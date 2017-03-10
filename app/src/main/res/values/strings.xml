@@ -1,0 +1,141 @@
+<resources>
+    <string name="app_name">Winsant</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_login">Winsant Login</string>
+    <string name="title_activity_sign_up">Winsant Sing Up</string>
+    <string name="title_activity_forgot_pass">Forgot Password</string>
+    <string name="title_activity_reset_pass">Reset Password</string>
+    <string name="title_activity_verify_otp">Verify OTP</string>
+    <string name="title_activity_verify_account">Verify Account</string>
+    <string name="title_activity_offer">Offers</string>
+    <string name="title_activity_add_new_address">Add new address</string>
+    <string name="title_activity_update_address">Update address</string>
+    <string name="title_activity_select_address">Select Address</string>
+    <string name="title_activity_policy">Privacy Policy</string>
+    <string name="title_activity_faq">FAQs</string>
+    <string name="title_activity_festival">Book Your Passes</string>
+
+    <string name="activity_action_cart">Cart</string>
+    <string name="title_activity_wish_list">WishList</string>
+
+    <string name="Rs">\u20B9</string>
+    <string name="app_id">1388761107841516</string> <!--1555840384655574-->
+
+    <string name="icon">icon</string>
+
+    <string name="no_internet">It seems that your device not connected to the internet.</string>
+    <string name="no_data">No data found. Try again</string>
+    <string name="no_cart_data">Your cart is Empty!!</string>
+    <string name="no_order_data">Your order list is empty!!</string>
+    <string name="no_connection">Cannot connect to the server. Try again</string>
+    <string name="no_wish_list_data">simple browse products and tap on heart icon</string>
+    <string name="no_wish_list_login_hint">Please Login/Sign Up to show your wish list data.</string>
+    <string name="no_offer_hint">No offers available.</string>
+
+    <!-- Login / Register-->
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="submit">Submit</string>
+    <string name="verify">Verify</string>
+    <string name="forgot_password">Forgot password ??</string>
+    <string name="forgot_pass">Forgot password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Mobile Number Or Email Address</string>
+    <string name="password">Password</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="confirm_password">ConfirmPassword</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="don_t_have_an_account_create_one">Don\'t have an account ? Create one</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="data">Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.Hi Guys, Today i am going to discuss with you about creation of login and registration for in Android using SQLite database. For this things you must have knowledge about SQLite database in Android. So for this at first i will discuss about SQLite database and how to use it in Android.</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+
+    <string name="text_home">Home</string>
+    <string name="text_offer">offers</string>
+    <string name="text_concept">Concept</string>
+    <string name="text_wishlist">WishList</string>
+    <string name="text_profile">Profile</string>
+    <string name="text_setting">Settings</string>
+    <string name="deals_of_the_day">Deals Of The Day</string>
+    <string name="view_all">VIEW ALL</string>
+    <string name="change">Change</string>
+    <string name="details">Details</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="out_of_stock">Out Of Stock</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="specification">Specification</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="all_categories">All Categories</string>
+    <string name="sort">SORT</string>
+    <string name="filter">FILTER</string>
+    <string name="my_order">My Orders</string>
+    <string name="my_address">My Addresses</string>
+    <string name="notification">Notification Preference</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="logout">Logout</string>
+
+    <!-- Test Data-->
+    <string name="test_user_name">Hardik Dungrani</string>
+    <string name="test_user_number">+91 9879245168</string>
+    <string name="test_user_email">hardikdungrani8@gmail.com</string>
+    <string name="login_hint">Please provide your Mobile No. or Email to Login/Sign Up on Winsant</string>
+    <string name="forgot_pass_hint">Please provide your Mobile No. or Email to reset password</string>
+    <string name="test_user">Hello User</string>
+    <string name="test_login_user">Hello Login User</string>
+    <string name="c_password">Confirm Password</string>
+    <string name="update">Update</string>
+    <string name="change_password">Change Password</string>
+    <string name="my_account">My Account</string>
+    <string name="apply">Apply</string>
+    <string name="item_sold_out">This item is SOLD OUT</string>
+    <string name="f_q"><![CDATA[F & Q]]></string>
+    <string name="rate_app">Rate App</string>
+    <string name="policies">Policy</string>
+    <string name="feedback">App Feedback</string>
+    <string name="email_address">Email Address</string>
+    <string name="remove">REMOVE</string>
+
+    <!-- Add Address -->
+    <string name="firstName">First Name*</string>
+    <string name="lastName">Last Name*</string>
+    <string name="mobile_no">Phone Number*</string>
+    <string name="pincode">Pincode*</string>
+    <string name="city">City*</string>
+    <string name="state">State*</string>
+    <string name="country">Country*</string>
+    <string name="address">Address*</string>
+    <string name="landmark">Landmark(Optional)</string>
+    <string name="save">Save</string>
+    <string name="delivery">Deliver Here</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="set_default">Set Default</string>
+    <string name="confirm">Confirm Order</string>
+    <string name="cod">CASH ON DELIVERY</string>
+    <string name="pay_u_money">PAYUMONEY</string>
+    <string name="Continue">Continue</string>
+    <string name="return_order">RETURN ORDER</string>
+    <string name="cancel_order">CANCEL ORDER</string>
+    <string name="cancel_reason">Enter your cancel reason...</string>
+    <string name="facebook">FACEBOOK</string>
+    <string name="google">GOOGLE</string>
+    <string name="proceed_pay">Proceed to pay</string>
+    <string name="book_hint">* Single User can book only one VVIP ticket. Each VVIP lounge will accommodate 10 pax.</string>
+
+</resources>

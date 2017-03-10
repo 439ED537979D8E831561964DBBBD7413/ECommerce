@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "664711747071",
+    "project_id": "firebase-winsant"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664711747071:android:d34a59da7197f589",
+        "android_client_info": {
+          "package_name": "com.winsant.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIqPZMwOdKOjmzp0LbMeaH6hjZ3nvP9X8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-92600794-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

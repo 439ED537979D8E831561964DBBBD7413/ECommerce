@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtAddAddress"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/main_toolbar"
+        android:background="@drawable/cardview"
+        android:gravity="center|start"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/title_activity_add_new_address"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/txtAddAddress"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/emptyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:drawableTop="@drawable/ico_home_address_svg"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/AddressList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp" />
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:elevation="4dp">
+
+        <TableRow
+            android:id="@+id/tableRow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorWhite"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtTotalPrice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:text=""
+                android:textColor="@color/black" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnDelivery"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:text="@string/delivery"
+                android:textColor="@color/white" />
+        </TableRow>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSetDefault"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorAccent"
+            android:text="@string/set_default"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>

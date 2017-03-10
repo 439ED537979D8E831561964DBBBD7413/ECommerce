@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:hint="@string/firstName"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:hint="@string/lastName"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:hint="@string/mobile_no"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtPincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:hint="@string/pincode"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/txtColor">
+
+                    <EditText
+                        android:id="@+id/edtCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:hint="@string/city"
+                        android:inputType="textCapSentences"
+                        android:maxLines="1"
+                        android:textColor="@color/txtColor"
+                        android:textColorHint="@color/txtColor"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/txtColor">
+
+                    <EditText
+                        android:id="@+id/edtState"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:hint="@string/state"
+                        android:inputType="textCapSentences"
+                        android:maxLines="1"
+                        android:textColor="@color/txtColor"
+                        android:textColorHint="@color/txtColor"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+            </TableRow>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:hint="@string/country"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center|start|top"
+                    android:hint="@string/address"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="4"
+                    android:minLines="3"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/txtColor">
+
+                <EditText
+                    android:id="@+id/edtLandmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_margin="5dp"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ /-.,"
+                    android:hint="@string/landmark"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/txtColor"
+                    android:textColorHint="@color/txtColor"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorAccent"
+                android:text="@string/save"
+                android:textAllCaps="true"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

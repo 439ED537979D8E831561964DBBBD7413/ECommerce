@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ico_home_normal_svg"
+        android:title="@string/text_home" />
+    <item
+        android:id="@+id/action_offer"
+        android:icon="@drawable/ico_discount_normal_svg"
+        android:title="@string/text_offer" />
+    <item
+        android:id="@+id/action_concept"
+        android:icon="@drawable/ico_concept_svg"
+        android:title="@string/text_concept" />
+
+    <item
+        android:id="@+id/action_wishlist"
+        android:icon="@drawable/ico_wishlist_h_normal_svg"
+        android:title="@string/text_wishlist" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ico_profile_normal_svg"
+        android:title="@string/text_profile" />
+</menu>

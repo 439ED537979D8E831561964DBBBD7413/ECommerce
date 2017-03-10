@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- End current session if app sleeps for a period of time -->
+    <!--<integer name="ga_sessionTimeout">30000</integer>-->
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!--  The property id associated with this analytics tracker -->
+    <string name="ga_trackingId">UA-92600794-1</string>
+
+    <!--<string name="ga_sampleFrequency">100.0</string>-->
+
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <screenName name="com.winsant.android.ui.HomeActivity">Home Screen
+    </screenName>
+    <screenName name="com.winsant.android.ui.ViewAllCategoryListActivity">All Category Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.ProductViewAllActivity">Product ViewAll Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.ProductDetailsActivity">Product Details Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.AddAddressActivity">AddAddress Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.AllAddressActivity">AllAddress Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.ForgotPasswordActivity">ForgotPassword Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.OrderActivity">Order Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.CartActivity">Cart Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.SelectPaymentActivity">SelectPayment Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.SettingsActivity">Settings Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.LoginActivity">Login Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.UpdateProfileActivity">UpdateProfile Activity
+    </screenName>
+    <screenName name="com.winsant.android.ui.SpecificCategoryListActivity">Specific Category
+        Activity
+    </screenName>
+
+    <!--
+      See Project Structure -> Analytics -> Google Analytics -> Learn More
+      to learn more about configuring this file.
+    -->
+</resources>

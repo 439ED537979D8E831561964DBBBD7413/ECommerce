@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_attribute"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/rose"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_toolbar"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Color"
+        android:textSize="14sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ColorList"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/txtColor"
+        android:layout_marginTop="10dp"
+        android:padding="2dp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ColorList"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/base" />
+
+    <TextView
+        android:id="@+id/txtSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Size"
+        android:textSize="14sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SizeList"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/txtSize"
+        android:layout_marginTop="10dp"
+        android:padding="2dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/SizeList"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/base" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnApply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="@string/apply"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </TableRow>
+</RelativeLayout>
