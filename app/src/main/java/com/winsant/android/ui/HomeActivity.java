@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationB
         LinearLayout llWishList = (LinearLayout) findViewById(R.id.llWishList);
         LinearLayout llProfile = (LinearLayout) findViewById(R.id.llProfile);
 
-
         imgHome = (ImageView) findViewById(R.id.imgHome);
         imgOffers = (ImageView) findViewById(R.id.imgOffers);
         imgWishList = (ImageView) findViewById(R.id.imgWishList);
