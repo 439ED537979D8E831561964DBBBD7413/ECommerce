@@ -21,12 +21,15 @@ public class FullScreenAdapter extends PagerAdapter {
 
     private Activity _activity;
     private ArrayList<String> _imagePaths;
+    private LayoutInflater inflater;
 
     // constructor
     public FullScreenAdapter(Activity activity,
                              ArrayList<String> imagePaths) {
         this._activity = activity;
         this._imagePaths = imagePaths;
+        inflater = (LayoutInflater) _activity
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -43,9 +46,6 @@ public class FullScreenAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         final TouchImageView imgDisplay;
-
-        LayoutInflater inflater = (LayoutInflater) _activity
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
 
@@ -55,9 +55,10 @@ public class FullScreenAdapter extends PagerAdapter {
                 .with(_activity)
                 .load(_imagePaths.get(position))
                 .asBitmap()
+                .skipMemoryCache(true)
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
-                .into(new SimpleTarget<Bitmap>(1024, 1024) {
+                .into(new SimpleTarget<Bitmap>(800, 1020) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         imgDisplay.setImageDrawable(null);
@@ -72,6 +73,7 @@ public class FullScreenAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        System.gc();
         container.removeView((RelativeLayout) object);
     }
 }

@@ -92,8 +92,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
         Glide
                 .with(activity)
                 .load(viewAllProductModel.getProduct_image())
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(200, 200) {

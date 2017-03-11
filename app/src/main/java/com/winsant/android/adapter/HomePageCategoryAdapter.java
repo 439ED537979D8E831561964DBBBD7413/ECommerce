@@ -98,8 +98,8 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
         Glide
                 .with(activity)
                 .load(categoryProductModel.getProduct_image())
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(200, 200) {

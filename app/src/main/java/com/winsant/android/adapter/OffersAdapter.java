@@ -53,8 +53,8 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
         Glide
                 .with(activity)
                 .load(offerList.get(position))
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 200) {

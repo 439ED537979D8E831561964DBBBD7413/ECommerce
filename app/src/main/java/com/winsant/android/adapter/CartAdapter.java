@@ -101,8 +101,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         Glide
                 .with(activity)
                 .load(cartModel.getProduct_image())
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(120, 120) {

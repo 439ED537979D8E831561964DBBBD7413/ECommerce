@@ -235,7 +235,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
     private void loadImage(String url, final ImageView imageView) {
 
-        Glide.with(activity).load(url).asBitmap().placeholder(R.drawable.no_image_available)
+        Glide.with(activity).load(url).asBitmap().skipMemoryCache(true).placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 350) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

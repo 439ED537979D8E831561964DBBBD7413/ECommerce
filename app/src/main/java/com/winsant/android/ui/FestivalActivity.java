@@ -139,8 +139,8 @@ public class FestivalActivity extends AppCompatActivity implements View.OnClickL
         getPrice();
 
         festival_banner = (ImageView) findViewById(R.id.festival_banner);
-        Glide.with(activity).load(R.drawable.holi_fest).asBitmap()
-                .skipMemoryCache(true).placeholder(R.drawable.no_image_available)
+        Glide.with(activity).load(R.drawable.holi_fest).asBitmap().skipMemoryCache(true)
+                .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 300) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

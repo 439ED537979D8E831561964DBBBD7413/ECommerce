@@ -420,8 +420,8 @@
 //
 //    private void loadImage(String url, final ImageView imageView) {
 //
-//        Glide.with(activity).load(url).asBitmap()
-//                .skipMemoryCache(true).placeholder(R.drawable.no_image_available)
+//        Glide.with(activity).load(url).asBitmap().skipMemoryCache(true)
+//                .placeholder(R.drawable.no_image_available)
 //                .into(new SimpleTarget<Bitmap>(1024, 350) {
 //                    @Override
 //                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -447,7 +447,7 @@
 //}
 //
 //
-///*Glide.with(activity).load(homeHeaderModel.getBanner()).asBitmap().placeholder(R.drawable.no_image_available)
+///*Glide.with(activity).load(homeHeaderModel.getBanner()).asBitmap().skipMemoryCache(true).placeholder(R.drawable.no_image_available)
 //                        .into(new SimpleTarget<Bitmap>(1024, 400) {
 //                            @Override
 //                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -461,7 +461,7 @@
 //                            }
 //                        });
 //
-//                 Glide.with(activity).load(homeHeaderModel.getBanner()).asBitmap().placeholder(R.drawable.no_image_available)
+//                 Glide.with(activity).load(homeHeaderModel.getBanner()).asBitmap().skipMemoryCache(true).placeholder(R.drawable.no_image_available)
 //                        .into(new SimpleTarget<Bitmap>(1024, 400) {
 //                            @Override
 //                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -475,7 +475,7 @@
 //                            }
 //                        });
 //
-//                Glide.with(activity).load(homeHeaderModel.getBanner1()).asBitmap().fitCenter().placeholder(R.drawable.no_image_available)
+//                Glide.with(activity).load(homeHeaderModel.getBanner1()).asBitmap().skipMemoryCache(true).fitCenter().placeholder(R.drawable.no_image_available)
 //                        .into(new SimpleTarget<Bitmap>(800, 400) {
 //                            @Override
 //                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -489,7 +489,7 @@
 //                            }
 //                        });
 //
-//                Glide.with(activity).load(homeHeaderModel.getBanner2()).asBitmap().fitCenter().placeholder(R.drawable.no_image_available)
+//                Glide.with(activity).load(homeHeaderModel.getBanner2()).asBitmap().skipMemoryCache(true).fitCenter().placeholder(R.drawable.no_image_available)
 //                        .into(new SimpleTarget<Bitmap>(800, 400) {
 //                            @Override
 //                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

@@ -23,12 +23,15 @@ public class ImageSliderAdapter extends PagerAdapter {
 
     private Activity _activity;
     private ArrayList<String> _imagePaths;
+    private LayoutInflater inflater;
 
     // constructor
     public ImageSliderAdapter(Activity activity,
                               ArrayList<String> imagePaths) {
         this._activity = activity;
         this._imagePaths = imagePaths;
+        inflater = (LayoutInflater) _activity
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -43,10 +46,8 @@ public class ImageSliderAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        final ImageView imgDisplay;
 
-        LayoutInflater inflater = (LayoutInflater) _activity
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ImageView imgDisplay;
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
 
@@ -55,8 +56,8 @@ public class ImageSliderAdapter extends PagerAdapter {
         Glide
                 .with(_activity)
                 .load(_imagePaths.get(position))
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 400) {
@@ -89,6 +90,7 @@ public class ImageSliderAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        System.gc();
         container.removeView((RelativeLayout) object);
     }
 }

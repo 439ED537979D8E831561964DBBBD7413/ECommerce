@@ -101,8 +101,8 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
         Glide
                 .with(activity)
                 .load(categoryProductModel.getProduct_image())
-                .asBitmap()
-                .skipMemoryCache(true)
+                .asBitmap().skipMemoryCache(true)
+
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(200, 200) {

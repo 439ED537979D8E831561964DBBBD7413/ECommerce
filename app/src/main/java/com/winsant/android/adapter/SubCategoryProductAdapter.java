@@ -76,7 +76,7 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
         final CategoryModel homeHeaderModel = categoryModelList.get(position);
 
-        Glide.with(activity).load(homeHeaderModel.getCategory_image()).asBitmap().placeholder(R.drawable.no_image_available)
+        Glide.with(activity).load(homeHeaderModel.getCategory_image()).asBitmap().skipMemoryCache(true).placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 350) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

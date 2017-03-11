@@ -101,9 +101,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Glide
                 .with(activity)
                 .load(orderModel.getProduct_image())
-                .asBitmap()
+                .asBitmap().skipMemoryCache(true)
                 .fitCenter()
-                .skipMemoryCache(true)
+
                 .placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(150, 150) {
                     @Override
