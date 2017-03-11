@@ -108,7 +108,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 .into(new SimpleTarget<Bitmap>(120, 120) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        viewHolder.productImage.setImageDrawable(null);
+                        viewHolder.productImage.setImageBitmap(null);
                         viewHolder.productImage.setImageBitmap(resource);
                     }
                 });

@@ -80,7 +80,7 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
                 .into(new SimpleTarget<Bitmap>(1024, 350) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        holder.main_banner.setImageDrawable(null);
+                        holder.main_banner.setImageBitmap(null);
                         holder.main_banner.setImageBitmap(resource);
                     }
 

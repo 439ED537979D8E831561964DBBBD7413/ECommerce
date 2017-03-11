@@ -108,7 +108,7 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
                 .into(new SimpleTarget<Bitmap>(220, 220) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        viewHolder.productImage.setImageDrawable(null);
+                        viewHolder.productImage.setImageBitmap(null);
                         viewHolder.productImage.setImageBitmap(resource);
                     }
                 });

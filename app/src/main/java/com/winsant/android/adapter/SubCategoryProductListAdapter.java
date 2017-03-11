@@ -108,7 +108,7 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
                 .into(new SimpleTarget<Bitmap>(200, 200) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        viewHolder.productImage.setImageDrawable(null);
+                        viewHolder.productImage.setImageBitmap(null);
                         viewHolder.productImage.setImageBitmap(resource);
                     }
                 });

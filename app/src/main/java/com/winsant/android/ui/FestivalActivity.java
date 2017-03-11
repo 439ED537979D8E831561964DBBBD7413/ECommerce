@@ -144,7 +144,7 @@ public class FestivalActivity extends AppCompatActivity implements View.OnClickL
                 .into(new SimpleTarget<Bitmap>(1024, 300) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        festival_banner.setImageDrawable(null);
+                        festival_banner.setImageBitmap(null);
                         festival_banner.setImageBitmap(resource);
                     }
 

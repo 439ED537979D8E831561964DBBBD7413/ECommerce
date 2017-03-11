@@ -63,7 +63,7 @@ public class ImageSliderAdapter extends PagerAdapter {
                 .into(new SimpleTarget<Bitmap>(1024, 400) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        imgDisplay.setImageDrawable(null);
+                        imgDisplay.setImageBitmap(null);
                         imgDisplay.setImageBitmap(resource);
                     }
                 });

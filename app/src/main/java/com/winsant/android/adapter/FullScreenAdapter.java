@@ -61,7 +61,7 @@ public class FullScreenAdapter extends PagerAdapter {
                 .into(new SimpleTarget<Bitmap>(800, 1020) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        imgDisplay.setImageDrawable(null);
+                        imgDisplay.setImageBitmap(null);
                         imgDisplay.setImageBitmap(resource);
                     }
                 });

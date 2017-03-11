@@ -108,7 +108,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 .into(new SimpleTarget<Bitmap>(150, 150) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        viewHolder.productImage.setImageDrawable(null);
+                        viewHolder.productImage.setImageBitmap(null);
                         viewHolder.productImage.setImageBitmap(resource);
                     }
                 });

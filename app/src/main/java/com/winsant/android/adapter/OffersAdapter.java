@@ -60,7 +60,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
                 .into(new SimpleTarget<Bitmap>(1024, 200) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        viewHolder.offersImage.setImageDrawable(null);
+                        viewHolder.offersImage.setImageBitmap(null);
                         viewHolder.offersImage.setImageBitmap(resource);
                     }
                 });

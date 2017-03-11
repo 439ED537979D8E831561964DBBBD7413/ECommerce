@@ -239,7 +239,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
                 .into(new SimpleTarget<Bitmap>(1024, 350) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        imageView.setImageDrawable(null);
+                        imageView.setImageBitmap(null);
                         imageView.setImageBitmap(resource);
                     }
 
