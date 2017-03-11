@@ -114,8 +114,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private KProgressHUD progressHUD;
     private MenuItem cart;
 
-    // Attribute
-    private AttributeListAdapter attributeListAdapter;
     private RecyclerView AttributeList;
     private RecyclerView SizeList;
     private RecyclerView ColorList;
@@ -214,10 +212,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
         txtPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
 
         txtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
@@ -643,7 +641,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 tblAttribute.setVisibility(View.VISIBLE);
                 llSingleAttribute.setVisibility(View.GONE);
 
-                attributeListAdapter = new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
+                AttributeListAdapter attributeListAdapter = new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                         new AttributeListAdapter.onClickListener() {
                             @Override
                             public void onColorClick(String color_id, String color_name) {
@@ -673,7 +671,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new SizeAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String size_id, String size_name) {
-                                txtSingleAttribute.setText("Size : " + size_name);
+                                txtSingleAttribute.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + size_name + "</b></font>"));
                                 SizeId = size_id;
                             }
                         });
@@ -692,7 +690,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new ColorAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String color_id, String color_name) {
-                                txtSingleAttribute.setText("Color : " + color_name);
+                                txtSingleAttribute.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + color_name + "</b></font>"));
                                 ColorId = color_id;
                             }
                         });

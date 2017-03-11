@@ -102,10 +102,10 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
         Glide
                 .with(activity)
                 .load(viewAllProductModel.getProduct_image())
-                .asBitmap().skipMemoryCache(true)
-
+                .asBitmap()
+                .skipMemoryCache(true)
                 .fitCenter()
-                .into(new SimpleTarget<Bitmap>(220, 220) {
+                .into(new SimpleTarget<Bitmap>(200, 200) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         viewHolder.productImage.setImageBitmap(null);
