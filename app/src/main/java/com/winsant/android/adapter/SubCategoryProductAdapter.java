@@ -2,6 +2,8 @@ package com.winsant.android.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.winsant.android.R;
 import com.winsant.android.model.CategoryModel;
 import com.winsant.android.ui.ProductDetailsActivity;
@@ -68,11 +72,26 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         final CategoryModel homeHeaderModel = categoryModelList.get(position);
 
-        Picasso.with(activity).load(homeHeaderModel.getCategory_image()).placeholder(R.drawable.no_image_available).into(holder.main_banner);
+//        Picasso.with(activity).load(homeHeaderModel.getCategory_image()).placeholder(R.drawable.no_image_available).into(holder.main_banner);
+
+        Glide.with(activity).load(homeHeaderModel.getCategory_image()).asBitmap().placeholder(R.drawable.no_image_available)
+                .into(new SimpleTarget<Bitmap>(1024, 350) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        holder.main_banner.setImageDrawable(null);
+                        holder.main_banner.setImageBitmap(resource);
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        super.onLoadFailed(e, errorDrawable);
+                        holder.main_banner.setImageResource(R.drawable.no_image_available);
+                    }
+                });
 
         holder.main_title.setText(homeHeaderModel.getCategory_name());
         holder.main_title.setTag(position);
