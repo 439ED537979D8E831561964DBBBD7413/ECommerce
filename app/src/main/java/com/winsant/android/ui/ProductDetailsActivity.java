@@ -583,9 +583,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     cardGeneralFeature.setVisibility(View.GONE);
                                 }
 
-                                if (!strAttribute.equals("both")) {
-                                    setAttributeData();
-                                }
+                                setAttributeData();
 
                                 progress_wheel.setVisibility(View.GONE);
                                 product_view.setVisibility(View.VISIBLE);
@@ -641,11 +639,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void setAttributeData() {
 
-        tblAttribute.setVisibility(View.GONE);
-        llSingleAttribute.setVisibility(View.VISIBLE);
-
         switch (strAttribute) {
             case "both":
+
+                tblAttribute.setVisibility(View.VISIBLE);
+                llSingleAttribute.setVisibility(View.GONE);
 
                 ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList, txtSize,
                         new AttributeListAdapter.onClickListener() {
@@ -670,6 +668,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 break;
             case "size":
 
+                tblAttribute.setVisibility(View.GONE);
+                llSingleAttribute.setVisibility(View.VISIBLE);
+
                 txtSingleAttribute.setText("Size : ");
                 SizeAttributeListAdapter sizeAttributeListAdapter = new SizeAttributeListAdapter(activity, finalSizeModelArrayList,
                         new SizeAttributeListAdapter.onClickListener() {
@@ -685,6 +686,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 break;
 
             case "color":
+
+                tblAttribute.setVisibility(View.GONE);
+                llSingleAttribute.setVisibility(View.VISIBLE);
 
                 txtSingleAttribute.setText("Color : ");
                 ColorAttributeListAdapter colorAttributeListAdapter = new ColorAttributeListAdapter(activity, attributeModelArrayList,
