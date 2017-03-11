@@ -91,7 +91,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private CirclePageIndicator indicator;
 
     private RelativeLayout rl_main;
-    private RecyclerView generalFeatureList, AttributeList, offerList;
+    private RecyclerView generalFeatureList, offerList;
     private CardView cardGeneralFeature, cardColorSize, cardOffers;
     private LinearLayout tblAttribute;
     private LinearLayout llSingleAttribute;
@@ -100,16 +100,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private TextView txtDiscountPrice;
     private TextView txtPrice;
     private TextView txtDiscount;
-    //    private TextView txtStar;
-//    private TextView txtRating;
     private TextView txtPinCode;
-    //    private TextView txtSeller;
-//    private TextView txtTime;
     private TextView txtDetails;
     private TextView item_sold_out;
     private TextView txtSingleAttribute;
 
-    private ImageView imgWishList, imgShare;
+    private ImageView imgWishList;
 
     private Button btnBuyNow, btnAddCart;
     private String url, strAttribute = "", fav_link, remove_link, buy_now_link, cart_url, is_wishlist, is_attribute, strPinCode = "";
@@ -119,6 +115,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private MenuItem cart;
 
     // Attribute
+    private AttributeListAdapter attributeListAdapter;
+    private RecyclerView AttributeList;
     private RecyclerView SizeList;
     private RecyclerView ColorList;
     private TextView txtColor, txtSize;
@@ -201,7 +199,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtPrice = (TextView) findViewById(R.id.txtPrice);
         txtDiscount = (TextView) findViewById(R.id.txtDiscount);
         imgWishList = (ImageView) findViewById(R.id.imgWishList);
-        imgShare = (ImageView) findViewById(R.id.imgShare);
+        ImageView imgShare = (ImageView) findViewById(R.id.imgShare);
         txtPinCode = (TextView) findViewById(R.id.txtPinCode);
         txtDetails = (TextView) findViewById(R.id.txtDetails);
         txtColor = (TextView) findViewById(R.id.txtColor);
@@ -645,7 +643,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 tblAttribute.setVisibility(View.VISIBLE);
                 llSingleAttribute.setVisibility(View.GONE);
 
-                ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
+                attributeListAdapter = new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                         new AttributeListAdapter.onClickListener() {
                             @Override
                             public void onColorClick(String color_id, String color_name) {
@@ -660,7 +658,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                 SizeName = size_name;
                                 txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
                             }
-                        }));
+                        });
+
+                ColorList.setAdapter(attributeListAdapter);
 
                 break;
             case "size":
@@ -1038,9 +1038,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
 //                                        setBadge();
 
-                                        if (type.equals("addtocart"))
+                                        if (type.equals("addtocart")) {
+//                                            setAttributeData();
                                             CommonDataUtility.showSnackBar(rl_main, message);
-                                        else {
+                                        } else {
                                             startActivity(new Intent(activity, CartActivity.class));
                                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                         }

@@ -73,13 +73,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
             txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
             txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         }
     }
 

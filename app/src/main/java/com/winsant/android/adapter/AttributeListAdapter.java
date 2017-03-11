@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.winsant.android.R;
 import com.winsant.android.model.AttributeModel;
+import com.winsant.android.model.SizeModel;
 import com.winsant.android.utils.CommonDataUtility;
 
 import java.util.ArrayList;
@@ -28,6 +29,16 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
         this.attributeModelArrayList = attributeModelArrayList;
         this.clickListener = clickListener;
         this.sizeList = sizeList;
+
+        setArrayFirstTime();
+    }
+
+    private void setArrayFirstTime() {
+
+        setSizeArray(0);
+        for (int i = 0; i < attributeModelArrayList.size(); i++)
+            attributeModelArrayList.set(i, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name(),
+                    attributeModelArrayList.get(i).getSizeList(), "0"));
     }
 
     public interface onClickListener {
@@ -60,9 +71,9 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
-        AttributeModel attributeModel = attributeModelArrayList.get(position);
+        AttributeModel attributeModel = attributeModelArrayList.get(viewHolder.getAdapterPosition());
 
         viewHolder.attributeName.setText(attributeModel.getColor_name());
 
@@ -71,7 +82,7 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
         else
             viewHolder.ll_attribute.setBackgroundResource(R.drawable.bg_offer);
 
-        viewHolder.ll_attribute.setTag(position);
+        viewHolder.ll_attribute.setTag(viewHolder.getAdapterPosition());
         viewHolder.ll_attribute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +94,17 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
                 if (clickListener != null)
                     clickListener.onColorClick(attributeModelArrayList.get(pos).getColor_id(), attributeModelArrayList.get(pos).getColor_name());
 
-                if (attributeModelArrayList.get(pos).getIsSelect().equals("0"))
+                if (attributeModelArrayList.get(pos).getIsSelect().equals("0")) {
                     attributeModelArrayList.set(pos, new AttributeModel(attributeModelArrayList.get(pos).getColor_id(), attributeModelArrayList.get(pos).getColor_name(),
                             attributeModelArrayList.get(pos).getSizeList(), "1"));
+
+                    clickListener.onSizeClick("", "");
+                    for (int i = 0; i < attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().size(); i++)
+                        attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().set(i, new SizeModel(
+                                attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().get(i).getSize_id(),
+                                attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().get(i).getSize_name(), "0"));
+
+                }
 
                 for (int i = 0; i < attributeModelArrayList.size(); i++)
                     if (i == pos)
@@ -96,14 +115,9 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
                                 , attributeModelArrayList.get(i).getSizeList(), "0"));
 
                 notifyDataSetChanged();
-
-                clickListener.onSizeClick("", "");
                 setSizeArray(pos);
             }
         });
-
-        if (first.equals("0"))
-            setSizeArray(0);
     }
 
     private void setSizeArray(int position) {
