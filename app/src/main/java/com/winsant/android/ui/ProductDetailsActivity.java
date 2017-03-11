@@ -227,10 +227,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         txtColor.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         txtSingleAttribute.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -645,16 +645,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 tblAttribute.setVisibility(View.VISIBLE);
                 llSingleAttribute.setVisibility(View.GONE);
 
-                ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList, txtSize,
+                ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                         new AttributeListAdapter.onClickListener() {
                             @Override
                             public void onColorClick(String color_id, String color_name) {
                                 ColorId = color_id;
                                 ColorName = color_name;
                                 txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + ColorName + "</b></font>"));
-
-
-                                txtColor.setText("Color - " + color_name);
                             }
 
                             @Override

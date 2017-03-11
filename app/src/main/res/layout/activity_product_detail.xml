@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:cardElevation="1dp">
 
                 <LinearLayout
@@ -215,9 +215,9 @@
 
                     <LinearLayout
                         android:id="@+id/tblAttribute"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txtColor"
@@ -225,74 +225,40 @@
                             android:layout_height="wrap_content"
                             android:background="@color/colorWhite"
                             android:gravity="center"
-                            android:padding="10dp"
-                            android:text="Color"
-                            android:textSize="14sp" />
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="@color/colorBlack" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/ColorList"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_height="46dp"
+                            android:layout_marginTop="5dp"
                             android:padding="2dp" />
 
                         <View
-                            android:id="@+id/view"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/base" />
+                            android:layout_marginTop="5dp"
+                            android:background="@color/rose" />
 
                         <TextView
                             android:id="@+id/txtSize"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
                             android:background="@color/colorWhite"
                             android:gravity="center"
-                            android:padding="10dp"
-                            android:text="Size"
-                            android:textSize="14sp" />
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="@color/colorBlack" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/SizeList"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_height="46dp"
+                            android:layout_marginTop="5dp"
                             android:padding="2dp" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/base" />
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txtColor"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:padding="8dp"-->
-                            <!--android:text="Color"-->
-                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Small" />-->
-
-                        <!--<View-->
-                            <!--android:layout_width="1dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:background="@color/rose" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txtSize"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="38dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:padding="8dp"-->
-                            <!--android:text="Size"-->
-                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Small" />-->
                     </LinearLayout>
 
                     <LinearLayout

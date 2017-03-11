@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_attribute"
     android:layout_width="wrap_content"
-    android:layout_height="45dp"
-    android:layout_margin="5dp"
+    android:layout_height="36dp"
+    android:layout_margin="2dp"
     android:background="@drawable/bg_offer"
     android:gravity="center"
     android:orientation="vertical"
@@ -13,11 +13,11 @@
         android:id="@+id/attributeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="1dp"
         android:ellipsize="end"
         android:gravity="center"
-        android:padding="6dp"
-        android:text="yellow and peach"
+        android:padding="5dp"
+        android:text=""
         android:textColor="@color/black" />
 
 </LinearLayout>

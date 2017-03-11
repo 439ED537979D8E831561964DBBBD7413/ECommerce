@@ -21,16 +21,13 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     private ArrayList<AttributeModel> attributeModelArrayList;
     private onClickListener clickListener;
     private RecyclerView sizeList;
-    private TextView txtSize;
     private String first = "0";
 
-    public AttributeListAdapter(Activity activity, ArrayList<AttributeModel> attributeModelArrayList, RecyclerView sizeList, TextView txtSize
-            , onClickListener clickListener) {
+    public AttributeListAdapter(Activity activity, ArrayList<AttributeModel> attributeModelArrayList, RecyclerView sizeList, onClickListener clickListener) {
         this.activity = activity;
         this.attributeModelArrayList = attributeModelArrayList;
         this.clickListener = clickListener;
         this.sizeList = sizeList;
-        this.txtSize = txtSize;
     }
 
     public interface onClickListener {
@@ -50,6 +47,8 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             attributeName = (TextView) itemView.findViewById(R.id.attributeName);
             ll_attribute = (LinearLayout) itemView.findViewById(R.id.ll_attribute);
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
+
+            attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         }
     }
 
@@ -65,7 +64,6 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
 
         AttributeModel attributeModel = attributeModelArrayList.get(position);
 
-        viewHolder.attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         viewHolder.attributeName.setText(attributeModel.getColor_name());
 
         if (attributeModel.getIsSelect().equals("1"))
@@ -99,6 +97,7 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
 
                 notifyDataSetChanged();
 
+                clickListener.onSizeClick("", "");
                 setSizeArray(pos);
             }
         });
@@ -108,8 +107,6 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     }
 
     private void setSizeArray(int position) {
-
-        clickListener.onSizeClick("", "");
 
         if (attributeModelArrayList.get(position).getSizeList().size() > 0)
             sizeList.setAdapter(new SizeAttributeListAdapter(activity, attributeModelArrayList.get(position).getSizeList(), new SizeAttributeListAdapter.onClickListener() {
@@ -121,7 +118,6 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             }));
 
         else {
-            txtSize.setVisibility(View.GONE);
             sizeList.setVisibility(View.GONE);
         }
     }

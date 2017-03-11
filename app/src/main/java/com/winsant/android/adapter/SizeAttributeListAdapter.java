@@ -42,6 +42,8 @@ public class SizeAttributeListAdapter extends RecyclerView.Adapter<SizeAttribute
             attributeName = (TextView) itemView.findViewById(R.id.attributeName);
             ll_attribute = (LinearLayout) itemView.findViewById(R.id.ll_attribute);
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
+
+            attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         }
     }
 
@@ -57,7 +59,6 @@ public class SizeAttributeListAdapter extends RecyclerView.Adapter<SizeAttribute
 
         final SizeModel sizeModel = sizeModelArrayList.get(position);
 
-        viewHolder.attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         viewHolder.attributeName.setText(sizeModel.getSize_name());
 
         if (sizeModel.getIsSelect().equals("1"))

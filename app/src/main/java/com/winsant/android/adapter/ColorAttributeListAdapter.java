@@ -42,6 +42,8 @@ public class ColorAttributeListAdapter extends RecyclerView.Adapter<ColorAttribu
             attributeName = (TextView) itemView.findViewById(R.id.attributeName);
             ll_attribute = (LinearLayout) itemView.findViewById(R.id.ll_attribute);
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
+
+            attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         }
     }
 
@@ -57,7 +59,6 @@ public class ColorAttributeListAdapter extends RecyclerView.Adapter<ColorAttribu
 
         final AttributeModel attributeModel = attributeModelArrayList.get(position);
 
-        viewHolder.attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         viewHolder.attributeName.setText(attributeModel.getColor_name());
 
         if (attributeModel.getIsSelect().equals("1"))

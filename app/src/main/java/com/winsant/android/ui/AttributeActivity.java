@@ -126,7 +126,7 @@ public class AttributeActivity extends AppCompatActivity {
         ColorList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         SizeList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
 
-        ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList, txtSize,
+        ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                 new AttributeListAdapter.onClickListener() {
                     @Override
                     public void onColorClick(String color_id, String color_name) {
