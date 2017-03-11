@@ -202,8 +202,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                         addressModel1.getLandmark(), addressModel1.getCountry(), addressModel1.getState(), addressModel1.getCity(), false, addressModel.getIs_cod()));
 
         }
-
         notifyDataSetChanged();
-
     }
 }
