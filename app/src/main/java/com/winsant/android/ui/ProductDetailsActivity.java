@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +39,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.winsant.android.R;
+import com.winsant.android.adapter.AttributeListAdapter;
 import com.winsant.android.adapter.ColorAttributeListAdapter;
 import com.winsant.android.adapter.GeneralFeatureAdapter;
 import com.winsant.android.adapter.ImageSliderAdapter;
@@ -93,7 +93,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private RelativeLayout rl_main;
     private RecyclerView generalFeatureList, AttributeList, offerList;
     private CardView cardGeneralFeature, cardColorSize, cardOffers;
-    private TableRow tblAttribute;
+    private LinearLayout tblAttribute;
     private LinearLayout llSingleAttribute;
 
     private TextView txtName;
@@ -106,8 +106,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     //    private TextView txtSeller;
 //    private TextView txtTime;
     private TextView txtDetails;
-    private TextView txtColor;
-    private TextView txtSize;
     private TextView item_sold_out;
     private TextView txtSingleAttribute;
 
@@ -115,12 +113,17 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private Button btnBuyNow, btnAddCart;
     private String url, strAttribute = "", fav_link, remove_link, buy_now_link, cart_url, is_wishlist, is_attribute, strPinCode = "";
-    private String ColorId = "", SizeId = "";
     private String TYPE = "";
 
     private KProgressHUD progressHUD;
     private MenuItem cart;
-//    private MenuItem cart;
+
+    // Attribute
+    private RecyclerView SizeList;
+    private RecyclerView ColorList;
+    private TextView txtColor, txtSize;
+    private String ColorName, SizeName, ColorId = "", SizeId = "";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,27 +181,28 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         offerList = (RecyclerView) findViewById(R.id.offerList);
         offerList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
 
+        // TODO : Attribute
         AttributeList = (RecyclerView) findViewById(R.id.AttributeList);
         AttributeList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
 
-        tblAttribute = (TableRow) findViewById(R.id.tblAttribute);
+        ColorList = (RecyclerView) findViewById(R.id.ColorList);
+        SizeList = (RecyclerView) findViewById(R.id.SizeList);
+        ColorList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        SizeList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+
+        tblAttribute = (LinearLayout) findViewById(R.id.tblAttribute);
+        // TODO : Attribute END
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         indicator = (CirclePageIndicator) findViewById(R.id.indicator);
 
         txtName = (TextView) findViewById(R.id.txtName);
-//        imgAvailable = (ImageView) findViewById(R.id.imgAvailable);
         txtDiscountPrice = (TextView) findViewById(R.id.txtDiscountPrice);
         txtPrice = (TextView) findViewById(R.id.txtPrice);
         txtDiscount = (TextView) findViewById(R.id.txtDiscount);
-//        txtStar = (TextView) findViewById(R.id.txtStar);
-//        txtRating = (TextView) findViewById(R.id.txtRating);
-        ImageView imgShare = (ImageView) findViewById(R.id.imgShare);
         imgWishList = (ImageView) findViewById(R.id.imgWishList);
         imgShare = (ImageView) findViewById(R.id.imgShare);
         txtPinCode = (TextView) findViewById(R.id.txtPinCode);
-//        txtSeller = (TextView) findViewById(R.id.txtSeller);
-//        txtTime = (TextView) findViewById(R.id.txtTime);
         txtDetails = (TextView) findViewById(R.id.txtDetails);
         txtColor = (TextView) findViewById(R.id.txtColor);
         txtSize = (TextView) findViewById(R.id.txtSize);
@@ -217,18 +221,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
-//        txtStar.setTypeface(CommonDataUtility.setTypeFace1(activity));
-//        txtStar.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
-//        txtRating.setTypeface(CommonDataUtility.setTypeFace1(activity));
-//        txtRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         txtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
-//        txtSeller.setTypeface(CommonDataUtility.setTypeFace1(activity));
-//        txtSeller.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
-//        txtTime.setTypeface(CommonDataUtility.setTypeFace1(activity));
-//        txtTime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
         txtDetails.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -264,9 +257,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         btnChange.setOnClickListener(this);
         btnBuyNow.setOnClickListener(this);
         btnAddCart.setOnClickListener(this);
-        txtColor.setOnClickListener(this);
+//        txtColor.setOnClickListener(this);
+//        txtSize.setOnClickListener(this);
         txtPinCode.setOnClickListener(this);
-        txtSize.setOnClickListener(this);
 
         if (!MyApplication.getInstance().getPreferenceUtility().getString("pincode").equals("")) {
             strPinCode = MyApplication.getInstance().getPreferenceUtility().getString("pincode");
@@ -335,23 +328,23 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 setAddToCart_BuyNow(cart_url, "addtocart");
                 break;
 
-            case R.id.txtColor:
-            case R.id.txtSize:
-
-                if (strAttribute.equals("both")) {
-
-                    tblAttribute.setVisibility(View.VISIBLE);
-                    llSingleAttribute.setVisibility(View.GONE);
-
-                    intent = new Intent(activity, AttributeActivity.class);
-                    intent.putExtra("name", txtName.getText().toString());
-                    intent.putExtra("attrib", attributeModelArrayList);
-                    startActivityForResult(intent, 2);// Activity is started with requestCode 2
-                    overridePendingTransition(R.anim.slide_up, 0);
-
-                }
-
-                break;
+//            case R.id.txtColor:
+//            case R.id.txtSize:
+//
+//                if (strAttribute.equals("both")) {
+//
+//                    tblAttribute.setVisibility(View.VISIBLE);
+//                    llSingleAttribute.setVisibility(View.GONE);
+//
+//                    intent = new Intent(activity, AttributeActivity.class);
+//                    intent.putExtra("name", txtName.getText().toString());
+//                    intent.putExtra("attrib", attributeModelArrayList);
+//                    startActivityForResult(intent, 2);// Activity is started with requestCode 2
+//                    overridePendingTransition(R.anim.slide_up, 0);
+//
+//                }
+//
+//                break;
             default:
                 break;
         }
@@ -483,6 +476,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     JSONArray attribute = data.optJSONArray("attribute");
 
                                     HashSet<SizeModel> hs = new HashSet<SizeModel>();
+                                    HashSet<String> hs1 = new HashSet<String>();
 
                                     if (attribute.length() > 0) {
                                         for (int i = 0; i < attribute.length(); i++) {
@@ -500,6 +494,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                                 sizeModelArrayList.add(new SizeModel(sizeObject.optString("size_id"),
                                                         sizeObject.optString("size_name"), "0"));
 
+                                                hs1.add(sizeObject.optString("size_name"));
                                                 hs.addAll(sizeModelArrayList);
                                             }
 
@@ -518,7 +513,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                         }
 
                                         txtColor.setText("Color (" + attributeModelArrayList.size() + ")");
-                                        txtSize.setText("Size (" + hs.size() + ")");
+                                        txtSize.setText("Size (" + hs1.size() + ")");
                                     }
                                 } else {
                                     cardColorSize.setVisibility(View.GONE);
@@ -649,33 +644,64 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         tblAttribute.setVisibility(View.GONE);
         llSingleAttribute.setVisibility(View.VISIBLE);
 
-        if (strAttribute.equals("size")) {
+        switch (strAttribute) {
+            case "both":
 
-            txtSingleAttribute.setText("Size : ");
-            SizeAttributeListAdapter sizeAttributeListAdapter = new SizeAttributeListAdapter(activity, finalSizeModelArrayList,
-                    new SizeAttributeListAdapter.onClickListener() {
-                        @Override
-                        public void onClick(String size_id, String size_name) {
-                            txtSingleAttribute.setText("Size : " + size_name);
-                            SizeId = size_id;
-                        }
-                    });
+                ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList, txtSize,
+                        new AttributeListAdapter.onClickListener() {
+                            @Override
+                            public void onColorClick(String color_id, String color_name) {
+                                ColorId = color_id;
+                                ColorName = color_name;
+                                txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + ColorName + "</b></font>"));
 
-            AttributeList.setAdapter(sizeAttributeListAdapter);
 
-        } else {
+                                txtColor.setText("Color - " + color_name);
+                            }
 
-            txtSingleAttribute.setText("Color : ");
-            ColorAttributeListAdapter colorAttributeListAdapter = new ColorAttributeListAdapter(activity, attributeModelArrayList,
-                    new ColorAttributeListAdapter.onClickListener() {
-                        @Override
-                        public void onClick(String color_id, String color_name) {
-                            txtSingleAttribute.setText("Color : " + color_name);
-                            ColorId = color_id;
-                        }
-                    });
+                            @Override
+                            public void onSizeClick(String size_id, String size_name) {
+                                SizeId = size_id;
+                                SizeName = size_name;
+                                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+                            }
+                        }));
 
-            AttributeList.setAdapter(colorAttributeListAdapter);
+                break;
+            case "size":
+
+                txtSingleAttribute.setText("Size : ");
+                SizeAttributeListAdapter sizeAttributeListAdapter = new SizeAttributeListAdapter(activity, finalSizeModelArrayList,
+                        new SizeAttributeListAdapter.onClickListener() {
+                            @Override
+                            public void onClick(String size_id, String size_name) {
+                                txtSingleAttribute.setText("Size : " + size_name);
+                                SizeId = size_id;
+                            }
+                        });
+
+                AttributeList.setAdapter(sizeAttributeListAdapter);
+
+                break;
+
+            case "color":
+
+                txtSingleAttribute.setText("Color : ");
+                ColorAttributeListAdapter colorAttributeListAdapter = new ColorAttributeListAdapter(activity, attributeModelArrayList,
+                        new ColorAttributeListAdapter.onClickListener() {
+                            @Override
+                            public void onClick(String color_id, String color_name) {
+                                txtSingleAttribute.setText("Color : " + color_name);
+                                ColorId = color_id;
+                            }
+                        });
+
+                AttributeList.setAdapter(colorAttributeListAdapter);
+
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -874,7 +900,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 if (edtPinCode.getText().toString().equals("")) {
                     edtPinCode.setError("Enter pin code");
                 } else {
-
                     PinCodeVerify(edtPinCode.getText().toString());
                 }
 
@@ -948,22 +973,23 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         Glide.clear(imgError);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
-        if (requestCode == 2) {
-            String getData = data.getStringExtra("type");
-
-            if (getData.equals("yes")) {
-                txtColor.setText("Color (" + data.getStringExtra("color") + ")");
-                txtSize.setText("Size (" + data.getStringExtra("size") + ")");
-
-                ColorId = data.getStringExtra("ColorId");
-                SizeId = data.getStringExtra("SizeId");
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        // check if the request code is same as what is passed  here it is 2
+//        if (requestCode == 2) {
+//            String getData = data.getStringExtra("type");
+//
+//            if (getData.equals("yes")) {
+//                txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + data.getStringExtra("color") + "</b></font>"));
+//                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + data.getStringExtra("size") + "</b></font>"));
+//
+//
+//                ColorId = data.getStringExtra("ColorId");
+//                SizeId = data.getStringExtra("SizeId");
+//            }
+//        }
+//    }
 
     private void AddToCart(String cart_url, final String type) {
 

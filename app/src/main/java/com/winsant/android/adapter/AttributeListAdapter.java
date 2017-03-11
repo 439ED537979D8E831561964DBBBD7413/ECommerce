@@ -91,10 +91,10 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
 
                 for (int i = 0; i < attributeModelArrayList.size(); i++)
                     if (i == pos)
-                        attributeModelArrayList.set(pos, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name()
+                        attributeModelArrayList.set(i, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name()
                                 , attributeModelArrayList.get(i).getSizeList(), "1"));
                     else
-                        attributeModelArrayList.set(pos, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name()
+                        attributeModelArrayList.set(i, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name()
                                 , attributeModelArrayList.get(i).getSizeList(), "0"));
 
                 notifyDataSetChanged();
@@ -108,6 +108,8 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     }
 
     private void setSizeArray(int position) {
+
+        clickListener.onSizeClick("", "");
 
         if (attributeModelArrayList.get(position).getSizeList().size() > 0)
             sizeList.setAdapter(new SizeAttributeListAdapter(activity, attributeModelArrayList.get(position).getSizeList(), new SizeAttributeListAdapter.onClickListener() {

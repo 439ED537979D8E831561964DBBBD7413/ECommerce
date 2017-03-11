@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 app:cardElevation="1dp">
 
                 <LinearLayout
@@ -212,36 +213,87 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TableRow
+                    <LinearLayout
                         android:id="@+id/tblAttribute"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/txtColor"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
                             android:gravity="center"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:text="Color"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                            android:textSize="14sp" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/ColorList"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="10dp"
+                            android:padding="2dp" />
 
                         <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/rose" />
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/base" />
 
                         <TextView
                             android:id="@+id/txtSize"
-                            android:layout_width="0dp"
-                            android:layout_height="38dp"
-                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorWhite"
                             android:gravity="center"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:text="Size"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-                    </TableRow>
+                            android:textSize="14sp" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/SizeList"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="10dp"
+                            android:padding="2dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/base" />
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtColor"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="8dp"-->
+                            <!--android:text="Color"-->
+                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Small" />-->
+
+                        <!--<View-->
+                            <!--android:layout_width="1dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:background="@color/rose" />-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtSize"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="38dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="8dp"-->
+                            <!--android:text="Size"-->
+                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Small" />-->
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/llSingleAttribute"
