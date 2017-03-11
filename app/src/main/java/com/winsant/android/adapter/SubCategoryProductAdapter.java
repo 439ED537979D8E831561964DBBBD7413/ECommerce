@@ -76,8 +76,6 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
         final CategoryModel homeHeaderModel = categoryModelList.get(position);
 
-//        Picasso.with(activity).load(homeHeaderModel.getCategory_image()).placeholder(R.drawable.no_image_available).into(holder.main_banner);
-
         Glide.with(activity).load(homeHeaderModel.getCategory_image()).asBitmap().placeholder(R.drawable.no_image_available)
                 .into(new SimpleTarget<Bitmap>(1024, 350) {
                     @Override
