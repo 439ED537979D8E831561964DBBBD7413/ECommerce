@@ -17,21 +17,23 @@ import com.winsant.android.views.CircleImageView;
 
 import java.util.ArrayList;
 
-public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCategoryListAdapter.ViewHolder> {
+public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCategoryListAdapter1.ViewHolder> {
 
     private Activity activity;
     private ArrayList<SubCategoryModel> subCategoryArrayList;
     private onClickListener clickListener;
     private String type;
     private RecyclerView subCategoryList2;
+    private AllSubCategoryListAdapter adapter;
 
-    public AllSubCategoryListAdapter(Activity activity, ArrayList<SubCategoryModel> subCategoryArrayList,
-                                     RecyclerView subCategoryList2, onClickListener clickListener, String type) {
+    public AllSubCategoryListAdapter1(Activity activity, ArrayList<SubCategoryModel> subCategoryArrayList,
+                                      RecyclerView subCategoryList2, AllSubCategoryListAdapter adapter, onClickListener clickListener, String type) {
         this.activity = activity;
         this.subCategoryArrayList = subCategoryArrayList;
         this.clickListener = clickListener;
         this.type = type;
         this.subCategoryList2 = subCategoryList2;
+        this.adapter = adapter;
     }
 
     public interface onClickListener {
@@ -56,7 +58,6 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
             }
             subCategoryName = (TextView) itemView.findViewById(R.id.subCategoryName);
             subCategoryName.setTypeface(CommonDataUtility.setTypeFace1(activity));
-            subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,46 +83,42 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
-
-        final SubCategoryModel subCategoryModel = subCategoryArrayList.get(position);
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
         if (type.equals("square")) {
 
-            if (position == subCategoryArrayList.size() - 1 && subCategoryModel.getIs_expand().equals("1")) {
-                viewHolder.ViewMore.setVisibility(View.VISIBLE);
-                viewHolder.subCategoryName.setText("View More");
+            if (position == subCategoryArrayList.size()) {
+                viewHolder.ViewLess.setVisibility(View.VISIBLE);
+                viewHolder.subCategoryName.setText("View Less");
                 viewHolder.SpecificSubCategoryImage.setVisibility(View.GONE);
             } else {
-                viewHolder.ViewMore.setVisibility(View.GONE);
+
+                SubCategoryModel subCategoryModel = subCategoryArrayList.get(position);
+
                 viewHolder.ViewLess.setVisibility(View.GONE);
+                viewHolder.subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
                 viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
+
+                Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(150, 150).into(viewHolder.SpecificSubCategoryImage);
             }
 
-            viewHolder.ViewLess.setVisibility(View.GONE);
+            viewHolder.ViewMore.setVisibility(View.GONE);
 
-            viewHolder.ViewMore.setTag(position);
-            viewHolder.ViewMore.setOnClickListener(new View.OnClickListener() {
+            viewHolder.ViewLess.setTag(position);
+            viewHolder.ViewLess.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = (int) v.getTag();
-
-                    if (subCategoryArrayList.get(pos).getIs_expand().equals("1")) {
-                        viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
-                        viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
-                        subCategoryList2.setVisibility(View.VISIBLE);
-                        viewHolder.ViewMore.setVisibility(View.GONE);
-                    } else {
-                        if (clickListener != null)
-                            clickListener.onClick(subCategoryArrayList.get(pos).getCategory_name(),
-                                    subCategoryArrayList.get(pos).getCategory_url(), subCategoryArrayList.get(pos).getIs_last());
-                    }
+                    subCategoryList2.setVisibility(View.GONE);
+                    viewHolder.ViewLess.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
                 }
             });
-
-            Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(150, 150).into(viewHolder.SpecificSubCategoryImage);
         } else {
+
+            SubCategoryModel subCategoryModel = subCategoryArrayList.get(position);
+
             Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(120, 120).into(viewHolder.subCategoryImage);
 
             viewHolder.subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -131,6 +128,6 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
 
     @Override
     public int getItemCount() {
-        return subCategoryArrayList.size();
+        return subCategoryArrayList.size() + 1;
     }
 }

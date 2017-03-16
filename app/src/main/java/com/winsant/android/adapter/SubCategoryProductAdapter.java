@@ -66,7 +66,6 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sub_category_product_item, viewGroup, false);
         return new ViewHolder(v);
     }

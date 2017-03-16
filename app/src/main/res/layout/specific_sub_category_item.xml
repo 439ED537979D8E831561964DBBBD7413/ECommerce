@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="80dp"
+    android:layout_width="85dp"
     android:layout_height="120dp"
     android:layout_gravity="center"
     android:layout_margin="1dp"
@@ -9,13 +9,40 @@
     android:orientation="vertical"
     android:padding="1dp">
 
-    <ImageView
-        android:id="@+id/SpecificSubCategoryImage"
-        android:layout_width="60dp"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:contentDescription="@string/app_name" />
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/SpecificSubCategoryImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/ViewMore"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+            android:contentDescription="@string/app_name"
+            android:padding="6dp"
+            android:src="@drawable/ico_view_more_svg"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ViewLess"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+            android:contentDescription="@string/app_name"
+            android:padding="6dp"
+            android:src="@drawable/ico_up_arrow_svg"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/subCategoryName"

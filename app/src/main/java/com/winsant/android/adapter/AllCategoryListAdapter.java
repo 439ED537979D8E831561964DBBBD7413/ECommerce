@@ -24,10 +24,12 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
     private Activity activity;
     private ArrayList<CategoryModel> AllCategoryList;
     private Intent intent;
+    private RecyclerView viewAllList;
 
-    public AllCategoryListAdapter(Activity activity, ArrayList<CategoryModel> AllCategoryList) {
+    public AllCategoryListAdapter(Activity activity, ArrayList<CategoryModel> AllCategoryList, RecyclerView viewAllList) {
         this.activity = activity;
         this.AllCategoryList = AllCategoryList;
+        this.viewAllList = viewAllList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,24 +64,24 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
         viewHolder.categoryName.setText(allCategoryModel.getCategory_name());
         viewHolder.subCategoryList.setAdapter(new AllSubCategoryListAdapter(activity, allCategoryModel.getSubCategoryArrayList(),
-                new AllSubCategoryListAdapter.onClickListener() {
-                    @Override
-                    public void onClick(String category_name, String category_url, String is_last) {
+                viewAllList, new AllSubCategoryListAdapter.onClickListener() {
+            @Override
+            public void onClick(String category_name, String category_url, String is_last) {
 
-                        // TODO : Specific SubCategory with SubCategory Product Display Activity
-                        if (is_last.equals("0")) {
-                            intent = new Intent(activity, SpecificCategoryListActivity.class);
-                        } else {
-                            intent = new Intent(activity, ProductViewAllActivity.class);
-                        }
+                // TODO : Specific SubCategory with SubCategory Product Display Activity
+                if (is_last.equals("0")) {
+                    intent = new Intent(activity, SpecificCategoryListActivity.class);
+                } else {
+                    intent = new Intent(activity, ProductViewAllActivity.class);
+                }
 
-                        intent.putExtra("url", category_url);
-                        intent.putExtra("name", category_name);
-                        activity.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                intent.putExtra("url", category_url);
+                intent.putExtra("name", category_name);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                    }
-                }, "circle"));
+            }
+        }, "circle"));
     }
 
     @Override

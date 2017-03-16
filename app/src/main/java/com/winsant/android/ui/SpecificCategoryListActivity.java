@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.winsant.android.R;
 import com.winsant.android.adapter.AllSubCategoryListAdapter;
+import com.winsant.android.adapter.AllSubCategoryListAdapter1;
 import com.winsant.android.adapter.SubCategoryProductAdapter;
 import com.winsant.android.kprogresshud.KProgressHUD;
 import com.winsant.android.model.CategoryModel;
@@ -115,10 +117,10 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
         imgError = (ImageView) findViewById(R.id.imgError);
 
         subCategoryList1 = (RecyclerView) findViewById(R.id.subCategoryList1);
-        subCategoryList1.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        subCategoryList1.setLayoutManager(new GridLayoutManager(activity, 4));
 
         subCategoryList2 = (RecyclerView) findViewById(R.id.subCategoryList2);
-        subCategoryList2.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        subCategoryList2.setLayoutManager(new GridLayoutManager(activity, 4));
 
         subCategoryProductListView = (RecyclerView) findViewById(R.id.subCategoryProductListView);
         subCategoryProductListView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
@@ -277,27 +279,22 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
         if (SubCategoryList.size() > 0)
             if (SubCategoryList.size() >= 7) {
 
-                int middle = SubCategoryList.size() / 2;
-
-                for (int i = 0; i < middle; i++) {
-                    subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
-                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last()));
+                for (int i = 0; i < 8; i++) {
+                    if (i == 7) {
+                        subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                                SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "1"));
+                    } else {
+                        subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                                SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
+                    }
                 }
 
-                for (int i = middle; i < SubCategoryList.size(); i++) {
+                for (int i = 8; i < SubCategoryList.size(); i++) {
                     subCategoryList21.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
-                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last()));
+                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
                 }
 
-//                ViewGroup.LayoutParams params = subCategoryList1.getLayoutParams();
-//                params.height = 385;
-//                subCategoryList1.setLayoutParams(params);
-//
-//                ViewGroup.LayoutParams params1 = subCategoryList2.getLayoutParams();
-//                params1.height = 385;
-//                subCategoryList2.setLayoutParams(params1);
-
-                subCategoryList1.setAdapter(new AllSubCategoryListAdapter(activity, subCategoryList11,
+                AllSubCategoryListAdapter adapter = new AllSubCategoryListAdapter(activity, subCategoryList11, subCategoryList2,
                         new AllSubCategoryListAdapter.onClickListener() {
                             @Override
                             public void onClick(String category_name, String category_url, String is_last) {
@@ -314,46 +311,50 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
                                 activity.startActivity(intent);
                                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             }
-                        }, "square"));
+                        }, "square");
+                subCategoryList1.setAdapter(adapter);
 
-                subCategoryList2.setAdapter(new AllSubCategoryListAdapter(activity, subCategoryList21,
-                        new AllSubCategoryListAdapter.onClickListener() {
-                            @Override
-                            public void onClick(String category_name, String category_url, String is_last) {
+                AllSubCategoryListAdapter1 adapter1 = new AllSubCategoryListAdapter1(activity, subCategoryList21,
+                        subCategoryList2, adapter, new AllSubCategoryListAdapter1.onClickListener() {
+                    @Override
+                    public void onClick(String category_name, String category_url, String is_last) {
 
-                                if (is_last.equals("0")) {
-                                    intent = new Intent(activity, SpecificCategoryListActivity.class);
-                                } else {
-                                    intent = new Intent(activity, ProductViewAllActivity.class);
-                                }
-                                // TODO : SubCategory View All Product Display Activity
-                                intent.putExtra("url", category_url);
-                                intent.putExtra("name", category_name);
-                                activity.startActivity(intent);
-                                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                            }
-                        }, "square"));
+                        if (is_last.equals("0")) {
+                            intent = new Intent(activity, SpecificCategoryListActivity.class);
+                        } else {
+                            intent = new Intent(activity, ProductViewAllActivity.class);
+                        }
+                        // TODO : SubCategory View All Product Display Activity
+                        intent.putExtra("url", category_url);
+                        intent.putExtra("name", category_name);
+                        activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
+                }, "square");
+
+                subCategoryList2.setAdapter(adapter1);
+                subCategoryList2.setVisibility(View.GONE);
 
             } else {
 
                 subCategoryList1.setAdapter(new AllSubCategoryListAdapter(activity, SubCategoryList,
-                        new AllSubCategoryListAdapter.onClickListener() {
-                            @Override
-                            public void onClick(String category_name, String category_url, String is_last) {
+                        subCategoryList2, new AllSubCategoryListAdapter.onClickListener() {
+                    @Override
+                    public void onClick(String category_name, String category_url, String is_last) {
 
-                                // TODO : SubCategory View All Product Display Activity
-                                if (is_last.equals("0")) {
-                                    intent = new Intent(activity, SpecificCategoryListActivity.class);
-                                } else {
-                                    intent = new Intent(activity, ProductViewAllActivity.class);
-                                }
+                        // TODO : SubCategory View All Product Display Activity
+                        if (is_last.equals("0")) {
+                            intent = new Intent(activity, SpecificCategoryListActivity.class);
+                        } else {
+                            intent = new Intent(activity, ProductViewAllActivity.class);
+                        }
 
-                                intent.putExtra("url", category_url);
-                                intent.putExtra("name", category_name);
-                                activity.startActivity(intent);
-                                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                            }
-                        }, "square"));
+                        intent.putExtra("url", category_url);
+                        intent.putExtra("name", category_name);
+                        activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
+                }, "square"));
 
                 subCategoryList2.setVisibility(View.GONE);
             }

@@ -222,7 +222,7 @@ public class ViewAllCategoryListActivity extends AppCompatActivity implements Vi
 
     private void setData() {
 
-        AllCategoryListAdapter adapter = new AllCategoryListAdapter(activity, AllCategoryList);
+        AllCategoryListAdapter adapter = new AllCategoryListAdapter(activity, AllCategoryList, viewAllList);
         viewAllList.setAdapter(adapter);
         viewAllList.scrollToPosition(Integer.parseInt(position));
     }

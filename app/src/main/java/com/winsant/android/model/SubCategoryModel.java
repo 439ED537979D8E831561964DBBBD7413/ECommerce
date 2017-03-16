@@ -10,6 +10,17 @@ public class SubCategoryModel {
     private String category_image;
     private String category_url;
     private String is_last;
+    private String is_expand;
+
+    // TODO : All SubCategory and SubCategory Product Display
+    public SubCategoryModel(String category_name, String category_image, String category_url, String is_last, String is_expand) {
+
+        this.category_name = category_name;
+        this.category_image = category_image;
+        this.category_url = category_url;
+        this.is_last = is_last;
+        this.is_expand = is_expand;
+    }
 
     // TODO : All SubCategory and SubCategory Product Display
     public SubCategoryModel(String category_name, String category_image, String category_url, String is_last) {
@@ -34,5 +45,9 @@ public class SubCategoryModel {
 
     public String getIs_last() {
         return this.is_last;
+    }
+
+    public String getIs_expand() {
+        return this.is_expand;
     }
 }
