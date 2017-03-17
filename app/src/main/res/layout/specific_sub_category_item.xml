@@ -10,6 +10,7 @@
     android:padding="1dp">
 
     <FrameLayout
+        android:id="@+id/fl_top"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="1">
@@ -23,23 +24,23 @@
 
         <ImageView
             android:id="@+id/ViewMore"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:contentDescription="@string/app_name"
-            android:padding="6dp"
+            android:padding="15dp"
             android:src="@drawable/ico_view_more_svg"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ViewLess"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:contentDescription="@string/app_name"
-            android:padding="6dp"
+            android:padding="15dp"
             android:src="@drawable/ico_up_arrow_svg"
             android:visibility="gone" />
     </FrameLayout>

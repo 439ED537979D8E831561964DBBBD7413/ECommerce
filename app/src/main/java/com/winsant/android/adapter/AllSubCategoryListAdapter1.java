@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -113,6 +114,7 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
                     int pos = (int) v.getTag();
 
                     if (pos == getItemCount() - 1) {
+                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_out));
                         subCategoryList2.setVisibility(View.GONE);
                         adapter.notifyDataSetChanged();
                     }
@@ -123,6 +125,7 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
             viewHolder.ViewLess.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_out));
                     subCategoryList2.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }

@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,6 +112,7 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
                         viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
                         viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
                         subCategoryList2.setVisibility(View.VISIBLE);
+                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.fade_in));
                         viewHolder.ViewMore.setVisibility(View.GONE);
                     } else {
                         if (clickListener != null)
@@ -130,6 +132,7 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
                         viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
                         viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
                         subCategoryList2.setVisibility(View.VISIBLE);
+                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.fade_in));
                         viewHolder.ViewMore.setVisibility(View.GONE);
                     } else {
                         if (clickListener != null)
