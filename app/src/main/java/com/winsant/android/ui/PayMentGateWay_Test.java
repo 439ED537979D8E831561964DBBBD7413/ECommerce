@@ -54,7 +54,6 @@ public class PayMentGateWay_Test extends Activity {
     int error = 0;
     String hashString = "";
     Map<String, String> params;
-    //String txnid = "";
 
     String SUCCESS_URL = "https://www.payumoney.com/mobileapp/payumoney/success.php"; // success
     String FAILED_URL = "https://www.payumoney.com/mobileapp/payumoney/failure.php"; // failed
