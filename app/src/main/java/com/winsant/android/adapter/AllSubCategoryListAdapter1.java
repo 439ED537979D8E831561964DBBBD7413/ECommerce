@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.winsant.android.R;
@@ -106,11 +105,24 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
 
             viewHolder.ViewMore.setVisibility(View.GONE);
 
+            viewHolder.subCategoryName.setTag(position);
+            viewHolder.subCategoryName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int pos = (int) v.getTag();
+
+                    if (pos == getItemCount() - 1) {
+                        subCategoryList2.setVisibility(View.GONE);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+
             viewHolder.ViewLess.setTag(position);
             viewHolder.ViewLess.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = (int) v.getTag();
                     subCategoryList2.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }

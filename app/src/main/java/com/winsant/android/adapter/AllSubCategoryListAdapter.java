@@ -101,6 +101,25 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
 
             viewHolder.ViewLess.setVisibility(View.GONE);
 
+            viewHolder.subCategoryName.setTag(position);
+            viewHolder.subCategoryName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = (int) v.getTag();
+
+                    if (subCategoryArrayList.get(pos).getIs_expand().equals("1")) {
+                        viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
+                        viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
+                        subCategoryList2.setVisibility(View.VISIBLE);
+                        viewHolder.ViewMore.setVisibility(View.GONE);
+                    } else {
+                        if (clickListener != null)
+                            clickListener.onClick(subCategoryArrayList.get(pos).getCategory_name(),
+                                    subCategoryArrayList.get(pos).getCategory_url(), subCategoryArrayList.get(pos).getIs_last());
+                    }
+                }
+            });
+
             viewHolder.ViewMore.setTag(position);
             viewHolder.ViewMore.setOnClickListener(new View.OnClickListener() {
                 @Override
