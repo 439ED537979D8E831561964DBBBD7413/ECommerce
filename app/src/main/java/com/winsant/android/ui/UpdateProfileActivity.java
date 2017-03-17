@@ -357,10 +357,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 CommonDataUtility.showSnackBar(coordinatorLayout, "Something problem while updating profile,Try again later!!!");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -439,10 +438,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 CommonDataUtility.showSnackBar(coordinatorLayout, "Something problem while reset password,Try again later!!!");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -512,10 +510,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 CommonDataUtility.showSnackBar(coordinatorLayout, "Something problem while change password,Try again later!!!");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

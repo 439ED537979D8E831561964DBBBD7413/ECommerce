@@ -315,8 +315,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -445,10 +445,9 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
                 showError("Problem while set address as default. Try again later");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -538,10 +537,9 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
                 showError("Problem while remove address. Try again later");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -614,10 +612,9 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
                 showError("Something went wrong. Try again later");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

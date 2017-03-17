@@ -233,10 +233,9 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                 }
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -340,10 +339,9 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                 showError("remove");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

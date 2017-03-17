@@ -52,20 +52,18 @@ public class AdjustableImageView extends ImageView {
 
             if (heightMode == MeasureSpec.EXACTLY && widthMode != MeasureSpec.EXACTLY) {
                 // Fixed Height & Adjustable Width
-                int height = heightSize;
-                int width = height * mDrawableWidth / mDrawableHeight;
+                int width = heightSize * mDrawableWidth / mDrawableHeight;
                 if (isInScrollingContainer())
-                    setMeasuredDimension(width, height);
+                    setMeasuredDimension(width, heightSize);
                 else
-                    setMeasuredDimension(Math.min(width, widthSize), Math.min(height, heightSize));
+                    setMeasuredDimension(Math.min(width, widthSize), Math.min(heightSize, heightSize));
             } else if (widthMode == MeasureSpec.EXACTLY && heightMode != MeasureSpec.EXACTLY) {
                 // Fixed Width & Adjustable Height
-                int width = widthSize;
-                int height = width * mDrawableHeight / mDrawableWidth;
+                int height = widthSize * mDrawableHeight / mDrawableWidth;
                 if (isInScrollingContainer())
-                    setMeasuredDimension(width, height);
+                    setMeasuredDimension(widthSize, height);
                 else
-                    setMeasuredDimension(Math.min(width, widthSize), Math.min(height, heightSize));
+                    setMeasuredDimension(Math.min(widthSize, widthSize), Math.min(height, heightSize));
             } else {
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             }

@@ -490,8 +490,8 @@ public class FestivalActivity extends AppCompatActivity implements View.OnClickL
             }
         }) {
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

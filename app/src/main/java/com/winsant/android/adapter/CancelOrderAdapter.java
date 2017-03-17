@@ -42,7 +42,7 @@ public class CancelOrderAdapter extends ArrayAdapter<CancelReason> {
             TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
 
             if (lblName != null)
-                lblName.setText(items.get(position).getName().toString());
+                lblName.setText(items.get(position).getName());
         }
         return view;
     }
@@ -59,7 +59,7 @@ public class CancelOrderAdapter extends ArrayAdapter<CancelReason> {
             TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
 
             if (lblName != null)
-                lblName.setText(items.get(position).getName().toString());
+                lblName.setText(items.get(position).getName());
         }
         return view;
     }

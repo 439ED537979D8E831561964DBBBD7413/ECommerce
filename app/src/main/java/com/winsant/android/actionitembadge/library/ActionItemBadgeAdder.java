@@ -73,7 +73,7 @@ public class ActionItemBadgeAdder {
         return add(ActionItemBadge.BadgeStyles.GREY_LARGE, badgeCount);
     }
 
-    public MenuItem add(ActionItemBadge.BadgeStyles style, int badgeCount) {
+    private MenuItem add(ActionItemBadge.BadgeStyles style, int badgeCount) {
         return add(style.getStyle(), badgeCount);
     }
 

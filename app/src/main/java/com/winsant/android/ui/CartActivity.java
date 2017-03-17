@@ -349,10 +349,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -494,10 +493,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 showError("Problem while remove from the cart. Try again later");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -795,10 +793,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 showError("Problem while check out from the cart. Try again later");
             }
         }) {
-
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

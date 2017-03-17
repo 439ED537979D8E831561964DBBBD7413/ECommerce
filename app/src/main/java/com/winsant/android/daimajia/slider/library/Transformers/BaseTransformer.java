@@ -88,7 +88,7 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
             ViewHelper.setAlpha(view,1f);
         }
         if(mCustomAnimationInterface != null){
-            if(h.containsKey(view) == false || h.get(view).size() == 1){
+            if(!h.containsKey(view) || h.get(view).size() == 1){
                 if(position > -1 && position < 1){
                     if(h.get(view) == null){
                         h.put(view,new ArrayList<Float>());

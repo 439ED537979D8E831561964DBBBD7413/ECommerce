@@ -21,8 +21,7 @@ public class LoginDataBaseAdapter {
     private DataBaseHelper dbHelper;
 
     public LoginDataBaseAdapter(Context _context) {
-        Context context = _context;
-        dbHelper = new DataBaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
+        dbHelper = new DataBaseHelper(_context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
 
@@ -52,8 +51,7 @@ public class LoginDataBaseAdapter {
 
     public int deleteEntry(String password) {
         String where = "PASSWORD=?";
-        int numberOFEntriesDeleted = db.delete("LOGIN", where, new String[]{password});
-        return numberOFEntriesDeleted;
+        return db.delete("LOGIN", where, new String[]{password});
     }
 
 

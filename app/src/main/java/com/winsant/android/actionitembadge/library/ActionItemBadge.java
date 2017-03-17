@@ -87,7 +87,7 @@ public class ActionItemBadge {
         }
     }
 
-    public static void updateNew(final Activity activity, final MenuItem menu, int icon, BadgeStyle style, String badgeCount, final ActionItemBadgeListener listener) {
+    private static void updateNew(final Activity activity, final MenuItem menu, int icon, BadgeStyle style, String badgeCount, final ActionItemBadgeListener listener) {
         if (menu == null) return;
 
         FrameLayout badge;

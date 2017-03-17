@@ -95,7 +95,7 @@ public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageL
      */
     @Override
     public void onEnd(boolean result, BaseSliderView target) {
-        if(target.isErrorDisappear() == false || result == true){
+        if(!target.isErrorDisappear() || result){
             return;
         }
         for (BaseSliderView slider: mImageContents){

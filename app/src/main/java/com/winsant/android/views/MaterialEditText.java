@@ -195,8 +195,7 @@ public class MaterialEditText extends EditText {
         Context context = getContext();
         TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(android.R.attr.colorAccent, typedValue, true)) {
-            int color = typedValue.data;
-            return color;
+            return typedValue.data;
         }
 
         int colorAccentId = getResources().getIdentifier("colorAccent", "attr", context.getPackageName());
