@@ -1,6 +1,7 @@
 package com.winsant.android.ui.fragment;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -8,9 +9,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -234,8 +238,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -268,7 +272,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                     public void onDeleteClick(int position, String product_id, String remove_link) {
 
                         // TODO : Delete Specific Product From WishList
-                        removeFromWishList(remove_link, position);
+                        ConditionDialog(remove_link, position);
                     }
                 });
 
@@ -280,6 +284,54 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         progress_wheel.setVisibility(View.GONE);
         TYPE = getString(R.string.no_data);
         Glide.with(activity).load(R.drawable.no_server).into(imgError);
+    }
+
+    private void ConditionDialog(final String remove_url, final int position) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+
+        View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_change_pincode, null);
+        dialog.setContentView(dialogView);
+
+        dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
+
+        TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
+        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        txtTitle.setText("Terms & Condition");
+
+        TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
+        txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        txtTerms.setVisibility(View.VISIBLE);
+        txtTerms.setText("Want to remove product from wishlist??");
+
+        dialogView.findViewById(R.id.edtPinCode).setVisibility(View.GONE);
+
+        Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
+        btnOK.setTypeface(CommonDataUtility.setTypeFace(activity));
+        btnOK.setTag(getString(R.string.yes));
+
+        Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
+        btnCancel.setTypeface(CommonDataUtility.setTypeFace(activity));
+        btnCancel.setTag(getString(R.string.no));
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                removeFromWishList(remove_url, position);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     private void removeFromWishList(String remove_url, final int position) {
@@ -340,8 +392,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

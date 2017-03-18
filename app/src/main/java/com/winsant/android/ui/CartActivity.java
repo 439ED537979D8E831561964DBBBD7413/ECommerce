@@ -350,8 +350,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -371,7 +371,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             cartAdapter = new CartAdapter(activity, cartProductArrayList, new CartAdapter.onClickListener() {
                 @Override
                 public void onRemoveClick(int position, String remove_url, String product_id) {
-                    RemoveFromCart(position, remove_url, product_id);
+                    RemoveFromCartDialog(position, remove_url, product_id);
                 }
 
                 @Override
@@ -421,6 +421,54 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         super.onStop();
         Glide.clear(imgError);
+    }
+
+    private void RemoveFromCartDialog(final int position, final String remove_link, final String product_id) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+
+        View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_change_pincode, null);
+        dialog.setContentView(dialogView);
+
+        dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
+
+        TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
+        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        txtTitle.setText("Terms & Condition");
+
+        TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
+        txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        txtTerms.setVisibility(View.VISIBLE);
+        txtTerms.setText("Want to remove product from wishlist??");
+
+        dialogView.findViewById(R.id.edtPinCode).setVisibility(View.GONE);
+
+        Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
+        btnOK.setTypeface(CommonDataUtility.setTypeFace(activity));
+        btnOK.setTag(getString(R.string.yes));
+
+        Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
+        btnCancel.setTypeface(CommonDataUtility.setTypeFace(activity));
+        btnCancel.setTag(getString(R.string.no));
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                RemoveFromCart(position, remove_link, product_id);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     private void RemoveFromCart(final int position, String remove_link, String product_id) {
@@ -494,8 +542,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -794,8 +842,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
