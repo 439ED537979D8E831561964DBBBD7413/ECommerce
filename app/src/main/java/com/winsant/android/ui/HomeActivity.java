@@ -17,13 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winsant.android.R;
-import com.winsant.android.bottomnavigation.BottomNavigationBar;
 import com.winsant.android.ui.fragment.HomeFragment;
 import com.winsant.android.ui.fragment.OfferListFragment;
 import com.winsant.android.ui.fragment.ProfileFragment;
 import com.winsant.android.ui.fragment.WishListFragment;
 
-public class HomeActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean doubleBackToExitPressedOnce = false;
     private ImageView imgHome, imgOffers, imgWishList, imgProfile;
@@ -274,21 +273,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationB
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onTabSelected(int position) {
-        setFragment(position);
-    }
-
-    @Override
-    public void onTabUnselected(int position) {
-
-    }
-
-    @Override
-    public void onTabReselected(int position) {
-
     }
 }
 //    private void selectFragment(MenuItem item) {
