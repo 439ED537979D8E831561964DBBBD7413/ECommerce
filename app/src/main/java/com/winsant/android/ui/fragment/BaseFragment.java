@@ -13,13 +13,11 @@ import com.winsant.android.ui.HomeActivity;
 public class BaseFragment extends Fragment {
 
     public HomeActivity activity;
-//    public HomeActivity activity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         activity = (HomeActivity) getActivity();
-//        activity = (HomeActivity) getActivity();
     }
 }
