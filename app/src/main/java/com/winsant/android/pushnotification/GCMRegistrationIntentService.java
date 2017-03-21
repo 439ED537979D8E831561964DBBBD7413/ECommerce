@@ -46,7 +46,7 @@ public class GCMRegistrationIntentService extends IntentService {
             //You can also extend the app by storing the token in to your server
             System.out.println(StaticDataUtility.APP_TAG + " FCM Notification token: " + token);
 
-            MyApplication.getInstance().getPreferenceUtility().setToken(token);
+            // MyApplication.getInstance().getPreferenceUtility().setToken(token);
             // TODO: Implement this method to send any registration to your app's servers.
             saveRegistrationToSP(token);
 

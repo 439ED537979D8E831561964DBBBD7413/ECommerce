@@ -42,8 +42,49 @@ public class FirebaseMessageService extends FirebaseMessagingService {
 
         //Calling method to generate notification
 
-//        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-        sendNotification(remoteMessage.getData());
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
+            sendNotification(remoteMessage.getData());
+        }
+
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            sendNotification(remoteMessage.getNotification().getBody());
+        }
+    }
+
+    private void sendNotification(String body) {
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+//        Uri defaultSoundUri = Uri.parse("android.resource://com.cabfinder.in/raw/vehicle041");
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle = bigTextStyle.bigText(body).setBigContentTitle("Winsant");
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notificationBuilder.setSmallIcon(R.drawable.ic_stat_action_android);
+        } else {
+            notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        }
+
+        notificationBuilder.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
+                .setContentTitle("Winsant")
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setStyle(bigTextStyle)
+                .setOngoing(false)
+                .setContentIntent(pendingIntent);
+
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, notificationBuilder.build());
 
     }
 //        if (remoteMessage.getData().get("msg_type").equals("book_cab")) {
@@ -69,17 +110,6 @@ public class FirebaseMessageService extends FirebaseMessagingService {
     private void sendNotification(Map<String, String> data) {
 
         Intent intent = new Intent(this, HomeActivity.class);
-//        intent.putExtra("from", "notification");
-//        intent.putExtra("full_name", data.get("full_name"));
-//        intent.putExtra("msg_type", data.get("msg_type"));
-//        intent.putExtra("user_id", data.get("user_id"));
-//        intent.putExtra("km", data.get("km"));
-//        intent.putExtra("mob", data.get("mob"));
-//        intent.putExtra("src_address", data.get("src_address"));
-//        intent.putExtra("des_address", data.get("des_address"));
-//        intent.putExtra("ride_id", data.get("ride_id"));
-//        intent.putExtra("time", String.valueOf(System.currentTimeMillis()));
-
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -174,7 +204,6 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         @Override
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
-
             showImageNotification(mContext, title, message, result);
         }
     }
