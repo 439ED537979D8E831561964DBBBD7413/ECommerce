@@ -22,7 +22,6 @@ import com.winsant.android.utils.StaticDataUtility;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -87,25 +86,6 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         notificationManager.notify(0, notificationBuilder.build());
 
     }
-//        if (remoteMessage.getData().get("msg_type").equals("book_cab")) {
-//            if (prefs.getString("alive").equals("true")) {
-//                sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-//            } else {
-//                sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-//            }
-//        } else if (remoteMessage.getData().get("msg_type").equals("advertise")) {
-//
-//            if (remoteMessage.getData().get("image").equals(""))
-//                showImageNotification(this, remoteMessage.getData().get("title"), remoteMessage.getData().get("message"), null);
-//            else
-//                new generatePictureStyleNotification(this, remoteMessage.getData().get("title"), remoteMessage.getData().get("message")
-//                        , remoteMessage.getData().get("image")).execute();
-//
-//        } else {
-//
-//            sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-//        }
-
 
     private void sendNotification(Map<String, String> data) {
 
@@ -191,10 +171,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
                 connection.setDoInput(true);
                 connection.connect();
                 in = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(in);
-                return myBitmap;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                return BitmapFactory.decodeStream(in);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -223,15 +200,16 @@ public class FirebaseMessageService extends FirebaseMessagingService {
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+                notificationBuilder.setSmallIcon(R.drawable.ic_stat_action_android);
             } else {
                 notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
             }
 
-            notificationBuilder.setContentIntent(pendingIntent)
+            notificationBuilder
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
+                    .setContentIntent(pendingIntent)
                     .setContentTitle(title)
                     .setContentText(message)
-                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
                     .setStyle(bigPictureStyle)
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                     .setAutoCancel(true)
@@ -245,7 +223,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+                notificationBuilder.setSmallIcon(R.drawable.ic_stat_action_android);
             } else {
                 notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
             }
@@ -260,3 +238,21 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         }
     }
 }
+//        if (remoteMessage.getData().get("msg_type").equals("book_cab")) {
+//            if (prefs.getString("alive").equals("true")) {
+//                sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+//            } else {
+//                sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+//            }
+//        } else if (remoteMessage.getData().get("msg_type").equals("advertise")) {
+//
+//            if (remoteMessage.getData().get("image").equals(""))
+//                showImageNotification(this, remoteMessage.getData().get("title"), remoteMessage.getData().get("message"), null);
+//            else
+//                new generatePictureStyleNotification(this, remoteMessage.getData().get("title"), remoteMessage.getData().get("message")
+//                        , remoteMessage.getData().get("image")).execute();
+//
+//        } else {
+//
+//            sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+//        }
