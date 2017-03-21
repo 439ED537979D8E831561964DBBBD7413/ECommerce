@@ -32,8 +32,6 @@ import java.util.Map;
 
 public class FirebaseMessageService extends FirebaseMessagingService {
 
-    private static final String TAG = "FireBaseMessageService";
-
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //Displaying data in log
