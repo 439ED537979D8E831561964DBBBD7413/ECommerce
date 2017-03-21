@@ -39,6 +39,14 @@ public class SharedPreferenceUtility {
         return appSharedPrefs.getInt(key, 0);
     }
 
+    public void setToken(String value) {
+        prefsEditor.putString("token", value).commit();
+    }
+
+    public String getToken() {
+        return appSharedPrefs.getString("token", "");
+    }
+
     public void setString(String key, String value) {
         prefsEditor.putString(key, value).commit();
     }

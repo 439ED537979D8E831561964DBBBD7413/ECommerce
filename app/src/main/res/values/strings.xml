@@ -137,5 +137,6 @@
     <string name="google">GOOGLE</string>
     <string name="proceed_pay">Proceed to pay</string>
     <string name="book_hint">* Single User can book only one VVIP ticket. Each VVIP lounge will accommodate 10 pax.</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

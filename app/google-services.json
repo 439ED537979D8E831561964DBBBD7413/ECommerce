@@ -1,35 +1,63 @@
 {
   "project_info": {
-    "project_number": "664711747071",
-    "project_id": "firebase-winsant"
+    "project_number": "71847953501",
+    "firebase_url": "https://winsant-155509.firebaseio.com",
+    "project_id": "winsant-155509",
+    "storage_bucket": "winsant-155509.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:664711747071:android:d34a59da7197f589",
+        "mobilesdk_app_id": "1:71847953501:android:d34a59da7197f589",
         "android_client_info": {
           "package_name": "com.winsant.android"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "71847953501-46ij3p846sd8k6snibp9mqdmd4spnj28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.winsant.android",
+            "certificate_hash": "a313419094846c0b2e16a7e0083f99dee9e0b1e5"
+          }
+        },
+        {
+          "client_id": "71847953501-n6gp06g53jbve9s5juvtb7nmi27cttom.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "71847953501-aphn9j0ojs260kk7bi9fgfoclvu4ad6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCIqPZMwOdKOjmzp0LbMeaH6hjZ3nvP9X8"
+          "current_key": "AIzaSyCJYcz9Ec_MCmIUuSs4Wqu7vd8_zgeEJRk"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-92600794-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71847953501-n6gp06g53jbve9s5juvtb7nmi27cttom.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "71847953501-rcp6thomnh6t5a5tb9uaiq231j517ad8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.savan.Winsant"
+              }
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
