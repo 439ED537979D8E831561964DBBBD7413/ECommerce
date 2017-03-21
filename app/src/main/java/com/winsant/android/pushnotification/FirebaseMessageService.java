@@ -17,7 +17,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.winsant.android.R;
 import com.winsant.android.ui.HomeActivity;
-import com.winsant.android.utils.StaticDataUtility;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,8 +35,8 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         //Displaying data in log
         //It is optional
 
-        System.out.println(StaticDataUtility.APP_TAG + " FireBaseMessageService From --> " + remoteMessage.getFrom());
-        System.out.println(StaticDataUtility.APP_TAG + " FireBaseMessageService getData --> " + remoteMessage.getData());
+//        System.out.println(StaticDataUtility.APP_TAG + " FireBaseMessageService From --> " + remoteMessage.getFrom());
+//        System.out.println(StaticDataUtility.APP_TAG + " FireBaseMessageService getData --> " + remoteMessage.getData());
 
         //Calling method to generate notification
 
