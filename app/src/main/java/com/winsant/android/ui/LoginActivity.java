@@ -410,6 +410,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
+                                // MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optString("total_cart"));
 
                                 progressHUD.dismiss();
                                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
@@ -435,8 +436,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -493,6 +494,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
+                                // MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optString("total_cart"));
 
                                 progressHUD.dismiss();
                                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
@@ -517,8 +519,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -678,8 +680,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

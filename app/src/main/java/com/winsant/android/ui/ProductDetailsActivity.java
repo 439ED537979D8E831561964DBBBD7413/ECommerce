@@ -39,6 +39,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.adapter.AttributeListAdapter;
 import com.winsant.android.adapter.ColorAttributeListAdapter;
 import com.winsant.android.adapter.GeneralFeatureAdapter;
@@ -617,8 +618,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -836,8 +837,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -922,12 +923,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         return true;
     }
 
-//    private void setBadge() {
-//
-//        int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-//        if (!(total == 0))
-//            ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
-//    }
+    private void setBadge() {
+
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+            if (!(total == 0))
+                ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+        }
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -1060,8 +1063,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -1150,8 +1153,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

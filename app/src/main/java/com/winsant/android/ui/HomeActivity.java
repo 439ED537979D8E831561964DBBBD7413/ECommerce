@@ -17,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.ui.fragment.HomeFragment;
 import com.winsant.android.ui.fragment.OfferListFragment;
 import com.winsant.android.ui.fragment.ProfileFragment;
 import com.winsant.android.ui.fragment.WishListFragment;
+import com.winsant.android.utils.StaticDataUtility;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -250,13 +252,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-//    private void setBadge() {
-//
-//        int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-//        if (!(total == 0)) {
-//            ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
-//        }
-//    }
+    private void setBadge() {
+
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+            if (!(total == 0)) {
+                ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+            }
+        }
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

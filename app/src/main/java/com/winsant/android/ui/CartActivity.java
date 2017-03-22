@@ -312,7 +312,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                 txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
 
 //                                MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
-//                                setBadge();
 
                                 progress_wheel.setVisibility(View.GONE);
                                 CartProductList.setVisibility(View.VISIBLE);
