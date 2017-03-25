@@ -313,8 +313,8 @@ public class ProductViewAllActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -336,8 +336,13 @@ public class ProductViewAllActivity extends AppCompatActivity implements View.On
         } else {
 
             if (type.equals("g")) {
-                gridLayoutManager = new GridLayoutManager(activity, 2);
+
+                if (CommonDataUtility.isTablet(activity))
+                    gridLayoutManager = new GridLayoutManager(activity, 3);
+                else
+                    gridLayoutManager = new GridLayoutManager(activity, 2);
                 viewAllList.setLayoutManager(gridLayoutManager);
+
             } else {
                 linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
                 viewAllList.setLayoutManager(linearLayoutManager);
@@ -509,8 +514,8 @@ public class ProductViewAllActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

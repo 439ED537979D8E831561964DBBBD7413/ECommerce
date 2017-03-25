@@ -130,22 +130,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edtPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtCPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-        edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         TextView txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
         txtForgotPass.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         btnSign_UP_IN = (Button) findViewById(R.id.btnSign_UP_IN);
         btnSign_UP_IN.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnSign_UP_IN.setText("New to Winsant? SIGN UP");
+
+        if (CommonDataUtility.isTablet(activity)) {
+
+            edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+
+            edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         txtForgotPass.setOnClickListener(this);
         btnLogin.setOnClickListener(this);

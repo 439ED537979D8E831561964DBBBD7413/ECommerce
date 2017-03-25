@@ -117,10 +117,15 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
         imgError = (ImageView) findViewById(R.id.imgError);
 
         subCategoryList1 = (RecyclerView) findViewById(R.id.subCategoryList1);
-        subCategoryList1.setLayoutManager(new GridLayoutManager(activity, 4));
-
         subCategoryList2 = (RecyclerView) findViewById(R.id.subCategoryList2);
-        subCategoryList2.setLayoutManager(new GridLayoutManager(activity, 4));
+
+        if (CommonDataUtility.isTablet(activity)) {
+            subCategoryList1.setLayoutManager(new GridLayoutManager(activity, 5));
+            subCategoryList2.setLayoutManager(new GridLayoutManager(activity, 5));
+        } else {
+            subCategoryList1.setLayoutManager(new GridLayoutManager(activity, 4));
+            subCategoryList2.setLayoutManager(new GridLayoutManager(activity, 4));
+        }
 
         subCategoryProductListView = (RecyclerView) findViewById(R.id.subCategoryProductListView);
         subCategoryProductListView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
@@ -272,93 +277,15 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
 
     private void setData() {
 
-        //  TODO : SubCategory Display
-        ArrayList<SubCategoryModel> subCategoryList11 = new ArrayList<>();
-        ArrayList<SubCategoryModel> subCategoryList21 = new ArrayList<>();
+        if (SubCategoryList.size() > 0) {
 
-        if (SubCategoryList.size() > 0)
-            if (SubCategoryList.size() >= 7) {
-
-                for (int i = 0; i < 8; i++) {
-                    if (i == 7) {
-                        subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
-                                SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "1"));
-                    } else {
-                        subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
-                                SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
-                    }
-                }
-
-                for (int i = 8; i < SubCategoryList.size(); i++) {
-                    subCategoryList21.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
-                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
-                }
-
-                AllSubCategoryListAdapter adapter = new AllSubCategoryListAdapter(activity, subCategoryList11, subCategoryList2,
-                        new AllSubCategoryListAdapter.onClickListener() {
-                            @Override
-                            public void onClick(String category_name, String category_url, String is_last) {
-
-                                // TODO : SubCategory View All Product Display Activity
-                                if (is_last.equals("0")) {
-                                    intent = new Intent(activity, SpecificCategoryListActivity.class);
-                                } else {
-                                    intent = new Intent(activity, ProductViewAllActivity.class);
-                                }
-
-                                intent.putExtra("url", category_url);
-                                intent.putExtra("name", category_name);
-                                activity.startActivity(intent);
-                                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                            }
-                        }, "square");
-                subCategoryList1.setAdapter(adapter);
-
-                AllSubCategoryListAdapter1 adapter1 = new AllSubCategoryListAdapter1(activity, subCategoryList21,
-                        subCategoryList2, adapter, new AllSubCategoryListAdapter1.onClickListener() {
-                    @Override
-                    public void onClick(String category_name, String category_url, String is_last) {
-
-                        if (is_last.equals("0")) {
-                            intent = new Intent(activity, SpecificCategoryListActivity.class);
-                        } else {
-                            intent = new Intent(activity, ProductViewAllActivity.class);
-                        }
-                        // TODO : SubCategory View All Product Display Activity
-                        intent.putExtra("url", category_url);
-                        intent.putExtra("name", category_name);
-                        activity.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    }
-                }, "square");
-
-                subCategoryList2.setAdapter(adapter1);
-                subCategoryList2.setVisibility(View.GONE);
-
+            if (CommonDataUtility.isTablet(activity)) {
+                setDataForTablet();
             } else {
-
-                subCategoryList1.setAdapter(new AllSubCategoryListAdapter(activity, SubCategoryList,
-                        subCategoryList2, new AllSubCategoryListAdapter.onClickListener() {
-                    @Override
-                    public void onClick(String category_name, String category_url, String is_last) {
-
-                        // TODO : SubCategory View All Product Display Activity
-                        if (is_last.equals("0")) {
-                            intent = new Intent(activity, SpecificCategoryListActivity.class);
-                        } else {
-                            intent = new Intent(activity, ProductViewAllActivity.class);
-                        }
-
-                        intent.putExtra("url", category_url);
-                        intent.putExtra("name", category_name);
-                        activity.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    }
-                }, "square"));
-
-                subCategoryList2.setVisibility(View.GONE);
+                setDataForSmartPhone();
             }
-        else {
+
+        } else {
             subCategoryList1.setVisibility(View.GONE);
             subCategoryList2.setVisibility(View.GONE);
         }
@@ -373,6 +300,180 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
                     addRemoveWishList(fav_link, position, "add");
             }
         }));
+    }
+
+    //  TODO : SubCategory Display
+    ArrayList<SubCategoryModel> subCategoryList11 = new ArrayList<>();
+    ArrayList<SubCategoryModel> subCategoryList21 = new ArrayList<>();
+
+    private void setDataForTablet() {
+
+        if (SubCategoryList.size() > 10) {
+
+            for (int i = 0; i < 11; i++) {
+                if (i == 10) {
+                    subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "1"));
+                } else {
+                    subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
+                }
+            }
+
+            for (int i = 11; i < SubCategoryList.size(); i++) {
+                subCategoryList21.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                        SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
+            }
+
+            AllSubCategoryListAdapter adapter = new AllSubCategoryListAdapter(activity, subCategoryList11, subCategoryList2,
+                    new AllSubCategoryListAdapter.onClickListener() {
+                        @Override
+                        public void onClick(String category_name, String category_url, String is_last) {
+
+                            // TODO : SubCategory View All Product Display Activity
+                            if (is_last.equals("0")) {
+                                intent = new Intent(activity, SpecificCategoryListActivity.class);
+                            } else {
+                                intent = new Intent(activity, ProductViewAllActivity.class);
+                            }
+
+                            intent.putExtra("url", category_url);
+                            intent.putExtra("name", category_name);
+                            activity.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        }
+                    }, "square");
+            subCategoryList1.setAdapter(adapter);
+
+            AllSubCategoryListAdapter1 adapter1 = new AllSubCategoryListAdapter1(activity, subCategoryList21,
+                    subCategoryList2, adapter, new AllSubCategoryListAdapter1.onClickListener() {
+                @Override
+                public void onClick(String category_name, String category_url, String is_last) {
+
+                    if (is_last.equals("0")) {
+                        intent = new Intent(activity, SpecificCategoryListActivity.class);
+                    } else {
+                        intent = new Intent(activity, ProductViewAllActivity.class);
+                    }
+                    // TODO : SubCategory View All Product Display Activity
+                    intent.putExtra("url", category_url);
+                    intent.putExtra("name", category_name);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            }, "square");
+
+            subCategoryList2.setAdapter(adapter1);
+            subCategoryList2.setVisibility(View.GONE);
+
+        } else {
+
+            subCategoryList1.setAdapter(new AllSubCategoryListAdapter(activity, SubCategoryList,
+                    subCategoryList2, new AllSubCategoryListAdapter.onClickListener() {
+                @Override
+                public void onClick(String category_name, String category_url, String is_last) {
+
+                    // TODO : SubCategory View All Product Display Activity
+                    if (is_last.equals("0")) {
+                        intent = new Intent(activity, SpecificCategoryListActivity.class);
+                    } else {
+                        intent = new Intent(activity, ProductViewAllActivity.class);
+                    }
+
+                    intent.putExtra("url", category_url);
+                    intent.putExtra("name", category_name);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            }, "square"));
+
+            subCategoryList2.setVisibility(View.GONE);
+        }
+    }
+
+    private void setDataForSmartPhone() {
+
+        if (SubCategoryList.size() >= 7) {
+
+            for (int i = 0; i < 8; i++) {
+                if (i == 7) {
+                    subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "1"));
+                } else {
+                    subCategoryList11.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                            SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
+                }
+            }
+
+            for (int i = 8; i < SubCategoryList.size(); i++) {
+                subCategoryList21.add(new SubCategoryModel(SubCategoryList.get(i).getCategory_name(), SubCategoryList.get(i).getCategory_image(),
+                        SubCategoryList.get(i).getCategory_url(), SubCategoryList.get(i).getIs_last(), "0"));
+            }
+
+            AllSubCategoryListAdapter adapter = new AllSubCategoryListAdapter(activity, subCategoryList11, subCategoryList2,
+                    new AllSubCategoryListAdapter.onClickListener() {
+                        @Override
+                        public void onClick(String category_name, String category_url, String is_last) {
+
+                            // TODO : SubCategory View All Product Display Activity
+                            if (is_last.equals("0")) {
+                                intent = new Intent(activity, SpecificCategoryListActivity.class);
+                            } else {
+                                intent = new Intent(activity, ProductViewAllActivity.class);
+                            }
+
+                            intent.putExtra("url", category_url);
+                            intent.putExtra("name", category_name);
+                            activity.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        }
+                    }, "square");
+            subCategoryList1.setAdapter(adapter);
+
+            AllSubCategoryListAdapter1 adapter1 = new AllSubCategoryListAdapter1(activity, subCategoryList21,
+                    subCategoryList2, adapter, new AllSubCategoryListAdapter1.onClickListener() {
+                @Override
+                public void onClick(String category_name, String category_url, String is_last) {
+
+                    if (is_last.equals("0")) {
+                        intent = new Intent(activity, SpecificCategoryListActivity.class);
+                    } else {
+                        intent = new Intent(activity, ProductViewAllActivity.class);
+                    }
+                    // TODO : SubCategory View All Product Display Activity
+                    intent.putExtra("url", category_url);
+                    intent.putExtra("name", category_name);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            }, "square");
+
+            subCategoryList2.setAdapter(adapter1);
+            subCategoryList2.setVisibility(View.GONE);
+
+        } else {
+
+            subCategoryList1.setAdapter(new AllSubCategoryListAdapter(activity, SubCategoryList,
+                    subCategoryList2, new AllSubCategoryListAdapter.onClickListener() {
+                @Override
+                public void onClick(String category_name, String category_url, String is_last) {
+
+                    // TODO : SubCategory View All Product Display Activity
+                    if (is_last.equals("0")) {
+                        intent = new Intent(activity, SpecificCategoryListActivity.class);
+                    } else {
+                        intent = new Intent(activity, ProductViewAllActivity.class);
+                    }
+
+                    intent.putExtra("url", category_url);
+                    intent.putExtra("name", category_name);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            }, "square"));
+
+            subCategoryList2.setVisibility(View.GONE);
+        }
     }
 
     private void noDataError() {
@@ -453,8 +554,8 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

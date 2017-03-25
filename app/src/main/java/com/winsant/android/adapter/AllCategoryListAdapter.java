@@ -42,11 +42,17 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
             subCategoryList = (RecyclerView) itemView.findViewById(R.id.subCategoryList);
             categoryName = (TextView) itemView.findViewById(R.id.categoryName);
-            subCategoryList.setLayoutManager(new GridLayoutManager(activity, 3));
             categoryName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
             categoryName.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
-            categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            if (CommonDataUtility.isTablet(activity)) {
+                categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                subCategoryList.setLayoutManager(new GridLayoutManager(activity, 4));
+            } else {
+                categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                subCategoryList.setLayoutManager(new GridLayoutManager(activity, 3));
+            }
         }
     }
 
@@ -86,7 +92,6 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
     @Override
     public int getItemCount() {
-
         return AllCategoryList.size();
 
     }

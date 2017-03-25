@@ -39,7 +39,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.winsant.android.R;
-import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.adapter.AttributeListAdapter;
 import com.winsant.android.adapter.ColorAttributeListAdapter;
 import com.winsant.android.adapter.GeneralFeatureAdapter;
@@ -105,6 +104,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private TextView txtDetails;
     private TextView item_sold_out;
     private TextView txtSingleAttribute;
+
+    private boolean is_item_sold_out = false;
 
     private ImageView imgWishList;
 
@@ -207,45 +208,56 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         item_sold_out = (TextView) findViewById(R.id.item_sold_out);
 
         txtName.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
         txtDiscountPrice.setTypeface(CommonDataUtility.setTypeFace(activity));
-        txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-
         txtPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-
         txtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
-
         txtDetails.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         txtColor.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
         txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
         txtSingleAttribute.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         item_sold_out.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        item_sold_out.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         Button btnChange = (Button) findViewById(R.id.btnChange);
-        btnChange.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         btnBuyNow = (Button) findViewById(R.id.btnBuyNow);
         btnAddCart = (Button) findViewById(R.id.btnAddCart);
-
-        btnBuyNow.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        btnAddCart.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
         btnChange.setTypeface(CommonDataUtility.setTypeFace(activity));
         btnBuyNow.setTypeface(CommonDataUtility.setTypeFace(activity));
         btnAddCart.setTypeface(CommonDataUtility.setTypeFace(activity));
+
+        if (CommonDataUtility.isTablet(activity)) {
+
+            txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            item_sold_out.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            btnBuyNow.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnAddCart.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnChange.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+        } else {
+
+            txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+            txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            item_sold_out.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            btnBuyNow.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnAddCart.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnChange.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
 
         imgError.setOnClickListener(this);
         imgShare.setOnClickListener(this);
@@ -566,10 +578,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     btnBuyNow.setVisibility(View.GONE);
                                     btnAddCart.setVisibility(View.GONE);
                                     item_sold_out.setVisibility(View.VISIBLE);
+                                    is_item_sold_out = true;
                                 } else {
                                     btnBuyNow.setVisibility(View.VISIBLE);
                                     btnAddCart.setVisibility(View.VISIBLE);
                                     item_sold_out.setVisibility(View.GONE);
+                                    is_item_sold_out = false;
                                 }
 
                                 if (generalFeaturesModels.size() > 0) {
@@ -729,13 +743,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         txtTitle.setText("Terms & Condition");
 
         TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
-        txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         txtTerms.setVisibility(View.VISIBLE);
         txtTerms.setText(t_and_c);
+
+        if (CommonDataUtility.isTablet(activity)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
 
         dialogView.findViewById(R.id.edtPinCode).setVisibility(View.GONE);
         dialogView.findViewById(R.id.view1).setVisibility(View.GONE);
@@ -873,15 +893,21 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
         TextView txtAvailability = (TextView) dialogView.findViewById(R.id.txtAvailability);
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         txtTitle.setText("Enter Delivery Pin Code");
 
         txtAvailability.setVisibility(View.GONE);
 
         final EditText edtPinCode = (EditText) dialogView.findViewById(R.id.edtPinCode);
         edtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         edtPinCode.setHint("Enter pin code here...");
+
+        if (CommonDataUtility.isTablet(activity)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         if (!MyApplication.getInstance().getPreferenceUtility().getString("pincode").equals(""))
             edtPinCode.setText(MyApplication.getInstance().getPreferenceUtility().getString("pincode"));
@@ -1122,15 +1148,23 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                         MyApplication.getInstance().getPreferenceUtility().setString("pincode", zip_code);
                                         strPinCode = MyApplication.getInstance().getPreferenceUtility().getString("pincode");
 
-                                        if (delivery.equals("0")) {
+                                        if (is_item_sold_out) {
                                             btnBuyNow.setVisibility(View.GONE);
                                             btnAddCart.setVisibility(View.GONE);
                                             item_sold_out.setVisibility(View.VISIBLE);
-                                            item_sold_out.setText(message);
+
                                         } else {
-                                            btnBuyNow.setVisibility(View.VISIBLE);
-                                            btnAddCart.setVisibility(View.VISIBLE);
-                                            item_sold_out.setVisibility(View.GONE);
+
+                                            if (delivery.equals("0")) {
+                                                btnBuyNow.setVisibility(View.GONE);
+                                                btnAddCart.setVisibility(View.GONE);
+                                                item_sold_out.setVisibility(View.VISIBLE);
+                                                item_sold_out.setText(message);
+                                            } else {
+                                                btnBuyNow.setVisibility(View.VISIBLE);
+                                                btnAddCart.setVisibility(View.VISIBLE);
+                                                item_sold_out.setVisibility(View.GONE);
+                                            }
                                         }
 
                                         txtPinCode.setText((Html.fromHtml(message + " <font color='#1B347E'> <b>" + strPinCode + "</b></font>")));

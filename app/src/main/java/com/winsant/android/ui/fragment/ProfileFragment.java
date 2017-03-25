@@ -96,18 +96,36 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         txtLogout.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
         txtChangePassword.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
-        txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-        txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtVerify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtOrder.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtFAQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtRateApp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtAppFeedBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtPolicies.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        if (CommonDataUtility.isTablet(activity)) {
+
+            txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtVerify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtOrder.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtFAQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtRateApp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtAppFeedBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtPolicies.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+
+            txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtVerify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtOrder.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtFAQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtRateApp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtAppFeedBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtPolicies.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         txtOrder.setOnClickListener(this);
         txtAddress.setOnClickListener(this);

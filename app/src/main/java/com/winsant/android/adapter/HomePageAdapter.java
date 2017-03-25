@@ -60,9 +60,16 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             home_page_data_list.setNestedScrollingEnabled(false);
 
             main_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-            main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             viewAll.setTypeface(CommonDataUtility.setTypeFace(activity));
-            viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+
+            if (CommonDataUtility.isTablet(activity)){
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            }
+            else {
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+            }
         }
     }
 
@@ -205,7 +212,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         } else {
 
-            holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
+            if (CommonDataUtility.isTablet(activity))
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
+            else
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
 
             HomePageCategoryAdapter homePageCategoryAdapter = new HomePageCategoryAdapter(activity, homeHeaderModels.get(position)
                     .getCategoryProductModels(),

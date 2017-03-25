@@ -34,11 +34,16 @@ public class GeneralFeatureAdapter extends RecyclerView.Adapter<GeneralFeatureAd
             txtAttrTitle = (TextView) itemView.findViewById(R.id.txtAttrTitle);
             txtAttrValue = (TextView) itemView.findViewById(R.id.txtAttrValue);
 
-            txtAttrTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtAttrTitle.setTypeface(CommonDataUtility.setTypeFace(activity));
-
-            txtAttrValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtAttrValue.setTypeface(CommonDataUtility.setTypeFace(activity));
+
+            if (CommonDataUtility.isTablet(activity)) {
+                txtAttrTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtAttrValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            } else {
+                txtAttrTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtAttrValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            }
         }
     }
 

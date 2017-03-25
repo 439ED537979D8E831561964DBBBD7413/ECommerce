@@ -93,6 +93,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     private void BindView() {
 
+//        if (CommonDataUtility.isTablet(activity)) {
+//            Toast.makeText(activity, "Tablet", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(activity, "Smart Phone", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+//        if (tabletSize) {
+//            Toast.makeText(activity, "Tablet_1", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(activity, "Smart_Phone_1", Toast.LENGTH_SHORT).show();
+//        }
+
         EditText edtSearch = (EditText) rootView.findViewById(R.id.edtSearch);
         edtSearch.setOnClickListener(new View.OnClickListener() {
             @Override

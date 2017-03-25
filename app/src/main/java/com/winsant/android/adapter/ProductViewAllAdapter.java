@@ -66,10 +66,20 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
             txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
-            txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            if (CommonDataUtility.isTablet(activity)) {
+
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            } else {
+
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

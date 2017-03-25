@@ -59,7 +59,10 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             ll_attribute = (LinearLayout) itemView.findViewById(R.id.ll_attribute);
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-            attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+            if (CommonDataUtility.isTablet(activity))
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            else
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         }
     }
 

@@ -58,9 +58,15 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
             home_page_data_list = (RecyclerView) itemView.findViewById(R.id.home_page_data_list);
 
             main_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-            main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             viewAll.setTypeface(CommonDataUtility.setTypeFace(activity));
-            viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+
+            if (CommonDataUtility.isTablet(activity)) {
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            } else {
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+            }
         }
     }
 
@@ -138,7 +144,11 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
         } else {
 
-            holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
+            if (CommonDataUtility.isTablet(activity))
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
+            else
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
+
 
             SubCategoryProductListAdapter homePageCategoryAdapter = new SubCategoryProductListAdapter(activity, categoryModelList.get(position).getSubCategoryProductList(),
                     new SubCategoryProductListAdapter.onClickListener() {

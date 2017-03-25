@@ -57,7 +57,11 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
             }
             subCategoryName = (TextView) itemView.findViewById(R.id.subCategoryName);
             subCategoryName.setTypeface(CommonDataUtility.setTypeFace1(activity));
-            subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+            if (CommonDataUtility.isTablet(activity))
+                subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            else
+                subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,7 +116,7 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
                         viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
                         viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
                         subCategoryList2.setVisibility(View.VISIBLE);
-                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.fade_in));
+                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_in));
                         viewHolder.ViewMore.setVisibility(View.GONE);
                     } else {
                         if (clickListener != null)
@@ -132,7 +136,7 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
                         viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
                         viewHolder.SpecificSubCategoryImage.setVisibility(View.VISIBLE);
                         subCategoryList2.setVisibility(View.VISIBLE);
-                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.fade_in));
+                        subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_in));
                         viewHolder.ViewMore.setVisibility(View.GONE);
                     } else {
                         if (clickListener != null)

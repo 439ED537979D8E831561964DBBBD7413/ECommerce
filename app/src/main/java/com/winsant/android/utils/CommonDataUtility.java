@@ -2,6 +2,7 @@ package com.winsant.android.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -21,6 +22,17 @@ import com.winsant.android.ui.MyApplication;
  */
 
 public class CommonDataUtility {
+
+    /**
+     * Determine if the device is a tablet (i.e. it has a large screen).
+     *
+     * @param activity The calling activity.
+     */
+    public static boolean isTablet(Activity activity) {
+        return (activity.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
 
     public static boolean checkConnection(Activity activity) {
         ConnectivityManager
