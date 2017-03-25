@@ -43,7 +43,13 @@ public class ColorAttributeListAdapter extends RecyclerView.Adapter<ColorAttribu
             ll_attribute = (LinearLayout) itemView.findViewById(R.id.ll_attribute);
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-            attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            } else {
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            }
         }
     }
 

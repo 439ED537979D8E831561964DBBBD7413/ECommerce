@@ -144,11 +144,13 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
         } else {
 
-            if (CommonDataUtility.isTablet(activity))
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 4));
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
-            else
+            } else {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
-
+            }
 
             SubCategoryProductListAdapter homePageCategoryAdapter = new SubCategoryProductListAdapter(activity, categoryModelList.get(position).getSubCategoryProductList(),
                     new SubCategoryProductListAdapter.onClickListener() {

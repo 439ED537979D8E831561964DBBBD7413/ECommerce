@@ -3,6 +3,7 @@ package com.winsant.android.adapter;
 import android.app.Activity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.winsant.android.R;
 import com.winsant.android.model.AddressModel;
+import com.winsant.android.utils.CommonDataUtility;
 import com.winsant.android.utils.StaticDataUtility;
 
 import java.util.ArrayList;
@@ -58,6 +60,20 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             txtName = (TextView) itemView.findViewById(R.id.txtName);
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
             txtMobile = (TextView) itemView.findViewById(R.id.txtMobile);
+
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

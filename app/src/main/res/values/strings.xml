@@ -12,6 +12,7 @@
     <string name="title_activity_add_new_address">Add new address</string>
     <string name="title_activity_update_address">Update address</string>
     <string name="title_activity_select_address">Select Address</string>
+    <string name="title_activity_select_payment">Select Payment Method </string>
     <string name="title_activity_policy">Privacy Policy</string>
     <string name="title_activity_faq">FAQs</string>
     <string name="title_activity_festival">Book Your Passes</string>

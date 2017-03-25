@@ -85,11 +85,9 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
 
         btnSetDefault = (Button) findViewById(R.id.btnSetDefault);
         btnSetDefault.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnSetDefault.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnSetDefault.setOnClickListener(this);
 
         TextView txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
-        txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         txtTotalPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
         if (getIntent().hasExtra("total")) {
@@ -110,14 +108,25 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
 
         TextView txtAddAddress = (TextView) findViewById(R.id.txtAddAddress);
         txtAddAddress.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        txtAddAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         txtAddAddress.setOnClickListener(this);
 
         Button btnDelivery = (Button) findViewById(R.id.btnDelivery);
         btnDelivery.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnDelivery.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnDelivery.setOnClickListener(this);
 
+        if (CommonDataUtility.isTablet(activity)) {
+            btnDelivery.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnSetDefault.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            txtAddAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+        } else {
+            btnDelivery.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnSetDefault.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            txtAddAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        }
     }
 
     private void getData() {
@@ -315,8 +324,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -446,8 +455,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -538,8 +547,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -613,8 +622,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

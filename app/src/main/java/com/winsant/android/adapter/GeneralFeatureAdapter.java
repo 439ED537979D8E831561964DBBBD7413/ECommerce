@@ -37,7 +37,10 @@ public class GeneralFeatureAdapter extends RecyclerView.Adapter<GeneralFeatureAd
             txtAttrTitle.setTypeface(CommonDataUtility.setTypeFace(activity));
             txtAttrValue.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-            if (CommonDataUtility.isTablet(activity)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                txtAttrTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtAttrValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 txtAttrTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 txtAttrValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             } else {

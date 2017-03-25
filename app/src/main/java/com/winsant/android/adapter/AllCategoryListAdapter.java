@@ -46,7 +46,10 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
             categoryName.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (CommonDataUtility.isTablet(activity)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                subCategoryList.setLayoutManager(new GridLayoutManager(activity, 4));
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 subCategoryList.setLayoutManager(new GridLayoutManager(activity, 4));
             } else {

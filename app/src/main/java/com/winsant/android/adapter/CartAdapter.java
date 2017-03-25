@@ -72,14 +72,36 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             txtColor.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
-            txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-            txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            } else {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            }
         }
     }
 

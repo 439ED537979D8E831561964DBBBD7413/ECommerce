@@ -58,10 +58,13 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
             subCategoryName = (TextView) itemView.findViewById(R.id.subCategoryName);
             subCategoryName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-            if (CommonDataUtility.isTablet(activity))
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
                 subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            else
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+                subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else {
                 subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -150,7 +153,6 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
         } else {
             Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(120, 120).into(viewHolder.subCategoryImage);
 
-            viewHolder.subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
         }
     }

@@ -17,12 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winsant.android.R;
-import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.ui.fragment.HomeFragment;
 import com.winsant.android.ui.fragment.OfferListFragment;
 import com.winsant.android.ui.fragment.ProfileFragment;
 import com.winsant.android.ui.fragment.WishListFragment;
-import com.winsant.android.utils.StaticDataUtility;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,10 +50,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         txtWishList = (TextView) findViewById(R.id.txtWishList);
         txtProfile = (TextView) findViewById(R.id.txtProfile);
 
-        txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtProfile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        if (getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtProfile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else if (getResources().getBoolean(R.bool.isTablet)) {
+            txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtProfile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        } else {
+            txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtProfile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
 
         txtHome.setOnClickListener(this);
         txtOffers.setOnClickListener(this);

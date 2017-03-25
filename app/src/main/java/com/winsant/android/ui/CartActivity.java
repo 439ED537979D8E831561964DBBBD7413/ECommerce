@@ -125,15 +125,20 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
 
         txtTotalPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
-        txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-//        txtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-//        txtCoupon.setText("Have coupon code?");
 
         Button btnChange = (Button) findViewById(R.id.btnChange);
         Button btnContinue = (Button) findViewById(R.id.btnContinue);
         btnContinue.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+        if (CommonDataUtility.isTablet(activity)) {
+            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+        } else {
+            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        }
 
         CartProductList = (RecyclerView) findViewById(R.id.CartProductList);
         CartProductList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));

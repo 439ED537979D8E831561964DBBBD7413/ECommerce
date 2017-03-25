@@ -61,7 +61,8 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
             txtPrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (CommonDataUtility.isTablet(activity)) {
+
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);

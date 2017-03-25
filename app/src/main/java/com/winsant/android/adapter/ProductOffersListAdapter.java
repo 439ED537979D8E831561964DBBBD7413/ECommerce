@@ -39,11 +39,17 @@ public class ProductOffersListAdapter extends RecyclerView.Adapter<ProductOffers
 
             txtCoupon = (TextView) itemView.findViewById(R.id.txtCoupon);
             txtCoupon.setTypeface(CommonDataUtility.setTypeFace1(activity));
-            txtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
             t_and_c = (TextView) itemView.findViewById(R.id.t_and_c);
             t_and_c.setTypeface(CommonDataUtility.setTypeFace1(activity));
-            t_and_c.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                txtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                t_and_c.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            } else {
+                txtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                t_and_c.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            }
         }
     }
 

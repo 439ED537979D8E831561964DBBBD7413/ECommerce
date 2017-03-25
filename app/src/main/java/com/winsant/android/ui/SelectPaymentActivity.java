@@ -60,7 +60,7 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        mToolbar_title.setText(getString(R.string.title_activity_select_address));
+        mToolbar_title.setText(getString(R.string.title_activity_select_payment));
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -78,25 +78,19 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         rl_payment = (RelativeLayout) findViewById(R.id.rl_payment);
 
         edtCouponCode = (EditText) findViewById(R.id.edtCouponCode);
-        edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         edtCouponCode.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.BOLD);
 
         txtCouponCode = (TextView) findViewById(R.id.txtCouponCode);
-        txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         txtCouponCode.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.BOLD);
 
         txtSubTotalPrice = (TextView) findViewById(R.id.txtSubTotalPrice);
-        txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         txtSubTotalPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
 
         txtDiscountPrice = (TextView) findViewById(R.id.txtDiscountPrice);
-        txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         txtDiscountPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
 
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
-        txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         txtTotalPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
-
 
         is_cod = getIntent().getStringExtra("is_cod");
         address_id = getIntent().getStringExtra("address_id");
@@ -108,19 +102,41 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         rbPAYU = (RadioButton) findViewById(R.id.rbPAYU);
 
         rbCOD.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.BOLD);
-        rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         rbPAYU.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.BOLD);
-        rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         btnApply = (Button) findViewById(R.id.btnApply);
         btnApply.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnApply.setOnClickListener(this);
 
         Button btnConfirm = (Button) findViewById(R.id.btnConfirm);
         btnConfirm.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnConfirm.setOnClickListener(this);
+
+        if (CommonDataUtility.isTablet(activity)) {
+            edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+            edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+        }
 
         if (is_cod.equals("1"))
             rbCOD.setVisibility(View.VISIBLE);
@@ -337,8 +353,8 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -432,8 +448,8 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

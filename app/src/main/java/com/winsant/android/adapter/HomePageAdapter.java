@@ -62,11 +62,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             main_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
             viewAll.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-            if (CommonDataUtility.isTablet(activity)){
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            }
-            else {
+            } else {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
             }
@@ -212,10 +214,18 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         } else {
 
-            if (CommonDataUtility.isTablet(activity))
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 4));
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
-            else
+            } else {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
+            }
+
+//            if (CommonDataUtility.isTablet(activity))
+//                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
+//            else
+//                holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
 
             HomePageCategoryAdapter homePageCategoryAdapter = new HomePageCategoryAdapter(activity, homeHeaderModels.get(position)
                     .getCategoryProductModels(),

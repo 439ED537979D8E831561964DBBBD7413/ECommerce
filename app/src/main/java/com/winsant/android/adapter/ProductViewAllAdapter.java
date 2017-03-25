@@ -66,7 +66,7 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
             txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (CommonDataUtility.isTablet(activity)) {
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -75,7 +75,7 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
 
             } else {
 
-                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);

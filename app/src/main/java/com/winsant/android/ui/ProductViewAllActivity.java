@@ -337,10 +337,14 @@ public class ProductViewAllActivity extends AppCompatActivity implements View.On
 
             if (type.equals("g")) {
 
-                if (CommonDataUtility.isTablet(activity))
+                if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                    gridLayoutManager = new GridLayoutManager(activity, 4);
+                } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                     gridLayoutManager = new GridLayoutManager(activity, 3);
-                else
+                } else {
                     gridLayoutManager = new GridLayoutManager(activity, 2);
+                }
+
                 viewAllList.setLayoutManager(gridLayoutManager);
 
             } else {

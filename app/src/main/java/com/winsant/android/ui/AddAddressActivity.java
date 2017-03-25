@@ -96,20 +96,36 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
         edtAddress.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtLandmark.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-        edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtPincode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtCity.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtState.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtCountry.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtLandmark.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
         Button btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnSave.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnSave.setOnClickListener(this);
+
+        if (CommonDataUtility.isTablet(activity)) {
+            edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtPincode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtCity.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtState.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtCountry.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtLandmark.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            btnSave.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+            edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtPincode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtCity.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtState.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtCountry.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtLandmark.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            btnSave.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         if (type.equals("update")) {
 
@@ -279,8 +295,8 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
