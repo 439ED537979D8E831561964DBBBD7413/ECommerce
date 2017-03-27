@@ -105,7 +105,16 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         btnOK.setOnClickListener(this);
         txtResend.setOnClickListener(this);
 
-        if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);

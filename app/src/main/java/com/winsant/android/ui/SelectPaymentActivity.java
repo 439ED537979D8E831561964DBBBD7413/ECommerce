@@ -112,7 +112,21 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         btnConfirm.setTypeface(CommonDataUtility.setTypeFace1(activity));
         btnConfirm.setOnClickListener(this);
 
-        if (CommonDataUtility.isTablet(activity)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+            btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+
             edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);

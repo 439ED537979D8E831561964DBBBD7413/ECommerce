@@ -106,12 +106,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/txtVerify"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:background="@color/colorAccent"
                     android:drawablePadding="10dp"
                     android:gravity="center"
@@ -123,7 +123,7 @@
                 <TextView
                     android:id="@+id/txtOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_order_svg"
@@ -143,7 +143,7 @@
                 <TextView
                     android:id="@+id/txtAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_address_svg"
@@ -163,7 +163,7 @@
                 <TextView
                     android:id="@+id/txtChangePassword"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_change_password_svg"
@@ -183,7 +183,7 @@
                 <TextView
                     android:id="@+id/txtFAQ"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_faq_svg"
@@ -203,7 +203,7 @@
                 <TextView
                     android:id="@+id/txtRateApp"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_rate_us_svg"
@@ -223,7 +223,7 @@
                 <TextView
                     android:id="@+id/txtAppFeedBack"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_feedback_svg"
@@ -243,7 +243,7 @@
                 <TextView
                     android:id="@+id/txtPolicies"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_policy_svg"
@@ -263,7 +263,7 @@
                 <TextView
                     android:id="@+id/txtLogout"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_margin="2dp"
                     android:background="@color/colorWhite"
                     android:drawableLeft="@drawable/ico_logout_svg"

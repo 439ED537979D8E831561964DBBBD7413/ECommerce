@@ -96,7 +96,22 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         txtLogout.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
         txtChangePassword.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
-        if (CommonDataUtility.isTablet(activity)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtVerify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtOrder.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtAddress.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtFAQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtRateApp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtAppFeedBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtPolicies.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
 
             txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
             txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);

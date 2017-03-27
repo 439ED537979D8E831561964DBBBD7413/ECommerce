@@ -108,7 +108,16 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         btnUpdate.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
         btnUpdate1.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
-        if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnUpdate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnUpdate1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
 
             edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
