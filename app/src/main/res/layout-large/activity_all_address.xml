@@ -97,7 +97,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSetDefault"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@color/colorAccent"
             android:text="@string/set_default"
             android:textColor="@color/white"

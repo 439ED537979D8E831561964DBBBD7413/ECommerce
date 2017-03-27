@@ -130,7 +130,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         Button btnContinue = (Button) findViewById(R.id.btnContinue);
         btnContinue.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-        if (CommonDataUtility.isTablet(activity)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
             txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
@@ -316,8 +321,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(activity, "Total " + cartProductArrayList.size() + " Products", Toast.LENGTH_SHORT).show();
                                 txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
 
-//                                MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
-
                                 progress_wheel.setVisibility(View.GONE);
                                 CartProductList.setVisibility(View.VISIBLE);
 
@@ -326,7 +329,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                 progress_wheel.setVisibility(View.GONE);
 
                                 if (cartProductArrayList.size() == 0) {
-//                                    MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
+                                    MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
                                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                                     EmptyCart();
                                 }
@@ -439,23 +442,32 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        txtTitle.setText("Terms & Condition");
+        txtTitle.setText("Remove from cart");
 
         TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
-        txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         txtTerms.setVisibility(View.VISIBLE);
-        txtTerms.setText("Want to remove product from wishlist??");
+        txtTerms.setText("Want to remove product from cart??");
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
 
         dialogView.findViewById(R.id.edtPinCode).setVisibility(View.GONE);
 
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
         btnOK.setTypeface(CommonDataUtility.setTypeFace(activity));
-        btnOK.setTag(getString(R.string.yes));
+        btnOK.setText(getString(R.string.yes));
 
         Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
         btnCancel.setTypeface(CommonDataUtility.setTypeFace(activity));
-        btnCancel.setTag(getString(R.string.no));
+        btnCancel.setText(getString(R.string.no));
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -519,7 +531,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                         CommonDataUtility.showSnackBar(rl_cart, message);
 
                                         mToolbar_title.setText("My Cart (" + cartProductArrayList.size() + ")");
-//                                        MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
+                                        MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", cartProductArrayList.size());
 
                                         TotalAfterRemove();
 
@@ -591,8 +603,19 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         final EditText edtPinCode = (EditText) dialogView.findViewById(R.id.edtPinCode);
         edtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         edtPinCode.setHint("Enter pin code here...");
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtAvailability.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         if (!MyApplication.getInstance().getPreferenceUtility().getString("pincode").equals(""))
             edtPinCode.setText(MyApplication.getInstance().getPreferenceUtility().getString("pincode"));
@@ -639,8 +662,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
         TextView txtAvailability = (TextView) dialogView.findViewById(R.id.txtAvailability);
-        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        txtAvailability.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         txtTitle.setText("Enter Quantity");
 
         txtAvailability.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
@@ -648,8 +669,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         final EditText edtPinCode = (EditText) dialogView.findViewById(R.id.edtPinCode);
         edtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         edtPinCode.setHint("Quantity");
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtAvailability.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtAvailability.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtAvailability.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
         btnOK.setTypeface(CommonDataUtility.setTypeFace(activity));

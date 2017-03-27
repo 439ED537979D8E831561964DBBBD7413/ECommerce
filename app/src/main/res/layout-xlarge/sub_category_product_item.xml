@@ -9,7 +9,7 @@
     <com.winsant.android.roundimageview.RoundedImageView
         android:id="@+id/main_banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_marginTop="2dp"
         android:contentDescription="@string/app_name"
         android:padding="2dp"
@@ -47,7 +47,7 @@
             <TextView
                 android:id="@+id/viewAll"
                 android:layout_width="120dp"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/bg_view_all"

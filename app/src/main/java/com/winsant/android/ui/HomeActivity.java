@@ -1,6 +1,5 @@
 package com.winsant.android.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -8,8 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,7 +25,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imgHome, imgOffers, imgWishList, imgProfile;
     private TextView txtHome, txtOffers, txtWishList, txtProfile;
     private String tag = "";
-    private MenuItem cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +146,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (position) {
             case 0:
+
+                for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i) {
+                    getSupportFragmentManager().popBackStack();
+                }
+
                 frag = new HomeFragment();
                 tag = "home";
                 break;
@@ -157,10 +158,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 frag = new OfferListFragment();
                 tag = "offers";
                 break;
-//            case 2:
-//                frag = MenuFragment.newInstance(getString(R.string.text_concept));
-//                tag = "concept";
-//                break;
             case 2:
                 frag = new WishListFragment();
                 tag = "wishList";
@@ -212,8 +209,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-//        setBadge();
-//        invalidateOptionsMenu();
     }
 
     private void backPress() {
@@ -254,40 +249,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//        cart = menu.findItem(1);
-//        setBadge();
-        return true;
-    }
-
-//    private void setBadge() {
-//
-//        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-//            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-//            if (!(total == 0)) {
-//                ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
-//            }
-//        }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        return true;
 //    }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case 1:
-
-                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-                    startActivity(new Intent(HomeActivity.this, CartActivity.class));
-                } else {
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                }
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//
+//            case 1:
+//
+//                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+//                    startActivity(new Intent(HomeActivity.this, CartActivity.class));
+//                } else {
+//                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+//                }
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 }
 //    private void selectFragment(MenuItem item) {
 //        Fragment frag = null;

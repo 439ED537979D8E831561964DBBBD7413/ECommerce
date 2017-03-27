@@ -32,7 +32,7 @@
         <EditText
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_margin="10dp"
             android:background="@drawable/bg_search"
             android:drawableLeft="@drawable/ico_search_svg"
@@ -46,7 +46,7 @@
             android:padding="10dp"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/aluminum"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
 
     </android.support.design.widget.AppBarLayout>
 

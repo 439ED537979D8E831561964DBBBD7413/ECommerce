@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:gravity="center"
     app:cardElevation="2dp">
 
-    <RelativeLayout
-        android:layout_width="180dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -17,9 +16,7 @@
         <FrameLayout
             android:id="@+id/fl_top"
             android:layout_width="135dp"
-            android:layout_height="165dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true">
+            android:layout_height="165dp">
 
             <ImageView
                 android:id="@+id/productImage"
@@ -44,7 +41,6 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fl_top"
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
@@ -55,7 +51,6 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtName"
             android:layout_marginTop="2dp">
 
             <TextView
@@ -102,5 +97,5 @@
             android:src="@drawable/ico_wishlist_normal_svg"
             android:visibility="gone" />
 
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

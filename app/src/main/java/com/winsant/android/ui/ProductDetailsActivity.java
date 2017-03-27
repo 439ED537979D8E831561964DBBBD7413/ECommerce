@@ -39,6 +39,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.adapter.AttributeListAdapter;
 import com.winsant.android.adapter.ColorAttributeListAdapter;
 import com.winsant.android.adapter.GeneralFeatureAdapter;
@@ -901,7 +902,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         edtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtPinCode.setHint("Enter pin code here...");
 
-        if (CommonDataUtility.isTablet(activity)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
             txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             edtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         } else {
@@ -944,19 +948,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//        cart = menu.findItem(1);
-//        setBadge();
+        cart = menu.findItem(1);
+        setBadge();
         return true;
     }
 
-//    private void setBadge() {
-//
-//        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-//            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-//            if (!(total == 0))
-//                ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
-//        }
-//    }
+    private void setBadge() {
+
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+            if (!(total == 0))
+                ActionItemBadge.Update(this, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+        }
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -973,8 +977,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     protected void onResume() {
         super.onResume();
-//        setBadge();
-//        invalidateOptionsMenu();
+        setBadge();
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -1058,10 +1062,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     @Override
                                     public void run() {
 
-//                                        int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-//                                        MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", (total + 1));
+                                        int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+                                        MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", (total + 1));
 
-//                                        setBadge();
+                                        setBadge();
 
                                         if (type.equals("addtocart")) {
 //                                            setAttributeData();

@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.adapter.HomePageAdapter;
 import com.winsant.android.daimajia.slider.library.SliderLayout;
 import com.winsant.android.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -29,7 +33,9 @@ import com.winsant.android.model.BannerModel;
 import com.winsant.android.model.CategoryModel;
 import com.winsant.android.model.HomeHeaderModel;
 import com.winsant.android.model.HomeProductModel;
+import com.winsant.android.ui.CartActivity;
 import com.winsant.android.ui.FestivalActivity;
+import com.winsant.android.ui.LoginActivity;
 import com.winsant.android.ui.MyApplication;
 import com.winsant.android.ui.ProductSearchActivity;
 import com.winsant.android.ui.SpecificCategoryListActivity;
@@ -44,7 +50,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener, BaseSliderView.OnSliderClickListener {
     //implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener
@@ -69,10 +74,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView txtCategory1;
     private TextView txtCategory2;
     private TextView txtCategory3;
-
+    private MenuItem cart;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -175,10 +181,31 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         txtCategory2.setTypeface(CommonDataUtility.setTypeFace(activity));
         txtCategory3.setTypeface(CommonDataUtility.setTypeFace(activity));
         txtCategory4.setTypeface(CommonDataUtility.setTypeFace(activity));
-        txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+
+            txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+        } else {
+
+            txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
+
+
     }
 
     private void getData() {
@@ -202,12 +229,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         HomePageAdapter adapter = new HomePageAdapter(activity, homeHeaderModels);
         home_page_list.setAdapter(adapter);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MyApplication.getInstance().trackScreenView("Home Fragment");
     }
 
     private void getHomePageData() {
@@ -408,5 +429,49 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onPause() {
         super.onPause();
         Glide.clear(imgError);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Home Fragment");
+        setBadge();
+        activity.invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        cart = menu.findItem(1);
+        setBadge();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case 1:
+
+                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+                    startActivity(new Intent(activity, CartActivity.class));
+                } else {
+                    startActivity(new Intent(activity, LoginActivity.class));
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setBadge() {
+
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+            if (!(total == 0)) {
+                ActionItemBadge.Update(activity, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+            }
+        }
     }
 }

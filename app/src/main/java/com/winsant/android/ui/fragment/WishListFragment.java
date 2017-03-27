@@ -298,23 +298,32 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         txtTitle.setText("Terms & Condition");
 
         TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
-        txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         txtTerms.setVisibility(View.VISIBLE);
         txtTerms.setText("Want to remove product from wishlist??");
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        } else {
+            txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTerms.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
 
         dialogView.findViewById(R.id.edtPinCode).setVisibility(View.GONE);
 
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
         btnOK.setTypeface(CommonDataUtility.setTypeFace(activity));
-        btnOK.setTag(getString(R.string.yes));
+        btnOK.setText(getString(R.string.yes));
 
         Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
         btnCancel.setTypeface(CommonDataUtility.setTypeFace(activity));
-        btnCancel.setTag(getString(R.string.no));
+        btnCancel.setText(getString(R.string.no));
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
