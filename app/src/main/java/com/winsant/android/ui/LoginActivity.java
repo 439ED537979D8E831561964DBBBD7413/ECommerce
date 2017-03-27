@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnSign_UP_IN.setTypeface(CommonDataUtility.setTypeFace1(activity));
         btnSign_UP_IN.setText("New to Winsant? SIGN UP");
 
-        if (CommonDataUtility.isTablet(activity)) {
+        if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);

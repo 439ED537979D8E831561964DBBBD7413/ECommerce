@@ -60,11 +60,20 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
             txtPrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-            txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            } else {
+
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,7 +88,6 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_home_product_v_item, viewGroup, false);
         return new ViewHolder(v);
     }

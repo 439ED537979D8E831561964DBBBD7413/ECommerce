@@ -100,17 +100,29 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         edtOtp.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtResend.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-        edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
         btnOK = (Button) findViewById(R.id.btnOK);
         btnOK.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         btnOK.setOnClickListener(this);
         txtResend.setOnClickListener(this);
+
+        if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+
+            edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
     }
 
     @Override
@@ -275,8 +287,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -376,8 +388,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

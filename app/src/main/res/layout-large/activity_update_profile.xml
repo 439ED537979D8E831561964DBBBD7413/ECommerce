@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/rose"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="#AA3F51B5"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ico_boy_svg" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_profile_update"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/first_name"
+                        android:inputType="textCapSentences"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/last_name"
+                        android:inputType="textCapSentences"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rbMale"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Male"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rbFemale"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Female"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/mobile"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLength="10"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/email_address"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_ratting"
+                    android:text="@string/update"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_password_update"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardOldPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtOldPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/old_password"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/new_password"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardCPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    app:cardElevation="2dp">
+
+                    <EditText
+                        android:id="@+id/edtCPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:hint="@string/c_password"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/oil"
+                        android:textColorHint="@color/aluminum"
+                        android:textSize="14sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnUpdate1"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_view_all"
+                    android:text="@string/update"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

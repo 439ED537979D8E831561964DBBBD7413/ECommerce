@@ -92,13 +92,13 @@
 
         <ImageView
             android:id="@+id/imgWishList"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:contentDescription="@string/app_name"
-            android:padding="5dp"
+            android:padding="10dp"
             android:src="@drawable/ico_wishlist_normal_svg"
             android:visibility="gone" />
 

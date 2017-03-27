@@ -108,12 +108,24 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         btnUpdate.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
         btnUpdate1.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
-        edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        edtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        btnUpdate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        btnUpdate1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+
+            edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnUpdate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            btnUpdate1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        } else {
+
+            edtFirstName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtLastName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtEmail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnUpdate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnUpdate1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         btnUpdate.setOnClickListener(this);
         btnUpdate1.setOnClickListener(this);
@@ -358,8 +370,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -439,8 +451,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -511,8 +523,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

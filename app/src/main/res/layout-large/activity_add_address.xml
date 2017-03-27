@@ -219,7 +219,7 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_marginTop="15dp"
         android:background="@color/colorAccent"
         android:text="@string/save"
