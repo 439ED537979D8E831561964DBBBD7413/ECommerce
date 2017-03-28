@@ -240,7 +240,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                            System.out.println(StaticDataUtility.APP_TAG + " url --> " + product_url);
                         }
                     }, "g");
 

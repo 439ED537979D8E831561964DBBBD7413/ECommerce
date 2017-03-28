@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.ui.AllAddressActivity;
+import com.winsant.android.ui.CartActivity;
 import com.winsant.android.ui.LoginActivity;
 import com.winsant.android.ui.MyApplication;
 import com.winsant.android.ui.OrderActivity;
@@ -40,6 +45,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private String isSetPassword = "";
     private TextView txtVerify;
     private String Verify = "";
+    private MenuItem cart;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -161,6 +167,42 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         System.out.println(StaticDataUtility.APP_TAG + " Profile OnResume");
         MyApplication.getInstance().trackScreenView("Profile Fragment");
         checkLogin();
+        setBadge();
+        activity.invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        cart = menu.findItem(1);
+        setBadge();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case 1:
+
+                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+                    startActivity(new Intent(activity, CartActivity.class));
+                } else {
+                    startActivity(new Intent(activity, LoginActivity.class));
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setBadge() {
+
+        int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+        if (!(total == 0)) {
+            ActionItemBadge.Update(activity, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+        }
     }
 
     private void checkLogin() {
@@ -310,10 +352,11 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             case R.id.txtLogout:
 
                 CommonDataUtility.clearData();
+                setBadge();
+                activity.invalidateOptionsMenu();
                 checkLogin();
 
                 break;
-
         }
     }
 

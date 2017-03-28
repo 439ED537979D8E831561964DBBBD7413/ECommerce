@@ -182,7 +182,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         txtCategory3.setTypeface(CommonDataUtility.setTypeFace(activity));
         txtCategory4.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-
         if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
             txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -276,21 +275,44 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                             homeProductModels = new ArrayList<>();
                             JSONArray nameObject = name.optJSONArray(i);
 
-                            for (int j = 0; j < nameObject.length(); j++) {
+//                            if (activity.getResources().getBoolean(R.bool.isTablet)) {
+//
+//                                for (int j = 0; j < 4; j++) {
+//
+//                                    JSONObject finalObject = nameObject.optJSONObject(j);
+//
+//                                    if (j == 0) {
+//                                        homeHeaderModels.add(new HomeHeaderModel(finalObject.optString("name"), finalObject.optString("banner"),
+//                                                finalObject.optString("banner_url"), finalObject.optString("catt_view_all"), finalObject.optString("banner1"),
+//                                                finalObject.optString("banner1_url"), finalObject.optString("banner2"), finalObject.optString("banner2_url"),
+//                                                jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), homeProductModels, categoryModels, bannerList));
+//                                    } else {
+//                                        homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
+//                                                finalObject.optString("product_url"), finalObject.optString("price"), finalObject.optString("discount_price"),
+//                                                finalObject.optString("discount_per"), finalObject.optString("product_image"), finalObject.optString("cart_url"),
+//                                                finalObject.optString("fav_url")));
+//                                    }
+//                                }
+//
+//                            } else {
 
-                                JSONObject finalObject = nameObject.optJSONObject(j);
+                                for (int j = 0; j < nameObject.length(); j++) {
 
-                                if (j == 0) {
-                                    homeHeaderModels.add(new HomeHeaderModel(finalObject.optString("name"), finalObject.optString("banner"),
-                                            finalObject.optString("banner_url"), finalObject.optString("catt_view_all"), finalObject.optString("banner1"),
-                                            finalObject.optString("banner1_url"), finalObject.optString("banner2"), finalObject.optString("banner2_url"),
-                                            jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), homeProductModels, categoryModels, bannerList));
-                                } else {
-                                    homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
-                                            finalObject.optString("product_url"), finalObject.optString("price"), finalObject.optString("discount_price"),
-                                            finalObject.optString("discount_per"), finalObject.optString("product_image"), finalObject.optString("cart_url"),
-                                            finalObject.optString("fav_url")));
-                                }
+                                    JSONObject finalObject = nameObject.optJSONObject(j);
+
+                                    if (j == 0) {
+                                        homeHeaderModels.add(new HomeHeaderModel(finalObject.optString("name"), finalObject.optString("banner"),
+                                                finalObject.optString("banner_url"), finalObject.optString("catt_view_all"), finalObject.optString("banner1"),
+                                                finalObject.optString("banner1_url"), finalObject.optString("banner2"), finalObject.optString("banner2_url"),
+                                                jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), homeProductModels, categoryModels, bannerList));
+                                    } else {
+                                        homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
+                                                finalObject.optString("product_url"), finalObject.optString("price"), finalObject.optString("discount_price"),
+                                                finalObject.optString("discount_per"), finalObject.optString("product_image"), finalObject.optString("cart_url"),
+                                                finalObject.optString("fav_url")));
+                                    }
+//                                }
+
                             }
                         }
 

@@ -139,7 +139,17 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
 
     @Override
     public int getItemCount() {
-        return itemsCategory.size();
+
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            return itemsCategory.size();
+        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            if (tag.equals("v"))
+                return 4;
+            else
+                return 3;
+        } else {
+            return itemsCategory.size();
+        }
     }
 
     @Override
