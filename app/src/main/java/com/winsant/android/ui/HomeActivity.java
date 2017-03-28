@@ -248,7 +248,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
+}
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -271,7 +271,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
-}
 //    private void selectFragment(MenuItem item) {
 //        Fragment frag = null;
 //        // init corresponding fragment
