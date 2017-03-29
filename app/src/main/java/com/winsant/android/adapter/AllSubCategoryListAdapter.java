@@ -151,8 +151,8 @@ public class AllSubCategoryListAdapter extends RecyclerView.Adapter<AllSubCatego
 
             Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(150, 150).into(viewHolder.SpecificSubCategoryImage);
         } else {
-            Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(120, 120).into(viewHolder.subCategoryImage);
 
+            Picasso.with(activity).load(subCategoryModel.getCategory_image()).resize(120, 120).into(viewHolder.subCategoryImage);
             viewHolder.subCategoryName.setText(subCategoryModel.getCategory_name());
         }
     }
