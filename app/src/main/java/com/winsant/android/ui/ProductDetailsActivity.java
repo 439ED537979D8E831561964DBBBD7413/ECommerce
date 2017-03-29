@@ -401,7 +401,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         AddToCart(url, tag);
                     }
                 } else {
-                    Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Please login first to add product in cart", Toast.LENGTH_SHORT).show();
                     activity.startActivity(new Intent(activity, LoginActivity.class));
                 }
             }
