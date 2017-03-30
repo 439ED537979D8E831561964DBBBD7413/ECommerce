@@ -101,8 +101,8 @@
 
                         <ImageView
                             android:id="@+id/imgShare"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_margin="2dp"
                             android:contentDescription="@string/app_name"
                             android:padding="10dp"
@@ -110,8 +110,8 @@
 
                         <ImageView
                             android:id="@+id/imgWishList"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_margin="2dp"
                             android:contentDescription="@string/app_name"
                             android:padding="10dp"
@@ -443,7 +443,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center|start"
                         android:padding="8dp"
-                        android:text="12.7 cm (5) Display Resolution 1280X720 Android Lollipop 5.1 Processor(core+bit): 1.5GHz Hexa Core Processor RAM 2 GB 16GB ROM*(Includes memory used for OS &amp; apps) 5MP Camera ( Rear) 5MP Camera ( Front) Lens: Rear:4P, Front:3P Capacity: 2200mAh Battery Type: Li-Ion Stand-By: 200h"
                         android:textColor="@color/colorBlack" />
 
                 </LinearLayout>
