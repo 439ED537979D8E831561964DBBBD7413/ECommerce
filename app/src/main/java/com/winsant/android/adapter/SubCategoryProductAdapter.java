@@ -60,7 +60,10 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
             main_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
             viewAll.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-            if (CommonDataUtility.isTablet(activity)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+                main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             } else {
