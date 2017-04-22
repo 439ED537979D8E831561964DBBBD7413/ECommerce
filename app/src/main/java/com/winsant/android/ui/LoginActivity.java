@@ -1,10 +1,17 @@
 package com.winsant.android.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +45,11 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 import com.winsant.android.R;
 import com.winsant.android.kprogresshud.KProgressHUD;
 import com.winsant.android.utils.CommonDataUtility;
@@ -45,28 +57,29 @@ import com.winsant.android.utils.StaticDataUtility;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-//        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener
+        , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Activity activity;
     private EditText edtUserId, edtPassword, edtCPassword;
     private String strUserId, strPassword, strCPassword;
     private Button btnSign_UP_IN, btnLogin;
     private boolean isForLogin = false;
-    private LinearLayout ll_login, llFacebookLogin;
-    //    llGoogleLogin;
+    private LinearLayout ll_login, llFacebookLogin, llGoogleLogin;
+    //    ;
     private KProgressHUD progressHUD;
     private CardView cardCPassword;
     private TextView mToolbar_title;
     private ProgressDialog pDialog;
 
-    //    private GoogleApiClient mGoogleApiClient;
-//    private ConnectionResult mConnectionResult;
+    private GoogleApiClient mGoogleApiClient;
+    private ConnectionResult mConnectionResult;
     private LoginButton loginbutton;
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
@@ -74,6 +87,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String fbId = "", fbFirstName = "", fbLastName = "", fbEmail = "";
     private String social_logout;
     private boolean mIntentInProgress;
+
+
+    private boolean isReadPhone = false, isReadAccount = false;
+    private int REQUEST_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         ll_login = (LinearLayout) findViewById(R.id.ll_login);
         llFacebookLogin = (LinearLayout) findViewById(R.id.llFacebookLogin);
-//        llGoogleLogin = (LinearLayout) findViewById(R.id.llGoogleLogin);
+        llGoogleLogin = (LinearLayout) findViewById(R.id.llGoogleLogin);
         loginbutton = (LoginButton) findViewById(R.id.login_button);
 
         cardCPassword = (CardView) findViewById(R.id.cardCPassword);
@@ -173,33 +190,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnSign_UP_IN.setOnClickListener(this);
 
         // Initializing google plus api client
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(Plus.API)
-//                .addScope(Plus.SCOPE_PLUS_PROFILE)
-//                .addScope(Plus.SCOPE_PLUS_LOGIN)
-//                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_PROFILE)
+                .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .build();
 
-//        llGoogleLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!CommonDataUtility.checkConnection(activity)) {
-//                    Toast.makeText(activity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
-//                } else {
-//                    social_provider = "google";
-//                    pDialog = new ProgressDialog(activity);
-//                    pDialog.setMessage("Please wait...");
-//                    pDialog.setIndeterminate(false);
-//                    pDialog.setCancelable(false);
-//                    pDialog.show();
-//                    if (mGoogleApiClient != null && !mGoogleApiClient.isConnected())
-//                        mGoogleApiClient.connect();
-//                    else
-//                        signInWithGplus();
-//                }
-//            }
-//        });
+        llGoogleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!CommonDataUtility.checkConnection(activity)) {
+                    Toast.makeText(activity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+                } else {
+                    if (checkPermission()) {
+                        loginWithGplus();
+                    }
+                }
+            }
+        });
 
         //FB
         List<String> permissionNeeds = Arrays.asList("email", "public_profile");
@@ -290,6 +300,92 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+
+    private void loginWithGplus() {
+        pDialog = new ProgressDialog(activity);
+        pDialog.setMessage("Please wait...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+        if (mGoogleApiClient != null && !mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
+        else
+            signInWithGplus();
+    }
+
+    private boolean checkPermission() {
+
+        int permissionReadPhoneState = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE);
+        int accountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS);
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (accountPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.GET_ACCOUNTS);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            Toast.makeText(activity, "please grant all this permission to work all functionality properly", Toast.LENGTH_LONG).show();
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_PERMISSION);
+            return false;
+        } else {
+
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+        if (requestCode == REQUEST_PERMISSION) {
+            // START_INCLUDE(permission_result)
+
+            Map<String, Integer> perms = new HashMap<String, Integer>();
+            // Initial
+            perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+            perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
+
+            // Fill with results
+            for (int i = 0; i < permissions.length; i++)
+                perms.put(permissions[i], grantResults[i]);
+
+            // Check for READ_PHONE_STATE
+            if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+
+                isReadPhone = true;
+
+            } else {
+
+                isReadPhone = false;
+                CommonDataUtility.showSnackBar(ll_login, "Phone read permission was NOT granted.");
+            }
+
+            // Check for GET_ACCOUNTS
+            if (perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
+
+                isReadAccount = true;
+
+            } else {
+
+                isReadAccount = false;
+                CommonDataUtility.showSnackBar(ll_login, "Google Account read permission was NOT granted.");
+            }
+
+            if (isReadPhone && isReadAccount) {
+                loginWithGplus();
+            } else {
+                checkPermission();
+            }
+
+            // END_INCLUDE(permission_result)
+
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override
@@ -560,22 +656,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Intent intent) {
         super.onActivityResult(requestCode, responseCode, intent);
         callbackManager.onActivityResult(requestCode, responseCode, intent);
-//        if (requestCode == 0) {
-//            if (responseCode != RESULT_OK) {
-//                mIntentInProgress = false;
-//                if (mGoogleApiClient != null && mGoogleApiClient.isConnecting()) {
-//                    mGoogleApiClient.disconnect();
-//                }
-//                if (pDialog != null && pDialog.isShowing())
-//                    pDialog.dismiss();
-//            } else {
-//                mIntentInProgress = false;
-//                if (mGoogleApiClient != null)
-//                    if (!mGoogleApiClient.isConnecting()) {
-//                        mGoogleApiClient.connect();
-//                    }
-//            }
-//        }
+        if (requestCode == 0) {
+            if (responseCode != RESULT_OK) {
+                mIntentInProgress = false;
+                if (mGoogleApiClient != null && mGoogleApiClient.isConnecting()) {
+                    mGoogleApiClient.disconnect();
+                }
+                if (pDialog != null && pDialog.isShowing())
+                    pDialog.dismiss();
+            } else {
+                mIntentInProgress = false;
+                if (mGoogleApiClient != null)
+                    if (!mGoogleApiClient.isConnecting()) {
+                        mGoogleApiClient.connect();
+                    }
+            }
+        }
     }
 
     private void EmailMobileDialog() {
@@ -716,140 +812,134 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+
+    /**
+     * Sign-in into google
+     */
+    private void signInWithGplus() {
+        if (!mGoogleApiClient.isConnecting()) {
+            resolveSignInError();
+        }
+    }
+
+    public void signOutFromGplus() {
+        if (mGoogleApiClient != null && !mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
+
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            social_logout = "0";
+        }
+    }
+
+    public void signOutFromGplusFailed() {
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            social_logout = "0";
+        }
+    }
+
+    /**
+     * Method to resolve any signin errors
+     */
+    private void resolveSignInError() {
+        if (mConnectionResult != null && mConnectionResult.hasResolution()) {
+            try {
+                mIntentInProgress = true;
+                mConnectionResult.startResolutionForResult(this, 0);
+            } catch (IntentSender.SendIntentException e) {
+                mIntentInProgress = false;
+                mGoogleApiClient.connect();
+            }
+        }
+    }
+
+    /**
+     * Fetching user's information name, email, profile pic
+     */
+    private void getProfileInformation() {
+        try {
+            fbEmail = Plus.AccountApi.getAccountName(mGoogleApiClient);
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+                String personName = "";
+                String personlastname = "";
+                if (currentPerson.getName().hasFamilyName())
+                    personlastname = currentPerson.getName().getFamilyName();
+                if (currentPerson.getName().hasGivenName())
+                    personName = currentPerson.getName().getGivenName();
+                else
+                    personName = currentPerson.getDisplayName();
+                fbId = currentPerson.getId();
+                fbFirstName = personName;
+                fbLastName = personlastname;
+//                if (currentPerson.getGender() == 1)
+//                    fbGender = "female";
+//                else if (currentPerson.getGender() == 0)
+//                    fbGender = "male";
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                fbEmail = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                if (CommonDataUtility.checkConnection(activity)) {
+                    if (pDialog != null && pDialog.isShowing())
+                        pDialog.dismiss();
+//                    checkSocialLogin();
+                } else {
+                    if (pDialog != null && pDialog.isShowing())
+                        pDialog.dismiss();
+                    Toast.makeText(activity, "Internet Connection Error", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                if (pDialog != null && pDialog.isShowing())
+                    pDialog.dismiss();
+                Toast.makeText(activity, "Data not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            if (pDialog != null && pDialog.isShowing())
+                pDialog.dismiss();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (mGoogleApiClient.isConnected())
+            getProfileInformation();
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        if (!result.hasResolution()) {
+            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
+            return;
+        }
+        if (!mIntentInProgress) {
+            mConnectionResult = result;
+            resolveSignInError();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
 }
-
-/**
- * Sign-in into google
- */
-//    private void signInWithGplus() {
-//        if (!mGoogleApiClient.isConnecting()) {
-//            resolveSignInError();
-//        }
-//    }
-//
-//    public void signOutFromGplus() {
-//        if (mGoogleApiClient != null && !mGoogleApiClient.isConnected())
-//            mGoogleApiClient.connect();
-//
-//        if (mGoogleApiClient.isConnected()) {
-//            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-//            mGoogleApiClient.disconnect();
-//            social_logout = "0";
-//        }
-//    }
-//
-//    public void signOutFromGplusFailed() {
-//        if (mGoogleApiClient.isConnected()) {
-//            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-//            mGoogleApiClient.disconnect();
-//            social_logout = "0";
-//        }
-//    }
-//
-//    /**
-//     * Method to resolve any signin errors
-//     */
-//    private void resolveSignInError() {
-//        if (mConnectionResult != null && mConnectionResult.hasResolution()) {
-//            try {
-//                mIntentInProgress = true;
-//                mConnectionResult.startResolutionForResult(this, 0);
-//            } catch (IntentSender.SendIntentException e) {
-//                mIntentInProgress = false;
-//                mGoogleApiClient.connect();
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Fetching user's information name, email, profile pic
-//     */
-//    private void getProfileInformation() {
-//        try {
-//            fbEmail = Plus.AccountApi.getAccountName(mGoogleApiClient);
-//            social_provider = "google";
-//            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-//                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-//                String personName = "";
-//                String personlastname = "";
-//                if (currentPerson.getName().hasFamilyName())
-//                    personlastname = currentPerson.getName().getFamilyName();
-//                if (currentPerson.getName().hasGivenName())
-//                    personName = currentPerson.getName().getGivenName();
-//                else
-//                    personName = currentPerson.getDisplayName();
-//                String personPhotoUrl = currentPerson.getImage().getUrl();
-//                fbId = currentPerson.getId();
-//                fbFirstName = personName;
-//                fbLastName = personlastname;
-//                imageURL = personPhotoUrl;
-////                if (currentPerson.getGender() == 1)
-////                    fbGender = "female";
-////                else if (currentPerson.getGender() == 0)
-////                    fbGender = "male";
-//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//                fbEmail = Plus.AccountApi.getAccountName(mGoogleApiClient);
-//                imageURL = imageURL.substring(0, imageURL.length() - 2) + 400;
-//                if (CommonDataUtility.checkConnection(activity)) {
-//                    if (pDialog != null && pDialog.isShowing())
-//                        pDialog.dismiss();
-////                    checkSocialLogin();
-//                } else {
-//                    if (pDialog != null && pDialog.isShowing())
-//                        pDialog.dismiss();
-//                    Toast.makeText(activity, "Internet Connection Error", Toast.LENGTH_SHORT).show();
-//                }
-//            } else {
-//                if (pDialog != null && pDialog.isShowing())
-//                    pDialog.dismiss();
-//                Toast.makeText(activity, "Data not found", Toast.LENGTH_SHORT).show();
-//            }
-//        } catch (Exception e) {
-//            if (pDialog != null && pDialog.isShowing())
-//                pDialog.dismiss();
-//            e.printStackTrace();
-//        }
-//    }
-//}
-
-
-//    @Override
-//    public void onConnected(@Nullable Bundle bundle) {
-//        if (mGoogleApiClient.isConnected())
-//            getProfileInformation();
-//
-//    }
-
-//    @Override
-//    public void onConnectionSuspended(int i) {
-//        mGoogleApiClient.connect();
-//    }
-
-//    @Override
-//    public void onConnectionFailed(ConnectionResult result) {
-//        if (!result.hasResolution()) {
-//            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
-//            return;
-//        }
-//        if (!mIntentInProgress) {
-//            mConnectionResult = result;
-//            resolveSignInError();
-//        }
-//    }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mGoogleApiClient.isConnected()) {
-//            mGoogleApiClient.disconnect();
-//        }
-//    }

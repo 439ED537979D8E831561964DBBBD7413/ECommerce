@@ -381,6 +381,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private void setSliderData() {
 
         for (int i = 0; i < bannerList.size(); i++) {
+
+            System.out.println(StaticDataUtility.APP_TAG + " url --> " + bannerList.get(i).getBanner_image());
+
             TextSliderView textSliderView = new TextSliderView(activity);
             textSliderView.image(bannerList.get(i).getBanner_image()).setScaleType(BaseSliderView.ScaleType.Fit);
             textSliderView.setOnSliderClickListener(this);
