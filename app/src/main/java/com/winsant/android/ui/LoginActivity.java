@@ -361,22 +361,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             // Check for READ_PHONE_STATE
             if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-
                 isReadPhone = true;
 
             } else {
-
                 isReadPhone = false;
                 CommonDataUtility.showSnackBar(ll_login, "Phone read permission was NOT granted.");
             }
 
             // Check for GET_ACCOUNTS
             if (perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
-
                 isReadAccount = true;
 
             } else {
-
                 isReadAccount = false;
                 CommonDataUtility.showSnackBar(ll_login, "Google Account read permission was NOT granted.");
             }
