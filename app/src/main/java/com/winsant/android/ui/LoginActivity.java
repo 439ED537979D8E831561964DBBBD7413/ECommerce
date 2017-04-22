@@ -45,6 +45,9 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -651,29 +654,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int responseCode,
-                                    Intent intent) {
-        super.onActivityResult(requestCode, responseCode, intent);
-        callbackManager.onActivityResult(requestCode, responseCode, intent);
-        if (requestCode == 0) {
-            if (responseCode != RESULT_OK) {
-                mIntentInProgress = false;
-                if (mGoogleApiClient != null && mGoogleApiClient.isConnecting()) {
-                    mGoogleApiClient.disconnect();
-                }
-                if (pDialog != null && pDialog.isShowing())
-                    pDialog.dismiss();
-            } else {
-                mIntentInProgress = false;
-                if (mGoogleApiClient != null)
-                    if (!mGoogleApiClient.isConnecting()) {
-                        mGoogleApiClient.connect();
-                    }
-            }
-        }
-    }
-
     private void EmailMobileDialog() {
 
         final Dialog dialog = new Dialog(activity);
@@ -812,6 +792,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int responseCode,
+                                    Intent intent) {
+        super.onActivityResult(requestCode, responseCode, intent);
+        callbackManager.onActivityResult(requestCode, responseCode, intent);
+        if (requestCode == 0) {
+            if (responseCode != RESULT_OK) {
+                mIntentInProgress = false;
+                if (mGoogleApiClient != null && mGoogleApiClient.isConnecting()) {
+                    mGoogleApiClient.disconnect();
+                }
+                if (pDialog != null && pDialog.isShowing())
+                    pDialog.dismiss();
+
+                getProfileInformation();
+                handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(intent));
+            } else {
+                mIntentInProgress = false;
+                if (mGoogleApiClient != null)
+                    if (!mGoogleApiClient.isConnecting()) {
+                        mGoogleApiClient.connect();
+                    }
+            }
+        }
+    }
 
     /**
      * Sign-in into google
@@ -908,6 +913,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (pDialog != null && pDialog.isShowing())
                 pDialog.dismiss();
             e.printStackTrace();
+        }
+    }
+
+    //After the signing we are calling this function
+    private void handleSignInResult(GoogleSignInResult result) {
+        //If the login succeed
+        if (result.isSuccess()) {
+            //Getting google account
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            //Displaying name and email
+
+            System.out.println(StaticDataUtility.APP_TAG + " name --> " + acct.getDisplayName());
+            System.out.println(StaticDataUtility.APP_TAG + " email --> " + acct.getEmail());
+
+        } else {
+            //If login fails
+            Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
         }
     }
 
