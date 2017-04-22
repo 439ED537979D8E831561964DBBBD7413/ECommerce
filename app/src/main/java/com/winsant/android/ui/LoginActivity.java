@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String social_logout;
     private boolean mIntentInProgress;
 
-
     private boolean isReadPhone = false, isReadAccount = false;
     private int REQUEST_PERMISSION = 1;
 
@@ -326,9 +325,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
+        } else {
+            isReadPhone = true;
         }
         if (accountPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.GET_ACCOUNTS);
+        } else {
+            isReadAccount = true;
         }
         if (!listPermissionsNeeded.isEmpty()) {
             Toast.makeText(activity, "please grant all this permission to work all functionality properly", Toast.LENGTH_LONG).show();
@@ -899,6 +902,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (pDialog != null && pDialog.isShowing())
                         pDialog.dismiss();
 //                    checkSocialLogin();
+                    signOutFromGplus();
                 } else {
                     if (pDialog != null && pDialog.isShowing())
                         pDialog.dismiss();
@@ -927,6 +931,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             System.out.println(StaticDataUtility.APP_TAG + " name --> " + acct.getDisplayName());
             System.out.println(StaticDataUtility.APP_TAG + " email --> " + acct.getEmail());
+
+            signOutFromGplus();
 
         } else {
             //If login fails
