@@ -461,7 +461,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return "Please enter valid Email/Mobile Number";
         else if (strUserId.contains("@") && !Patterns.EMAIL_ADDRESS.matcher(strUserId).matches())
             return "Please enter valid Email";
-        else if (!android.util.Patterns.PHONE.matcher(strUserId).matches())
+        else if (!strUserId.contains("@") && !android.util.Patterns.PHONE.matcher(strUserId).matches())
             return "Please enter valid Mobile number";
         else if (strPassword.equals(""))
             return "Please enter password";
@@ -475,7 +475,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return "Please enter valid Email/Mobile number";
         else if (strUserId.contains("@") && !Patterns.EMAIL_ADDRESS.matcher(strUserId).matches())
             return "Please enter valid Email";
-        else if (!android.util.Patterns.PHONE.matcher(strUserId).matches())
+        else if (!strUserId.contains("@") && !android.util.Patterns.PHONE.matcher(strUserId).matches())
             return "Please enter valid Mobile number";
         else if (strPassword.equals(""))
             return "Please enter password";
