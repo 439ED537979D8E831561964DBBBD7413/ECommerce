@@ -84,15 +84,15 @@ public class ColorAttributeListAdapter extends RecyclerView.Adapter<ColorAttribu
 
                 if (attributeModelArrayList.get(pos).getIsSelect().equals("0"))
                     attributeModelArrayList.set(pos, new AttributeModel(attributeModelArrayList.get(pos).getColor_id(), attributeModelArrayList.get(pos).getColor_name(),
-                            "1"));
+                            "1", attributeModelArrayList.get(pos).getColor_image(), attributeModelArrayList.get(pos).getColor_images()));
 
                 for (int i = 0; i < attributeModelArrayList.size(); i++)
                     if (i == pos)
                         attributeModelArrayList.set(i, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name(),
-                                "1"));
+                                "1", attributeModelArrayList.get(i).getColor_image(), attributeModelArrayList.get(i).getColor_images()));
                     else
                         attributeModelArrayList.set(i, new AttributeModel(attributeModelArrayList.get(i).getColor_id(), attributeModelArrayList.get(i).getColor_name(),
-                                "0"));
+                                "0", attributeModelArrayList.get(i).getColor_image(), attributeModelArrayList.get(i).getColor_images()));
 
                 notifyDataSetChanged();
             }

@@ -28,7 +28,7 @@ public class SizeAttributeListAdapter extends RecyclerView.Adapter<SizeAttribute
     }
 
     public interface onClickListener {
-        void onClick(String size_id, String size_name);
+        void onClick(String size_id, String size_name, String price, String discount_price, String discount_per);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,19 +80,20 @@ public class SizeAttributeListAdapter extends RecyclerView.Adapter<SizeAttribute
                 int pos = (int) v.getTag();
 
                 if (clickListener != null)
-                    clickListener.onClick(sizeModelArrayList.get(pos).getSize_id(), sizeModelArrayList.get(pos).getSize_name());
+                    clickListener.onClick(sizeModelArrayList.get(pos).getSize_id(), sizeModelArrayList.get(pos).getSize_name(), sizeModelArrayList.get(pos).getPrice()
+                            , sizeModelArrayList.get(pos).getDiscount_price(), sizeModelArrayList.get(pos).getDiscount_per());
 
                 if (sizeModelArrayList.get(pos).getIsSelect().equals("0"))
                     sizeModelArrayList.set(pos, new SizeModel(sizeModelArrayList.get(pos).getSize_id(), sizeModelArrayList.get(pos).getSize_name(),
-                            "1"));
+                            "1", sizeModelArrayList.get(pos).getPrice(), sizeModelArrayList.get(pos).getDiscount_price(), sizeModelArrayList.get(pos).getDiscount_per()));
 
                 for (int i = 0; i < sizeModelArrayList.size(); i++)
                     if (i == pos)
                         sizeModelArrayList.set(i, new SizeModel(sizeModelArrayList.get(i).getSize_id(), sizeModelArrayList.get(i).getSize_name(),
-                                "1"));
+                                "1", sizeModelArrayList.get(i).getPrice(), sizeModelArrayList.get(i).getDiscount_price(), sizeModelArrayList.get(i).getDiscount_per()));
                     else
                         sizeModelArrayList.set(i, new SizeModel(sizeModelArrayList.get(i).getSize_id(), sizeModelArrayList.get(i).getSize_name(),
-                                "0"));
+                                "0", sizeModelArrayList.get(i).getPrice(), sizeModelArrayList.get(i).getDiscount_price(), sizeModelArrayList.get(i).getDiscount_per()));
 
                 notifyDataSetChanged();
             }

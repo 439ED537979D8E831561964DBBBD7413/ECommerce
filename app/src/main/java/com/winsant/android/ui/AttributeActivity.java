@@ -129,14 +129,16 @@ public class AttributeActivity extends AppCompatActivity {
         ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                 new AttributeListAdapter.onClickListener() {
                     @Override
-                    public void onColorClick(String color_id, String color_name) {
+                    public void onColorClick(ArrayList<String> images, String color_id, String color_name) {
+
                         ColorId = color_id;
                         ColorName = color_name;
                         txtColor.setText("Color - " + color_name);
+
                     }
 
                     @Override
-                    public void onSizeClick(String size_id, String size_name) {
+                    public void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
                         SizeId = size_id;
                         SizeName = size_name;
                         txtSize.setText("Size - " + size_name);

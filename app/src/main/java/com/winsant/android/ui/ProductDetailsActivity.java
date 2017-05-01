@@ -503,8 +503,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                                 JSONObject sizeObject = size.getJSONObject(j);
 
-                                                sizeModelArrayList.add(new SizeModel(sizeObject.optString("size_id"),
-                                                        sizeObject.optString("size_name"), "0"));
+                                                sizeModelArrayList.add(new SizeModel(sizeObject.optString("size_id"), sizeObject.optString("size_name"), "0",
+                                                        sizeObject.optString("price"), sizeObject.optString("discount_price"), sizeObject.optString("discount_per")));
 
                                                 hs1.add(sizeObject.optString("size_name"));
                                                 hs.addAll(sizeModelArrayList);
@@ -521,11 +521,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                             } else if (sizeModelArrayList.size() > 0) {
                                                 strAttribute = "both";
                                                 attributeModelArrayList.add(new AttributeModel(attributeObject.optString("color_id"),
-                                                        attributeObject.optString("color_name"), sizeModelArrayList, "0", colorImagesList));
+                                                        attributeObject.optString("color_name"), sizeModelArrayList, "0",
+                                                        attributeObject.optString("color_image"), colorImagesList));
                                             } else {
                                                 strAttribute = "color";
                                                 attributeModelArrayList.add(new AttributeModel(attributeObject.optString("color_id"),
-                                                        attributeObject.optString("color_name"), "0", colorImagesList));
+                                                        attributeObject.optString("color_name"), "0", attributeObject.optString("color_image"), colorImagesList));
                                             }
                                         }
 
@@ -579,8 +580,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
                                 }
 
-                                viewPager.setAdapter(new ImageSliderAdapter(activity, productImages));
-                                indicator.setViewPager(viewPager);
+                                setProductImages();
 
                                 if (data.optString("availability").equals("0")) {
                                     btnBuyNow.setVisibility(View.GONE);
@@ -655,6 +655,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    private void setProductImages() {
+        viewPager.setAdapter(new ImageSliderAdapter(activity, productImages));
+        indicator.setViewPager(viewPager);
+    }
+
     private void setAttributeData() {
 
         switch (strAttribute) {
@@ -666,17 +671,50 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 AttributeListAdapter attributeListAdapter = new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
                         new AttributeListAdapter.onClickListener() {
                             @Override
-                            public void onColorClick(String color_id, String color_name) {
+                            public void onColorClick(ArrayList<String> images, String color_id, String color_name) {
+
+                                showProgress();
+
+                                productImages.clear();
+                                productImages.addAll(images);
+                                setProductImages();
+
                                 ColorId = color_id;
                                 ColorName = color_name;
                                 txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + ColorName + "</b></font>"));
+
+                                dismissProgress();
+
+                                return;
                             }
 
                             @Override
-                            public void onSizeClick(String size_id, String size_name) {
-                                SizeId = size_id;
-                                SizeName = size_name;
-                                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+                            public void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
+                                if (ColorId.equals("") || ColorName.equals("")) {
+                                    CommonDataUtility.showSnackBar(rl_main, "Please select COLOR first!");
+                                } else {
+
+                                    showProgress();
+
+                                    SizeId = size_id;
+                                    SizeName = size_name;
+                                    txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+
+                                    if (discount_per.equals("100")) {
+                                        txtPrice.setVisibility(View.GONE);
+                                        txtDiscount.setVisibility(View.GONE);
+                                        txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + price);
+                                    } else {
+                                        txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + price);
+                                        txtPrice.setPaintFlags(txtPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                                        txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + discount_price);
+                                        txtDiscount.setText(String.format("%s %% OFF", discount_per));
+                                    }
+
+                                    dismissProgress();
+                                }
+
+                                return;
                             }
                         });
 
@@ -692,7 +730,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 SizeAttributeListAdapter sizeAttributeListAdapter = new SizeAttributeListAdapter(activity, finalSizeModelArrayList,
                         new SizeAttributeListAdapter.onClickListener() {
                             @Override
-                            public void onClick(String size_id, String size_name) {
+                            public void onClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
                                 txtSingleAttribute.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + size_name + "</b></font>"));
                                 SizeId = size_id;
                             }
@@ -802,9 +840,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void addRemoveWishList(String fav_link, final String favType) {
 
-        progressHUD = KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false).show();
 
         JSONObject obj = new JSONObject();
         try {
@@ -831,7 +866,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                             if (success.equals("1")) {
 
-                                progressHUD.dismiss();
+                                dismissProgress();
 
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
@@ -880,6 +915,17 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    private void showProgress() {
+        progressHUD = KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false).show();
+    }
+
+    private void dismissProgress() {
+        if (progressHUD != null && progressHUD.isShowing())
+            progressHUD.dismiss();
+    }
+
     private void showError(String favType) {
         if (favType.equals("add")) {
             Toast.makeText(activity, "Problem while adding from the wish list. Try again later", Toast.LENGTH_SHORT).show();
@@ -887,7 +933,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             Toast.makeText(activity, "Problem while removing from the wishlist. Try again later", Toast.LENGTH_SHORT).show();
         }
 
-        progressHUD.dismiss();
+        dismissProgress();
     }
 
     private void changePinDialog() {
@@ -1030,9 +1076,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void AddToCart(String cart_url, final String type) {
 
-        progressHUD = KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false).show();
+        showProgress();
 
         JSONObject obj = new JSONObject();
         try {
@@ -1063,7 +1107,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                             if (success.equals("1")) {
 
-                                progressHUD.dismiss();
+                                dismissProgress();
 
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
@@ -1117,9 +1161,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void PinCodeVerify(final String zip_code) {
 
-        progressHUD = KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false).show();
+        showProgress();
 
         JSONObject obj = new JSONObject();
         try {
@@ -1149,7 +1191,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                             if (success.equals("1")) {
 
-                                progressHUD.dismiss();
+                                dismissProgress();
 
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
@@ -1215,6 +1257,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void showErrorMessage(String message) {
         CommonDataUtility.showSnackBar(rl_main, message);
-        progressHUD.dismiss();
+        dismissProgress();
     }
 }
