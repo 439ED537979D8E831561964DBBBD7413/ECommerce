@@ -86,6 +86,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private ArrayList<GeneralFeaturesModel> generalFeaturesModels;
     private ArrayList<AttributeModel> attributeModelArrayList;
     private ArrayList<SizeModel> sizeModelArrayList, finalSizeModelArrayList;
+    private ArrayList<String> colorImagesList;
     private ArrayList<OfferModel> offersArrayList;
 
     private ViewPager viewPager;
@@ -495,6 +496,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                             JSONArray size = attributeObject.optJSONArray("size");
                                             sizeModelArrayList = new ArrayList<>();
+                                            colorImagesList = new ArrayList<>();
                                             finalSizeModelArrayList = new ArrayList<>();
 
                                             for (int j = 0; j < size.length(); j++) {
@@ -508,17 +510,22 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                                 hs.addAll(sizeModelArrayList);
                                             }
 
+                                            JSONArray color_images = attributeObject.optJSONArray("color_images");
+                                            for (int j = 0; j < color_images.length(); j++) {
+                                                colorImagesList.add(color_images.getJSONObject(j).optString("image_url"));
+                                            }
+
                                             if (attributeObject.optString("color_id").equals("")) {
                                                 strAttribute = "size";
                                                 finalSizeModelArrayList.addAll(hs);
                                             } else if (sizeModelArrayList.size() > 0) {
                                                 strAttribute = "both";
                                                 attributeModelArrayList.add(new AttributeModel(attributeObject.optString("color_id"),
-                                                        attributeObject.optString("color_name"), sizeModelArrayList, "0"));
+                                                        attributeObject.optString("color_name"), sizeModelArrayList, "0", colorImagesList));
                                             } else {
                                                 strAttribute = "color";
                                                 attributeModelArrayList.add(new AttributeModel(attributeObject.optString("color_id"),
-                                                        attributeObject.optString("color_name"), "0"));
+                                                        attributeObject.optString("color_name"), "0", colorImagesList));
                                             }
                                         }
 
