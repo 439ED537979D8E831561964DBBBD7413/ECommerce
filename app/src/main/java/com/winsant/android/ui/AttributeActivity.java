@@ -139,6 +139,11 @@ public class AttributeActivity extends AppCompatActivity {
 
                     @Override
                     public void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
+
+                    }
+
+                    @Override
+                    public void onSizeClick(String size_id, String size_name) {
                         SizeId = size_id;
                         SizeName = size_name;
                         txtSize.setText("Size - " + size_name);

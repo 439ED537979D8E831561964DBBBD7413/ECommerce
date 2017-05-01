@@ -51,6 +51,8 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
         void onColorClick(ArrayList<String> images, String color_id, String color_name);
 
         void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per);
+
+        void onSizeClick(String size_id, String size_name);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,11 +70,11 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             attributeName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
             if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
-                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            } else {
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            } else {
+                attributeName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
             }
         }
     }
@@ -126,7 +128,7 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
                             attributeModelArrayList.get(pos).getSizeList(), "1", attributeModelArrayList.get(pos).getColor_image(),
                             attributeModelArrayList.get(pos).getColor_images()));
 
-                    clickListener.onSizeClick("", "", "", "", "");
+                    clickListener.onSizeClick("", "");
                     for (int i = 0; i < attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().size(); i++)
                         attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().set(i, new SizeModel(
                                 attributeModelArrayList.get(viewHolder.getAdapterPosition()).getSizeList().get(i).getSize_id(),

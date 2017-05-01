@@ -124,7 +124,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private TextView txtColor, txtSize;
     private String ColorName, SizeName, ColorId = "", SizeId = "";
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -673,7 +672,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                             @Override
                             public void onColorClick(ArrayList<String> images, String color_id, String color_name) {
 
-                                showProgress();
+//                                showProgress();
 
                                 productImages.clear();
                                 productImages.addAll(images);
@@ -681,9 +680,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                 ColorId = color_id;
                                 ColorName = color_name;
-                                txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + ColorName + "</b></font>"));
+                                txtColor.setText(Html.fromHtml("Color : <font color='#1B347E'><b>" + ColorName + "</b></font>"));
 
-                                dismissProgress();
+//                                dismissProgress();
                             }
 
                             @Override
@@ -692,11 +691,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                     CommonDataUtility.showSnackBar(rl_main, "Please select COLOR first!");
                                 } else {
 
-                                    showProgress();
+//                                    showProgress();
 
                                     SizeId = size_id;
                                     SizeName = size_name;
-                                    txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+                                    txtSize.setText(Html.fromHtml("Size : <font color='#1B347E'><b>" + SizeName + "</b></font>"));
 
                                     if (discount_per.equals("100")) {
                                         txtPrice.setVisibility(View.GONE);
@@ -709,8 +708,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                         txtDiscount.setText(String.format("%s %% OFF", discount_per));
                                     }
 
-                                    dismissProgress();
+//                                    dismissProgress();
                                 }
+                            }
+
+                            @Override
+                            public void onSizeClick(String size_id, String size_name) {
+                                SizeId = size_id;
+                                SizeName = size_name;
+                                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
                             }
                         });
 
@@ -727,7 +733,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new SizeAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
-                                txtSingleAttribute.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + size_name + "</b></font>"));
+                                txtSingleAttribute.setText(Html.fromHtml("Size : <font color='#1B347E'><b>" + size_name + "</b></font>"));
                                 SizeId = size_id;
                             }
                         });
@@ -746,7 +752,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new ColorAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String color_id, String color_name) {
-                                txtSingleAttribute.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + color_name + "</b></font>"));
+                                txtSingleAttribute.setText(Html.fromHtml("Color : <font color='#1B347E'><b>" + color_name + "</b></font>"));
                                 ColorId = color_id;
                             }
                         });
