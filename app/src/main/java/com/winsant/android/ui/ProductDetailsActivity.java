@@ -684,8 +684,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                 txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + ColorName + "</b></font>"));
 
                                 dismissProgress();
-
-                                return;
                             }
 
                             @Override
@@ -713,8 +711,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                     dismissProgress();
                                 }
-
-                                return;
                             }
                         });
 
