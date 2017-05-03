@@ -481,7 +481,7 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
 
     private void setDataForSmartPhone() {
 
-        if (SubCategoryList.size() >= 7) {
+        if (SubCategoryList.size() >= 8) {
 
             for (int i = 0; i < 8; i++) {
                 if (i == 7) {

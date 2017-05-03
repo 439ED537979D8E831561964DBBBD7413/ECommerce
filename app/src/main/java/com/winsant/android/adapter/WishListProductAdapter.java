@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.winsant.android.R;
+import com.winsant.android.like.LikeButton;
 import com.winsant.android.model.HomeProductModel;
 import com.winsant.android.utils.CommonDataUtility;
 
@@ -36,11 +37,12 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
     public interface onClickListener {
         void onClick(int position, String product_id, String product_url);
 
-        void onDeleteClick(int position, String product_id, String remove_link);
+        void onDeleteClick(int position, String product_id, String remove_link, String name);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        LikeButton heart_button;
         ImageView productImage, imgWishList, outStockImage;
         TextView txtName, txtDiscount, txtPrice, txtDiscountPrice;
 
@@ -54,6 +56,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
             txtDiscount = (TextView) itemView.findViewById(R.id.txtDiscount);
             txtPrice = (TextView) itemView.findViewById(R.id.txtPrice);
             txtDiscountPrice = (TextView) itemView.findViewById(R.id.txtDiscountPrice);
+
+            heart_button = (LikeButton) itemView.findViewById(R.id.heart_button);
 
             txtName.setTypeface(CommonDataUtility.setTypeFace1(activity));
             txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
@@ -113,6 +117,7 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
 
         viewHolder.txtName.setText(viewAllProductModel.getName());
 
+        viewHolder.heart_button.setVisibility(View.GONE);
         viewHolder.imgWishList.setVisibility(View.VISIBLE);
         viewHolder.imgWishList.setImageResource(R.drawable.ico_delete_svg);
         viewHolder.imgWishList.setTag(position);
@@ -123,7 +128,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
                 int pos = (int) v.getTag();
 
                 if (clickListener != null)
-                    clickListener.onDeleteClick(pos, viewAllProductList.get(pos).getProduct_id(), viewAllProductList.get(pos).getRemove_url());
+                    clickListener.onDeleteClick(pos, viewAllProductList.get(pos).getProduct_id(), viewAllProductList.get(pos).getRemove_url(),
+                            viewAllProductList.get(pos).getName());
             }
         });
 

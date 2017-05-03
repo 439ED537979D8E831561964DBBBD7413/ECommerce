@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.winsant.android.R;
+import com.winsant.android.like.LikeButton;
+import com.winsant.android.like.OnLikeListener;
 import com.winsant.android.model.HomeProductModel;
 import com.winsant.android.ui.LoginActivity;
 import com.winsant.android.ui.MyApplication;
@@ -48,7 +50,9 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView productImage, imgWishList, outStockImage;
+        private LikeButton heart_button;
+        ImageView productImage, outStockImage;
+        //        imgWishList
         TextView txtName, txtDiscount, txtPrice, txtDiscountPrice;
 
         public ViewHolder(final View itemView) {
@@ -56,7 +60,8 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
 
             productImage = (ImageView) itemView.findViewById(R.id.productImage);
             outStockImage = (ImageView) itemView.findViewById(R.id.outStockImage);
-            imgWishList = (ImageView) itemView.findViewById(R.id.imgWishList);
+//            imgWishList = (ImageView) itemView.findViewById(R.id.imgWishList);
+            heart_button = (LikeButton) itemView.findViewById(R.id.heart_button);
             txtName = (TextView) itemView.findViewById(R.id.txtName);
             txtDiscount = (TextView) itemView.findViewById(R.id.txtDiscount);
             txtPrice = (TextView) itemView.findViewById(R.id.txtPrice);
@@ -126,39 +131,55 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
         viewHolder.txtName.setText(viewAllProductModel.getName());
         viewHolder.outStockImage.setVisibility(viewAllProductModel.getAvailability().equals("0") ? View.VISIBLE : View.GONE);
 
-        viewHolder.imgWishList.setVisibility(View.VISIBLE);
+        viewHolder.heart_button.setVisibility(View.VISIBLE);
 
         if (MyApplication.getInstance().getPreferenceUtility().getLogin())
-            if (viewAllProductModel.getIsFavorite().equals("1"))
-                viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
-            else viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
-        else
-            viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
-
-        viewHolder.imgWishList.setTag(position);
-
-        viewHolder.imgWishList.setOnClickListener(new View.OnClickListener() {
+            if (viewAllProductModel.getIsFavorite().equals("1")) {
+                viewHolder.heart_button.setLiked(true);
+//                viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
+            } else {
+                viewHolder.heart_button.setLiked(false);
+//                    viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
+            }
+        else {
+            viewHolder.heart_button.setLiked(false);
+//            viewHolder.imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
+        }
+        viewHolder.heart_button.setTag(position);
+        viewHolder.heart_button.setOnLikeListener(new OnLikeListener() {
             @Override
-            public void onClick(View v) {
+            public void liked(LikeButton likeButton) {
+                setWishListIcon(likeButton);
+            }
 
-                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-                    int pos = (int) v.getTag();
-
-                    if (clickListener != null) {
-                        if (viewAllProductList.get(pos).getIsFavorite().equals("1")) {
-                            clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
-                                    viewAllProductList.get(pos).getRemove_url(), viewAllProductList.get(pos).getIsFavorite());
-                        } else {
-                            clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
-                                    viewAllProductList.get(pos).getFav_url(), viewAllProductList.get(pos).getIsFavorite());
-                        }
-                    }
-                } else {
-                    Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
-                    activity.startActivity(new Intent(activity, LoginActivity.class));
-                }
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                setWishListIcon(likeButton);
             }
         });
+
+//        viewHolder.imgWishList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+//                    int pos = (int) v.getTag();
+//
+//                    if (clickListener != null) {
+//                        if (viewAllProductList.get(pos).getIsFavorite().equals("1")) {
+//                            clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
+//                                    viewAllProductList.get(pos).getRemove_url(), viewAllProductList.get(pos).getIsFavorite());
+//                        } else {
+//                            clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
+//                                    viewAllProductList.get(pos).getFav_url(), viewAllProductList.get(pos).getIsFavorite());
+//                        }
+//                    }
+//                } else {
+//                    Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
+//                    activity.startActivity(new Intent(activity, LoginActivity.class));
+//                }
+//            }
+//        });
 
         if (viewAllProductModel.getDiscount_per().equals("100")) {
             viewHolder.txtDiscountPrice.setVisibility(View.GONE);
@@ -180,6 +201,25 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
             viewHolder.txtPrice.setGravity(Gravity.CENTER | Gravity.START);
             viewHolder.txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + viewAllProductModel.getPrice().replaceAll("\\.0*$", ""));
             viewHolder.txtPrice.setPaintFlags(viewHolder.txtPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+    }
+
+    private void setWishListIcon(LikeButton likeButton) {
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int pos = (int) likeButton.getTag();
+
+            if (clickListener != null) {
+                if (viewAllProductList.get(pos).getIsFavorite().equals("1")) {
+                    clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
+                            viewAllProductList.get(pos).getRemove_url(), viewAllProductList.get(pos).getIsFavorite());
+                } else {
+                    clickListener.onFavClick(pos, viewAllProductList.get(pos).getProduct_id(),
+                            viewAllProductList.get(pos).getFav_url(), viewAllProductList.get(pos).getIsFavorite());
+                }
+            }
+        } else {
+            Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
+            activity.startActivity(new Intent(activity, LoginActivity.class));
         }
     }
 

@@ -47,6 +47,8 @@ import com.winsant.android.adapter.ImageSliderAdapter;
 import com.winsant.android.adapter.ProductOffersListAdapter;
 import com.winsant.android.adapter.SizeAttributeListAdapter;
 import com.winsant.android.kprogresshud.KProgressHUD;
+import com.winsant.android.like.LikeButton;
+import com.winsant.android.like.OnLikeListener;
 import com.winsant.android.model.AttributeModel;
 import com.winsant.android.model.GeneralFeaturesModel;
 import com.winsant.android.model.OfferModel;
@@ -109,7 +111,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private boolean is_item_sold_out = false;
 
-    private ImageView imgWishList;
+    //    private ImageView imgWishList;
+    private LikeButton heart_button;
 
     private Button btnBuyNow, btnAddCart;
     private String url, strAttribute = "", fav_link, remove_link, buy_now_link, cart_url, is_wishlist, is_attribute, strPinCode = "";
@@ -199,7 +202,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtDiscountPrice = (TextView) findViewById(R.id.txtDiscountPrice);
         txtPrice = (TextView) findViewById(R.id.txtPrice);
         txtDiscount = (TextView) findViewById(R.id.txtDiscount);
-        imgWishList = (ImageView) findViewById(R.id.imgWishList);
+        heart_button = (LikeButton) findViewById(R.id.heart_button);
+//        imgWishList = (ImageView) findViewById(R.id.imgWishList);
         ImageView imgShare = (ImageView) findViewById(R.id.imgShare);
         txtPinCode = (TextView) findViewById(R.id.txtPinCode);
         txtDetails = (TextView) findViewById(R.id.txtDetails);
@@ -262,7 +266,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
         imgError.setOnClickListener(this);
         imgShare.setOnClickListener(this);
-        imgWishList.setOnClickListener(this);
+//        heart_button.setOnClickListener(this);
         imgShare.setOnClickListener(this);
         btnChange.setOnClickListener(this);
         btnBuyNow.setOnClickListener(this);
@@ -279,7 +283,36 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             txtPinCode.setText((Html.fromHtml("Deliver to : " + "<font color='#1B347E'>____________</font>")));
         }
 
+        heart_button.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                setWishListIcon();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                setWishListIcon();
+            }
+        });
+
         getData();
+    }
+
+    private void setWishListIcon() {
+        if (CommonDataUtility.checkConnection(activity)) {
+            if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+                if (is_wishlist.equals("1")) {
+                    addRemoveWishList(remove_link, "remove");
+                } else {
+                    addRemoveWishList(fav_link, "add");
+                }
+            } else {
+                Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
+                activity.startActivity(new Intent(activity, LoginActivity.class));
+            }
+        } else {
+            CommonDataUtility.showSnackBar(rl_main, getString(R.string.no_internet));
+        }
     }
 
     @Override
@@ -305,21 +338,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.imgWishList:
-
-                if (CommonDataUtility.checkConnection(activity)) {
-                    if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-                        if (is_wishlist.equals("1")) {
-                            addRemoveWishList(remove_link, "remove");
-                        } else {
-                            addRemoveWishList(fav_link, "add");
-                        }
-                    } else {
-                        Toast.makeText(activity, "Please login first to add product in wishlist", Toast.LENGTH_SHORT).show();
-                        activity.startActivity(new Intent(activity, LoginActivity.class));
-                    }
-                } else {
-                    CommonDataUtility.showSnackBar(rl_main, getString(R.string.no_internet));
-                }
 
                 break;
 
@@ -573,10 +591,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                 if (data.optString("is_wishlist").equals("1")) {
                                     is_wishlist = "1";
-                                    imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
+                                    heart_button.setLiked(true);
+//                                    imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
                                 } else {
                                     is_wishlist = "0";
-                                    imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
+                                    heart_button.setLiked(false);
+//                                    imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
                                 }
 
                                 setProductImages();
@@ -842,7 +862,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void addRemoveWishList(String fav_link, final String favType) {
 
-
         JSONObject obj = new JSONObject();
         try {
 
@@ -876,10 +895,17 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                         if (favType.equals("add")) {
                                             is_wishlist = "1";
-                                            imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
+//                                            imgWishList.setImageResource(R.drawable.ico_wishlist_selected_svg);
+//
+//                                            new ParticleSystem(activity, 10, R.drawable.animated_confetti, 1500)
+//                                                    .setSpeedRange(0.1f, 0.25f)
+//                                                    .setRotationSpeedRange(90, 180)
+//                                                    .setInitialRotationRange(0, 180)
+//                                                    .oneShot(imgWishList, 50);
+
                                         } else {
                                             is_wishlist = "0";
-                                            imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
+//                                            imgWishList.setImageResource(R.drawable.ico_wishlist_normal_svg);
                                         }
 
                                         CommonDataUtility.showSnackBar(rl_main, message);
@@ -1084,8 +1110,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         try {
 
             obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
-            obj.put("product_color", ColorId);
-            obj.put("product_size", SizeId);
+            obj.put("product_color", ColorName);
+            obj.put("color_id", ColorId);
+            obj.put("product_size", SizeName);
+            obj.put("size_id", SizeId);
             obj.put("qty", "1");
 
             System.out.println(StaticDataUtility.APP_TAG + " AddToCart param --> " + obj.toString());

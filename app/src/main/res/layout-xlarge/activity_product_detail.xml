@@ -108,14 +108,24 @@
                             android:padding="10dp"
                             android:src="@drawable/ico_forward_svg" />
 
-                        <ImageView
-                            android:id="@+id/imgWishList"
+                        <com.winsant.android.like.LikeButton
+                            android:id="@+id/heart_button"
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:layout_margin="2dp"
-                            android:contentDescription="@string/app_name"
-                            android:padding="10dp"
-                            android:src="@drawable/ico_wishlist_normal_svg" />
+                            android:padding="5dp"
+                            app:anim_scale_factor="3"
+                            app:icon_size="22dp"
+                            app:icon_type="heart" />
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgWishList"-->
+                        <!--android:layout_width="56dp"-->
+                        <!--android:layout_height="56dp"-->
+                        <!--android:layout_margin="2dp"-->
+                        <!--android:contentDescription="@string/app_name"-->
+                        <!--android:padding="10dp"-->
+                        <!--android:src="@drawable/ico_wishlist_normal_svg" />-->
                     </LinearLayout>
 
                     <TableRow

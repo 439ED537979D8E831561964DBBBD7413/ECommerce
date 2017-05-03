@@ -95,11 +95,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/txtDiscountPrice"
+                    android:layout_toLeftOf="@+id/heart_button"
                     android:layout_toRightOf="@+id/txtDiscountPrice"
+                    android:layout_toStartOf="@+id/heart_button"
                     android:gravity="center|start"
                     android:padding="5dp"
                     android:text=""
                     android:textColor="@color/oil" />
+
+
+                <com.winsant.android.like.LikeButton
+                    android:id="@+id/heart_button"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:anim_scale_factor="3"
+                    app:icon_size="22dp"
+                    app:icon_type="heart" />
 
                 <ImageView
                     android:id="@+id/imgWishList"

@@ -269,10 +269,10 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                     }
 
                     @Override
-                    public void onDeleteClick(int position, String product_id, String remove_link) {
+                    public void onDeleteClick(int position, String product_id, String remove_link, String name) {
 
                         // TODO : Delete Specific Product From WishList
-                        ConditionDialog(remove_link, position);
+                        ConditionDialog(remove_link, position, name);
                     }
                 });
 
@@ -286,7 +286,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         Glide.with(activity).load(R.drawable.no_server).into(imgError);
     }
 
-    private void ConditionDialog(final String remove_url, final int position) {
+    private void ConditionDialog(final String remove_url, final int position, String name) {
 
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -298,7 +298,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         dialogView.findViewById(R.id.txtAvailability).setVisibility(View.GONE);
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        txtTitle.setText("Terms & Condition");
+        txtTitle.setText(name);
 
         TextView txtTerms = (TextView) dialogView.findViewById(R.id.txtTerms);
         txtTerms.setVisibility(View.VISIBLE);
