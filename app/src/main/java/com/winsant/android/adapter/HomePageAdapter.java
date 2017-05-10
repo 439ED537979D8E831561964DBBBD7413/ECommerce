@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -46,9 +47,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         CapitalizedTextView main_title;
         TextView viewAll;
         RecyclerView home_page_data_list;
+        TableRow tblBanner;
 
         ViewHolder(final View itemView) {
             super(itemView);
+
+            tblBanner = (TableRow) itemView.findViewById(R.id.tblBanner);
 
             festival_banner = (ImageView) itemView.findViewById(R.id.festival_banner);
             main_banner = (ImageView) itemView.findViewById(R.id.main_banner);
@@ -120,8 +124,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         loadImage(homeHeaderModel.getFestival_banner(), holder.festival_banner);
         loadImage(homeHeaderModel.getBanner(), holder.main_banner);
-        loadImage(homeHeaderModel.getBanner1(), holder.sub_banner_1);
-        loadImage(homeHeaderModel.getBanner2(), holder.sub_banner_2);
+        if (homeHeaderModel.getBanner1().equals("") || homeHeaderModel.getBanner2().equals(""))
+            holder.tblBanner.setVisibility(View.GONE);
+        else {
+            holder.tblBanner.setVisibility(View.VISIBLE);
+            loadImage(homeHeaderModel.getBanner2(), holder.sub_banner_2);
+            loadImage(homeHeaderModel.getBanner1(), holder.sub_banner_1);
+        }
 
         holder.main_banner.setTag(position);
         holder.sub_banner_1.setTag(position);
