@@ -78,12 +78,10 @@ public class FirebaseMessageService extends FirebaseMessagingService {
                 .setOngoing(false)
                 .setContentIntent(pendingIntent);
 
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, notificationBuilder.build());
-
     }
 
     private void sendNotification(Map<String, String> data) {
@@ -108,7 +106,6 @@ public class FirebaseMessageService extends FirebaseMessagingService {
 //                .setSound(defaultSoundUri)
                 .setOngoing(true)
                 .setContentIntent(pendingIntent);
-
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
