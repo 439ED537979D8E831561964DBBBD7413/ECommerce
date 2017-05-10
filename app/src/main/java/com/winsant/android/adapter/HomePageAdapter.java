@@ -124,6 +124,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         loadImage(homeHeaderModel.getFestival_banner(), holder.festival_banner);
         loadImage(homeHeaderModel.getBanner(), holder.main_banner);
+
         if (homeHeaderModel.getBanner1().equals("") || homeHeaderModel.getBanner2().equals(""))
             holder.tblBanner.setVisibility(View.GONE);
         else {
