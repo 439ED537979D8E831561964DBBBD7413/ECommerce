@@ -39,8 +39,8 @@ public class StaticDataUtility {
     public static String APPLY_COUPON = "cart/apply_coupon";
     public static String REMOVE_ADDRESS = "cart/remove_address";
     public static String ADD_ADDRESS = "cart/add_address";
-    public static String ALL_ADD_TO_CART = "cart/all_add_to_cart";
-    public static String ADD_CUSTOMER_ORDER = "cart/add_customer_order";
+    public static String ALL_ADD_TO_CART = "";
+    public static String ADD_CUSTOMER_ORDER = "cart/add_customer_ordecart/all_add_to_cartr";
     public static String GET_PRICE = "event/get_price";
     public static String BOOK_TICKET = "event/book_ticket";
 }

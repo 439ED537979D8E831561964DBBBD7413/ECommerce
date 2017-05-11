@@ -798,8 +798,10 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
                 jsonObject.put("product_id", cartModel.getProduct_id());
                 jsonObject.put("qty", cartModel.getQty());
-                jsonObject.put("product_color", cartModel.getProduct_color());
-                jsonObject.put("product_size", cartModel.getProduct_size());
+                jsonObject.put("product_color", cartModel.getColor_name());
+                jsonObject.put("color_id", cartModel.getProduct_color());
+                jsonObject.put("product_size", cartModel.getSize_name());
+                jsonObject.put("size_id", cartModel.getProduct_size());
 
                 jsonArray.put(jsonObject);
             }
