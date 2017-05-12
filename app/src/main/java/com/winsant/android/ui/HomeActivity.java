@@ -1,12 +1,17 @@
 package com.winsant.android.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,22 +19,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winsant.android.R;
+import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.ui.fragment.HomeFragment;
 import com.winsant.android.ui.fragment.OfferListFragment;
 import com.winsant.android.ui.fragment.ProfileFragment;
 import com.winsant.android.ui.fragment.WishListFragment;
+import com.winsant.android.utils.CommonDataUtility;
+import com.winsant.android.utils.StaticDataUtility;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Activity activity;
     private boolean doubleBackToExitPressedOnce = false;
     private ImageView imgHome, imgOffers, imgWishList, imgProfile;
     private TextView txtHome, txtOffers, txtWishList, txtProfile;
     private String tag = "";
+    private MenuItem cart;
+    private TextView toolbar_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        activity = HomeActivity.this;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
+        toolbar_title.setText(getString(R.string.app_name));
 
         LinearLayout llHome = (LinearLayout) findViewById(R.id.llHome);
         LinearLayout llOffers = (LinearLayout) findViewById(R.id.llOffers);
@@ -91,6 +110,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txtHome:
             case R.id.imgHome:
 
+                setToolbarTitle(getString(R.string.app_name));
+
                 if (!tag.equals("home")) {
                     tabSelection(true, false, false, false);
                     setFragment(0);
@@ -99,6 +120,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.llOffers:
             case R.id.txtOffers:
             case R.id.imgOffers:
+
+                setToolbarTitle(getString(R.string.title_activity_offer));
 
                 if (!tag.equals("offers")) {
                     tabSelection(false, true, false, false);
@@ -109,6 +132,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txtWishList:
             case R.id.imgWishList:
 
+                setToolbarTitle(getString(R.string.title_activity_wish_list));
+
                 if (!tag.equals("wishList")) {
                     tabSelection(false, false, true, false);
                     setFragment(2);
@@ -118,12 +143,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txtProfile:
             case R.id.imgProfile:
 
+                setToolbarTitle(getString(R.string.my_account));
+
                 if (!tag.equals("profile")) {
                     tabSelection(false, false, false, true);
                     setFragment(3);
                 }
                 break;
         }
+    }
+
+    private void setToolbarTitle(String title) {
+        toolbar_title.setText(title);
     }
 
     private void tabSelection(boolean tab1, boolean tab2, boolean tab3, boolean tab4) {
@@ -168,7 +199,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
-        pushFragment(frag, tag);
+        pushFragment(frag);
     }
 
     @Override
@@ -190,25 +221,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 tag = "home";
                 tabSelection(true, false, false, false);
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            if (fragmentManager != null) {
-//                FragmentTransaction ft = fragmentManager.beginTransaction();
-//                if (ft != null) {
-//                    ft.replace(R.id.container, new HomeFragment());
-//                    ft.commit();
-//                }
-//            }
+                setToolbarTitle(getString(R.string.app_name));
+
+//                supportInvalidateOptionsMenu();
+//                setBadge();
+
             } else {
                 backPress();
             }
         } else {
             backPress();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     private void backPress() {
@@ -235,7 +258,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
      * @param fragment An instance of Fragment to show into the given id.
      */
 
-    protected void pushFragment(Fragment fragment, String tag) {
+    protected void pushFragment(Fragment fragment) {
         if (fragment == null)
             return;
 
@@ -248,29 +271,54 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-}
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//        return true;
-//    }
 
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//
-//            case 1:
-//
-//                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-//                    startActivity(new Intent(HomeActivity.this, CartActivity.class));
-//                } else {
-//                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//                }
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    @Override
+    protected void onResume() {
+        System.out.println(StaticDataUtility.APP_TAG + " home activity onResume ");
+        super.onResume();
+        supportInvalidateOptionsMenu();
+//        invalidateOptionsMenu();
+        setBadge();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        System.out.println(StaticDataUtility.APP_TAG + " home activity onCreateOptionsMenu ");
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        cart = menu.findItem(1);
+        setBadge();
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case 1:
+
+                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+                    startActivity(new Intent(activity, CartActivity.class));
+                } else {
+                    startActivity(new Intent(activity, LoginActivity.class));
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void setBadge() {
+
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+            System.out.println(StaticDataUtility.APP_TAG + " home activity total_cart --> " + total);
+            if (!(total == 0)) {
+                ActionItemBadge.Update(activity, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+            }
+        }
+    }
+}
+
 //    private void selectFragment(MenuItem item) {
 //        Fragment frag = null;
 //        // init corresponding fragment

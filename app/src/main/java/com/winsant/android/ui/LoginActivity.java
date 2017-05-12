@@ -70,14 +70,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Activity activity;
-    private EditText edtUserId, edtPassword, edtCPassword;
-    private String strUserId, strPassword, strCPassword;
+    private EditText edtUserId, edtMobile, edtPassword, edtCPassword;
+    private String strUserId, strMobile, strPassword, strCPassword;
     private Button btnSign_UP_IN, btnLogin;
     private boolean isForLogin = false;
     private LinearLayout ll_login, llFacebookLogin, llGoogleLogin;
     //    ;
     private KProgressHUD progressHUD;
-    private CardView cardCPassword;
+    private CardView cardCPassword, cardMobile;
     private TextView mToolbar_title;
     private ProgressDialog pDialog;
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
-    private String fbId = "", fbFirstName = "", fbLastName = "", fbEmail = "";
+    private String fbId = "", fbFirstName = "", fbLastName = "", fbEmail = "", fbMobile = "";
     private String social_logout;
     private boolean mIntentInProgress;
 
@@ -139,13 +139,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         llGoogleLogin = (LinearLayout) findViewById(R.id.llGoogleLogin);
         loginbutton = (LoginButton) findViewById(R.id.login_button);
 
+        cardMobile = (CardView) findViewById(R.id.cardMobile);
         cardCPassword = (CardView) findViewById(R.id.cardCPassword);
 
         edtUserId = (EditText) findViewById(R.id.edtUserId);
+        edtMobile = (EditText) findViewById(R.id.edtMobile);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtCPassword = (EditText) findViewById(R.id.edtCPassword);
 
         edtUserId.setTypeface(CommonDataUtility.setTypeFace1(activity));
+        edtMobile.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtCPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
@@ -162,6 +165,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -171,6 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -180,6 +185,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -238,7 +244,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (pDialog != null && pDialog.isShowing())
                                         pDialog.dismiss();
 
-                                    FBLogin();
+                                    if (!fbEmail.equals(""))
+                                        if (fbEmail.contains("@")) {
+                                            FBLogin();
+                                        } else {
+                                            fbMobile = fbEmail;
+                                            EmailMobileDialog();
+                                        }
+                                    else {
+                                        fbMobile = fbEmail;
+                                        EmailMobileDialog();
+                                    }
 
                                     LoginManager.getInstance().logOut();
                                 } catch (Exception e) {
@@ -404,6 +420,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogin:
 
                 strUserId = edtUserId.getText().toString();
+                strMobile = edtMobile.getText().toString();
                 strPassword = edtPassword.getText().toString();
                 strCPassword = edtCPassword.getText().toString();
 
@@ -439,15 +456,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     isForLogin = false;
                     btnSign_UP_IN.setText("New to Winsant? SIGN UP");
                     btnLogin.setText("SIGN IN");
+
+                    edtUserId.setHint(getString(R.string.email));
+
+                    cardMobile.setVisibility(View.GONE);
                     cardCPassword.setVisibility(View.GONE);
                     llFacebookLogin.setVisibility(View.VISIBLE);
+                    llGoogleLogin.setVisibility(View.VISIBLE);
                     mToolbar_title.setText(getString(R.string.title_activity_login));
                 } else {
                     isForLogin = true;
                     btnSign_UP_IN.setText("Existing User? SIGN IN");
                     btnLogin.setText("SIGN UP");
+
+                    edtUserId.setHint(getString(R.string.email_address));
+
+                    cardMobile.setVisibility(View.VISIBLE);
                     cardCPassword.setVisibility(View.VISIBLE);
                     llFacebookLogin.setVisibility(View.GONE);
+                    llGoogleLogin.setVisibility(View.GONE);
                     mToolbar_title.setText(getString(R.string.title_activity_sign_up));
                 }
 
@@ -472,10 +499,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String SignUpValidation() {
 
         if (strUserId.equals(""))
-            return "Please enter valid Email/Mobile number";
-        else if (strUserId.contains("@") && !Patterns.EMAIL_ADDRESS.matcher(strUserId).matches())
-            return "Please enter valid Email";
-        else if (!strUserId.contains("@") && !android.util.Patterns.PHONE.matcher(strUserId).matches())
+            return "Please enter  Email address";
+        else if (!Patterns.EMAIL_ADDRESS.matcher(strUserId).matches())
+            return "Please enter valid Email address";
+        else if (strMobile.equals(""))
+            return "Please enter Mobile number";
+        else if (!android.util.Patterns.PHONE.matcher(strMobile).matches())
             return "Please enter valid Mobile number";
         else if (strPassword.equals(""))
             return "Please enter password";
@@ -529,7 +558,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
-                                // MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optString("total_cart"));
+                                MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
 
                                 progressHUD.dismiss();
                                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
@@ -580,6 +609,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
 
             obj.put("username", strUserId);
+            obj.put("mobile", strUserId);
             obj.put("password", strPassword);
             System.out.println(StaticDataUtility.APP_TAG + " SignUp param --> " + obj.toString());
 
@@ -613,7 +643,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
-                                // MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optString("total_cart"));
+                                MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
 
                                 progressHUD.dismiss();
                                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
@@ -664,12 +694,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
         txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        txtTitle.setText("Enter E-mail or Mobile Number");
+        txtTitle.setText("Enter Email address");
 
         final EditText edtEmailMobile = (EditText) dialogView.findViewById(R.id.edtEmailMobile);
         edtEmailMobile.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtEmailMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        edtEmailMobile.setHint("Enter E-mail or Mobile number here...");
+        edtEmailMobile.setHint("Enter Email address here...");
 
         Button btnSubmit = (Button) dialogView.findViewById(R.id.btnSubmit);
         btnSubmit.setTypeface(CommonDataUtility.setTypeFace(activity));
@@ -681,8 +711,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
 
                 if (edtEmailMobile.getText().toString().equals("")) {
-                    edtEmailMobile.setError("Please enter E-mail or Mobile number");
-                } else {
+                    edtEmailMobile.setError("Please enter Email address");
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(edtEmailMobile.getText().toString()).matches())
+                    edtEmailMobile.setError("Please enter valid Email");
+                else {
                     dialog.dismiss();
                     fbEmail = edtEmailMobile.getText().toString();
                     FBLogin();
@@ -706,6 +738,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
 
             obj.put("username", fbEmail);
+            obj.put("mobile", fbMobile);
             obj.put("first_name", fbFirstName);
             obj.put("last_name", fbLastName);
             obj.put("fbid", fbId);
@@ -746,6 +779,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
+                                MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
 
                                 progressHUD.dismiss();
                                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();

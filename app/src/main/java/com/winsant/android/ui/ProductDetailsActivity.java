@@ -125,7 +125,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private RecyclerView SizeList;
     private RecyclerView ColorList;
     private TextView txtColor, txtSize;
-    private String ColorName, SizeName, ColorId = "", SizeId = "";
+    private String ColorName = "", SizeName = "", ColorId = "", SizeId = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -694,9 +694,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
 //                                showProgress();
 
-                                productImages.clear();
-                                productImages.addAll(images);
-                                setProductImages();
+                                if (images.size() > 0) {
+
+                                    productImages.clear();
+                                    productImages.addAll(images);
+                                    setProductImages();
+                                }
 
                                 ColorId = color_id;
                                 ColorName = color_name;

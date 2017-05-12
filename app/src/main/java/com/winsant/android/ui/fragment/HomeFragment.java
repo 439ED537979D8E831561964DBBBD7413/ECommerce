@@ -78,17 +78,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
+//        activity.invalidateOptionsMenu();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.main_toolbar);
-        activity.setSupportActionBar(toolbar);
-        TextView toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        toolbar_title.setText(getString(R.string.app_name));
 
         netWorkCall = new VolleyNetWorkCall();
 
@@ -98,19 +93,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void BindView() {
-
-//        if (CommonDataUtility.isTablet(activity)) {
-//            Toast.makeText(activity, "Tablet", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(activity, "Smart Phone", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-//        if (tabletSize) {
-//            Toast.makeText(activity, "Tablet_1", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(activity, "Smart_Phone_1", Toast.LENGTH_SHORT).show();
-//        }
 
         EditText edtSearch = (EditText) rootView.findViewById(R.id.edtSearch);
         edtSearch.setOnClickListener(new View.OnClickListener() {
@@ -437,43 +419,46 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onResume() {
         super.onResume();
         MyApplication.getInstance().trackScreenView("Home Fragment");
-        setBadge();
-        activity.invalidateOptionsMenu();
+//        System.out.println(StaticDataUtility.APP_TAG + " Home OnResume");
+//        setBadge();
+//        activity.invalidateOptionsMenu();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        cart = menu.findItem(1);
-        setBadge();
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case 1:
-
-                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-                    startActivity(new Intent(activity, CartActivity.class));
-                } else {
-                    startActivity(new Intent(activity, LoginActivity.class));
-                }
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void setBadge() {
-
-        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
-            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
-            if (!(total == 0)) {
-                ActionItemBadge.Update(activity, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
-            }
-        }
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        System.out.println(StaticDataUtility.APP_TAG + " onCreateOptionsMenu ");
+//        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.activity_action_cart)).setIcon(R.drawable.ico_menu_cart).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        cart = menu.findItem(1);
+//        setBadge();
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//
+//            case 1:
+//
+//                if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+//                    startActivity(new Intent(activity, CartActivity.class));
+//                } else {
+//                    startActivity(new Intent(activity, LoginActivity.class));
+//                }
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
+//
+//    private void setBadge() {
+//
+//        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+//            int total = MyApplication.getInstance().getPreferenceUtility().getInt("total_cart");
+//            System.out.println(StaticDataUtility.APP_TAG + " home total_cart --> " + total);
+//            if (!(total == 0)) {
+//                ActionItemBadge.Update(activity, cart, R.drawable.ico_menu_cart, StaticDataUtility.style, total);
+//            }
+//        }
+//    }
 }

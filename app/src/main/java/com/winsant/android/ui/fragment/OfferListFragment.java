@@ -7,12 +7,10 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
@@ -40,7 +38,7 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
     private RecyclerView viewAllList;
     private ProgressWheel progress_wheel;
     //    private RelativeLayout rl_no_data;
-    private TextView toolbar_title;
+//    private TextView toolbar_title;
     private ImageView imgError;
     private ArrayList<String> OfferList;
     private VolleyNetWorkCall netWorkCall;
@@ -60,11 +58,11 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
 
         netWorkCall = new VolleyNetWorkCall();
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
-        activity.setSupportActionBar(toolbar);
-        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        toolbar_title.setText(getString(R.string.title_activity_offer));
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
+//        activity.setSupportActionBar(toolbar);
+//        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
+//        toolbar_title.setText(getString(R.string.title_activity_offer));
 
         progress_wheel = (ProgressWheel) view.findViewById(R.id.progress_wheel);
         imgError = (ImageView) view.findViewById(R.id.imgError);
@@ -146,7 +144,6 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
                             for (int i = 0; i < data.length(); i++) {
 
                                 JSONObject dataObject = data.getJSONObject(i);
-
                                 OfferList.add(dataObject.optString("coupon_image"));
                             }
                         }
@@ -155,7 +152,7 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
 
                         if (OfferList.size() > 0) {
                             // TODO : Set Data
-                            toolbar_title.setText(getString(R.string.title_activity_offer) + " (" + OfferList.size() + ")");
+//                            toolbar_title.setText(getString(R.string.title_activity_offer) + " (" + OfferList.size() + ")");
                             viewAllList.setVisibility(View.VISIBLE);
                             setData();
 
@@ -215,7 +212,7 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
         viewAllList.setVisibility(View.GONE);
         imgError.setVisibility(View.VISIBLE);
 //        imgError.setImageResource(R.drawable.ico_offer_svg);
-        Glide.with(activity).load(R.drawable.ico_offer_svg).into(imgError);
+        Glide.with(activity).load(R.drawable.no_offer).into(imgError);
         TYPE = getString(R.string.no_offer_hint);
     }
 

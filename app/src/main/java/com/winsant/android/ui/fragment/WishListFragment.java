@@ -56,7 +56,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
     private RecyclerView viewAllList;
     private ProgressWheel progress_wheel;
-    private TextView toolbar_title;
+//    private TextView toolbar_title;
     private ImageView imgError;
     private ArrayList<HomeProductModel> wishListProductList;
     private KProgressHUD progressHUD;
@@ -74,11 +74,11 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
-        activity.setSupportActionBar(toolbar);
-        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        toolbar_title.setText(getString(R.string.title_activity_wish_list));
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
+//        activity.setSupportActionBar(toolbar);
+//        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
+//        toolbar_title.setText(getString(R.string.title_activity_wish_list));
 
         LinearLayout ll_before_login = (LinearLayout) view.findViewById(R.id.ll_before_login);
 
@@ -197,7 +197,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                                 if (wishListProductList.size() > 0) {
                                     // TODO : Set Data
-                                    toolbar_title.setText(getString(R.string.title_activity_wish_list) + " (Total " + wishListProductList.size() + " Products)");
+//                                    toolbar_title.setText(getString(R.string.title_activity_wish_list) + " (Total " + wishListProductList.size() + " Products)");
                                     Toast.makeText(activity, "Total " + wishListProductList.size() + " Products", Toast.LENGTH_SHORT).show();
 
                                     viewAllList.setVisibility(View.VISIBLE);
