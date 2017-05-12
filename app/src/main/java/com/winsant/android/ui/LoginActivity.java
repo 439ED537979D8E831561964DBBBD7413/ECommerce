@@ -549,20 +549,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 JSONObject data = jsonObject.optJSONObject("data");
 
-                                MyApplication.getInstance().getPreferenceUtility().setLogin(true);
                                 MyApplication.getInstance().getPreferenceUtility().setUserId(data.optString("user_id"));
                                 MyApplication.getInstance().getPreferenceUtility().setEmail(data.optString("email"));
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
-//                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
+                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
 
                                 progressHUD.dismiss();
-                                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                finish();
+
+                                if (data.optString("is_otp_verified").equals("1")) {
+
+                                    MyApplication.getInstance().getPreferenceUtility().setLogin(true);
+                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                    finish();
+
+                                } else {
+
+                                    Toast.makeText(activity, "Please verify your mobile number!!", Toast.LENGTH_SHORT).show();
+                                    MyApplication.getInstance().getPreferenceUtility().setLogin(false);
+                                    Intent intent = new Intent(activity, OtpVerifyActivity.class);
+                                    intent.putExtra("mobile", data.optString("mobile_number"));
+                                    intent.putExtra("user_id", data.optString("user_id"));
+                                    startActivity(intent);
+                                    finish();
+                                }
 
                             } else {
                                 progressHUD.dismiss();
@@ -609,7 +623,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
 
             obj.put("username", strUserId);
-            obj.put("mobile", strUserId);
+            obj.put("mobile", strMobile);
             obj.put("password", strPassword);
             System.out.println(StaticDataUtility.APP_TAG + " SignUp param --> " + obj.toString());
 
@@ -635,19 +649,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 JSONObject data = jsonObject.optJSONObject("data");
 
-                                MyApplication.getInstance().getPreferenceUtility().setLogin(true);
+                                progressHUD.dismiss();
+
                                 MyApplication.getInstance().getPreferenceUtility().setUserId(data.optString("user_id"));
                                 MyApplication.getInstance().getPreferenceUtility().setEmail(data.optString("email"));
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
+                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
 
-                                progressHUD.dismiss();
-                                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (data.optString("is_otp_verified").equals("1")) {
+
+                                    MyApplication.getInstance().getPreferenceUtility().setLogin(true);
+                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                    finish();
+
+                                } else {
+
+                                    Toast.makeText(activity, "Please verify your mobile number!!", Toast.LENGTH_SHORT).show();
+                                    MyApplication.getInstance().getPreferenceUtility().setLogin(false);
+                                    Intent intent = new Intent(activity, OtpVerifyActivity.class);
+                                    intent.putExtra("mobile", strMobile);
+                                    intent.putExtra("user_id", data.optString("user_id"));
+                                    startActivity(intent);
+                                    finish();
+                                }
 
                             } else {
                                 progressHUD.dismiss();
@@ -777,6 +806,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
+                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));

@@ -194,6 +194,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
                         intent = new Intent(activity, UpdateProfileActivity.class);
                         intent.putExtra("type", "profile");
+                        intent.putExtra("isVerify", "email");
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -203,13 +204,16 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
                         intent = new Intent(activity, UpdateProfileActivity.class);
                         intent.putExtra("type", "profile");
+                        intent.putExtra("isVerify", "mobile");
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                     } else if (Verify.equals("mobile")) {
 
-                        intent = new Intent(activity, VerifyActivity.class);
+                        intent = new Intent(activity, OtpVerifyActivity.class);
                         intent.putExtra("isVerify", Verify);
+                        intent.putExtra("mobile", MyApplication.getInstance().getPreferenceUtility().getMobileNumber());
+                        intent.putExtra("user_id", MyApplication.getInstance().getPreferenceUtility().getUserId());
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();

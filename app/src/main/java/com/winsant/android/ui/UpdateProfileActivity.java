@@ -2,6 +2,7 @@ package com.winsant.android.ui;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,7 +48,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     private LinearLayout coordinatorLayout;
     private KProgressHUD progressHUD;
     private TextView mToolbar_title;
-    private String missing = "none", isSetPassword;
+    private String missing = "none", isSetPassword, isVerify = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
         String type = getIntent().getStringExtra("type");
         isSetPassword = getIntent().getStringExtra("isSetPassword");
+        isVerify = getIntent().getStringExtra("isVerify");
 
         coordinatorLayout = (LinearLayout) findViewById(R.id.coordinatorLayout);
         LinearLayout ll_password_update = (LinearLayout) findViewById(R.id.ll_password_update);
@@ -357,8 +359,21 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
 
                                 progressHUD.dismiss();
-                                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                finish();
+
+                                if (isVerify.equals("mobile")) {
+
+                                    Intent intent = new Intent(activity, OtpVerifyActivity.class);
+                                    intent.putExtra("isVerify", isVerify);
+                                    intent.putExtra("mobile", MyApplication.getInstance().getPreferenceUtility().getMobileNumber());
+                                    intent.putExtra("user_id", MyApplication.getInstance().getPreferenceUtility().getUserId());
+                                    startActivity(intent);
+                                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                    finish();
+
+                                } else {
+                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
 
                             } else {
                                 progressHUD.dismiss();

@@ -114,7 +114,6 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
 
             imgError.setVisibility(View.VISIBLE);
             TYPE = getString(R.string.no_internet);
-//            imgError.setImageResource(R.drawable.ico_wifi_off_svg);
             Glide.with(activity).load(R.drawable.ico_wifi_off_svg).into(imgError);
         }
     }

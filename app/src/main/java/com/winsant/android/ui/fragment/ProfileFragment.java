@@ -1,13 +1,11 @@
 package com.winsant.android.ui.fragment;
 
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,12 +21,11 @@ import com.winsant.android.ui.AllAddressActivity;
 import com.winsant.android.ui.LoginActivity;
 import com.winsant.android.ui.MyApplication;
 import com.winsant.android.ui.OrderActivity;
+import com.winsant.android.ui.OtpVerifyActivity;
 import com.winsant.android.ui.SettingsActivity;
 import com.winsant.android.ui.UpdateProfileActivity;
-import com.winsant.android.ui.VerifyActivity;
 import com.winsant.android.utils.CommonDataUtility;
 import com.winsant.android.utils.StaticDataUtility;
-
 
 /**
  * Fragment class for each nav menu item
@@ -285,13 +282,16 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                     intent = new Intent(activity, UpdateProfileActivity.class);
                     intent.putExtra("type", "profile");
+                    intent.putExtra("isVerify", "mobile");
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 } else {
 
-                    intent = new Intent(activity, VerifyActivity.class);
+                    intent = new Intent(activity, OtpVerifyActivity.class);
                     intent.putExtra("isVerify", Verify);
+                    intent.putExtra("mobile", MyApplication.getInstance().getPreferenceUtility().getMobileNumber());
+                    intent.putExtra("user_id", MyApplication.getInstance().getPreferenceUtility().getUserId());
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
@@ -311,6 +311,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                 intent = new Intent(activity, UpdateProfileActivity.class);
                 intent.putExtra("type", "password");
+                intent.putExtra("isVerify", "pass");
                 intent.putExtra("isSetPassword", isSetPassword);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -339,6 +340,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                 intent = new Intent(activity, UpdateProfileActivity.class);
                 intent.putExtra("type", "profile");
+                intent.putExtra("isVerify", "profile");
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
