@@ -18,13 +18,14 @@ public class HomeHeaderModel {
     private String banner2_url;
     private String is_festival;
     private String festival_banner;
+    private String festival_banner_url;
 
     private ArrayList<HomeProductModel> categoryProductModels;
     private ArrayList<CategoryModel> categoryModels;
     private ArrayList<BannerModel> bannerList;
 
     public HomeHeaderModel(String name, String banner, String banner_url, String catt_view_all, String banner1, String banner1_url, String banner2, String banner2_url,
-                           String is_festival, String festival_banner, ArrayList<HomeProductModel> categoryProductModels, ArrayList<CategoryModel> categoryModels,
+                           String is_festival, String festival_banner, String festival_banner_url, ArrayList<HomeProductModel> categoryProductModels, ArrayList<CategoryModel> categoryModels,
                            ArrayList<BannerModel> bannerList) {
 
         this.name = name;
@@ -37,6 +38,7 @@ public class HomeHeaderModel {
         this.banner2_url = banner2_url;
         this.is_festival = is_festival;
         this.festival_banner = festival_banner;
+        this.festival_banner_url = festival_banner_url;
         this.categoryProductModels = categoryProductModels;
         this.categoryModels = categoryModels;
         this.bannerList = bannerList;
@@ -80,6 +82,10 @@ public class HomeHeaderModel {
 
     public String getFestival_banner() {
         return this.festival_banner;
+    }
+
+    public String getFestival_banner_url() {
+        return this.festival_banner_url;
     }
 
     public ArrayList<HomeProductModel> getCategoryProductModels() {

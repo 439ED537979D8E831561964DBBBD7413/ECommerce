@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.winsant.android.R;
-import com.winsant.android.actionitembadge.library.ActionItemBadge;
 import com.winsant.android.adapter.HomePageAdapter;
 import com.winsant.android.daimajia.slider.library.SliderLayout;
 import com.winsant.android.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -33,9 +29,7 @@ import com.winsant.android.model.BannerModel;
 import com.winsant.android.model.CategoryModel;
 import com.winsant.android.model.HomeHeaderModel;
 import com.winsant.android.model.HomeProductModel;
-import com.winsant.android.ui.CartActivity;
 import com.winsant.android.ui.FestivalActivity;
-import com.winsant.android.ui.LoginActivity;
 import com.winsant.android.ui.MyApplication;
 import com.winsant.android.ui.ProductSearchActivity;
 import com.winsant.android.ui.SpecificCategoryListActivity;
@@ -265,7 +259,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                                     homeHeaderModels.add(new HomeHeaderModel(finalObject.optString("name"), finalObject.optString("banner"),
                                             finalObject.optString("banner_url"), finalObject.optString("catt_view_all"), finalObject.optString("banner1"),
                                             finalObject.optString("banner1_url"), finalObject.optString("banner2"), finalObject.optString("banner2_url"),
-                                            jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), homeProductModels, categoryModels, bannerList));
+                                            jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), jsonObject.optString("festival_banner_url")
+                                            , homeProductModels, categoryModels, bannerList));
                                 } else {
                                     homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
                                             finalObject.optString("product_url"), finalObject.optString("price"), finalObject.optString("discount_price"),

@@ -554,7 +554,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
-                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
@@ -656,7 +655,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
-                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));
@@ -806,7 +804,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MyApplication.getInstance().getPreferenceUtility().setFirstName(data.optString("first_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setLastName(data.optString("last_name"));
                                 MyApplication.getInstance().getPreferenceUtility().setMobileNumber(data.optString("mobile_number"));
-                                MyApplication.getInstance().getPreferenceUtility().setString("email_verify", data.optString("is_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("mobile_verify", data.optString("is_otp_verified"));
                                 MyApplication.getInstance().getPreferenceUtility().setString("is_password_set", data.optString("is_password_set"));
                                 MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", data.optInt("total_cart"));

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -41,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class OtpVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,10 +53,13 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
     private Button btnOK;
     private LinearLayout ll_login;
     private KProgressHUD progressHUD;
-    private TextView mToolbar_title;
+    private TextView mToolbar_title, txtResend;
     private String strUserId, strMobile;
     private String strCode;
     private String is_otp_verified;
+    private Timer timer;
+    private TimerTask timerTask;
+    final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +93,7 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
         ll_login = (LinearLayout) findViewById(R.id.ll_login);
 
-        TextView txtResend = (TextView) findViewById(R.id.txtResend);
+        txtResend = (TextView) findViewById(R.id.txtResend);
         TextView txtOtpNumber = (TextView) findViewById(R.id.txtOtpNumber);
         edtOtp = (EditText) findViewById(R.id.edtOtp);
 
@@ -149,6 +156,24 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
                 break;
         }
+    }
+
+    public void initializeTimerTask() {
+
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtResend.setEnabled(false);
+                txtResend.setText("Resend OTP after : " + millisUntilFinished / 1000 + " seconds");
+                //here you can have your logic to set text to edittext
+            }
+
+            public void onFinish() {
+                txtResend.setEnabled(true);
+                txtResend.setText("Resend OTP");
+            }
+
+        }.start();
     }
 
     private void Verify() {
@@ -222,6 +247,8 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
                                 progressHUD.dismiss();
                                 CommonDataUtility.showSnackBar(ll_login, message);
 
+                                initializeTimerTask();
+
                             } else {
                                 progressHUD.dismiss();
                                 CommonDataUtility.showSnackBar(ll_login, message);
@@ -267,6 +294,8 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
             obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
             obj.put("is_otp_verified", is_otp_verified);
+            obj.put("otp_verified", is_otp_verified);
+            obj.put("is_verified", is_otp_verified);
 
             System.out.println(StaticDataUtility.APP_TAG + " verifiy_otp param --> " + obj.toString());
 

@@ -15,7 +15,7 @@ public class StaticDataUtility {
     // "userid":"570"
 
     public static String SERVER_URL = "http://ios.winsant.com/";
-//    public static String SERVER_URL = "http://api.winsant.com/";
+    // public static String SERVER_URL = "http://api.winsant.com/";
 
     public static String CATEGORY = "category";
     public static String CART = "cart";

@@ -138,6 +138,12 @@
             android:screenOrientation="sensorPortrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FinestWebViewTheme.Light" />
+
         <!-- Defining FCM Services -->
         <service android:name=".pushnotification.FirebaseMessageService">
             <intent-filter>

@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.thefinestartist.finestwebview.FinestWebView;
 import com.winsant.android.R;
 import com.winsant.android.adapter.OffersAdapter;
 import com.winsant.android.ui.MyApplication;
@@ -193,9 +195,40 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
 
     private void setData() {
 
-        OffersAdapter adapter = new OffersAdapter(activity, OfferList);
+        OffersAdapter adapter = new OffersAdapter(activity, OfferList, new OffersAdapter.onClickListener() {
+            @Override
+            public void onClick(int position, String offer_url) {
+//                showWebView(offer_url);
+            }
+        });
         viewAllList.setAdapter(adapter);
     }
+
+    private void showWebView(String url) {
+
+        new FinestWebView.Builder(activity).theme(R.style.FinestWebViewTheme)
+                .titleDefault("Winsant")
+                .showUrl(false)
+                .statusBarColorRes(R.color.bluePrimaryDark)
+                .toolbarColorRes(R.color.bluePrimary)
+                .titleColorRes(R.color.finestWhite)
+                .urlColorRes(R.color.bluePrimaryLight)
+                .iconDefaultColorRes(R.color.finestWhite)
+                .progressBarColorRes(R.color.finestWhite)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .showSwipeRefreshLayout(true)
+                .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                .menuSelector(R.drawable.selector_light_theme)
+                .menuTextGravity(Gravity.CENTER)
+                .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
+                .dividerHeight(0)
+                .gradientDivider(false)
+                .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+                .show(url);
+    }
+
 
     private void noDataError() {
 

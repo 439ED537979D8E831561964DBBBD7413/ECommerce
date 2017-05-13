@@ -19,14 +19,16 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
 
     private Activity activity;
     private ArrayList<String> offerList;
+    private onClickListener clickListener;
 
-    public OffersAdapter(Activity activity, ArrayList<String> offerList) {
+    public OffersAdapter(Activity activity, ArrayList<String> offerList, onClickListener clickListener) {
         this.activity = activity;
         this.offerList = offerList;
+        this.clickListener = clickListener;
     }
 
     public interface onClickListener {
-        void onClick(int position, String name, String product_url);
+        void onClick(int position, String offer_url);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,6 +66,18 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
                         viewHolder.offersImage.setImageBitmap(resource);
                     }
                 });
+
+        viewHolder.offersImage.setTag(position);
+        viewHolder.offersImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int pos = (int) v.getTag();
+
+                if (clickListener != null)
+                    clickListener.onClick(pos, offerList.get(pos));
+            }
+        });
 
 //        Glide
 //                .with(activity)

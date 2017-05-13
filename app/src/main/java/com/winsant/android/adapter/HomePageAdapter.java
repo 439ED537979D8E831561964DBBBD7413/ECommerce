@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.thefinestartist.finestwebview.FinestWebView;
 import com.winsant.android.R;
 import com.winsant.android.model.HomeHeaderModel;
-import com.winsant.android.ui.FestivalActivity;
 import com.winsant.android.ui.ProductDetailsActivity;
 import com.winsant.android.ui.ProductViewAllActivity;
 import com.winsant.android.ui.SpecificCategoryListActivity;
@@ -100,8 +101,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-
-        HomeHeaderModel homeHeaderModel = homeHeaderModels.get(position);
+        final HomeHeaderModel homeHeaderModel = homeHeaderModels.get(position);
 
         if (homeHeaderModel.getIs_festival().equals("1") && position == 0) {
             holder.festival_banner.setVisibility(View.VISIBLE);
@@ -112,8 +112,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         holder.festival_banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.startActivity(new Intent(activity, FestivalActivity.class));
-                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                if (!homeHeaderModel.getFestival_banner_url().equals(""))
+                    showWebView(homeHeaderModel.getFestival_banner_url());
             }
         });
 
@@ -278,6 +278,31 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
                         imageView.setImageResource(R.drawable.no_image_available);
                     }
                 });
+    }
+
+    private void showWebView(String url) {
+
+        new FinestWebView.Builder(activity).theme(R.style.FinestWebViewTheme)
+                .titleDefault("Winsant")
+                .showUrl(false)
+                .statusBarColorRes(R.color.bluePrimaryDark)
+                .toolbarColorRes(R.color.bluePrimary)
+                .titleColorRes(R.color.finestWhite)
+                .urlColorRes(R.color.bluePrimaryLight)
+                .iconDefaultColorRes(R.color.finestWhite)
+                .progressBarColorRes(R.color.finestWhite)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                .showSwipeRefreshLayout(true)
+                .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                .menuSelector(R.drawable.selector_light_theme)
+                .menuTextGravity(Gravity.CENTER)
+                .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
+                .dividerHeight(0)
+                .gradientDivider(false)
+                .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+                .show(url);
     }
 
     @Override

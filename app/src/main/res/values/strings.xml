@@ -140,4 +140,12 @@
     <string name="book_hint">* Single User can book only one VVIP ticket. Each VVIP lounge will accommodate 10 pax.</string>
     <string name="title_activity_maps">Map</string>
 
+    <!-- Web View -->
+    <string name="refresh">Refresh</string>
+    <string name="find">Find</string>
+    <string name="share_via">Share via</string>
+    <string name="copy_link">Copy Link</string>
+    <string name="open_with">Open with</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+
 </resources>
