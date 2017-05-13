@@ -294,8 +294,6 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
             obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
             obj.put("is_otp_verified", is_otp_verified);
-            obj.put("otp_verified", is_otp_verified);
-            obj.put("is_verified", is_otp_verified);
 
             System.out.println(StaticDataUtility.APP_TAG + " verifiy_otp param --> " + obj.toString());
 
