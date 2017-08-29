@@ -72,6 +72,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             txtOrderId.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtTypeDate.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
+
             if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
                 txtOrder.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -157,7 +158,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         viewHolder.txtQty.setText("Qty : " + orderModel.getQty());
 
         switch (orderModel.getOrder_status()) {
-            case "Canceled":
+            case "Cancelled":
             case "Deleted":
             case "Return":
             case "Rejected":
@@ -168,9 +169,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             case "Pending":
             case "Ready For Dispatch":
             case "Dispatched":
-                viewHolder.txtType.setTextColor(Color.parseColor("#1B347E"));
+            case "New Order":
+            case "Confirm":
+                viewHolder.txtType.setTextColor(Color.parseColor("#0787EA"));
                 viewHolder.txtType.setBackgroundResource(R.drawable.bg_pending);
-                viewHolder.txtTypeDate.setTextColor(Color.parseColor("#1B347E"));
+                viewHolder.txtTypeDate.setTextColor(Color.parseColor("#0787EA"));
                 break;
             default:
                 viewHolder.txtType.setTextColor(Color.parseColor("#18AB4B"));
@@ -180,7 +183,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
 
         switch (orderModel.getOrder_status()) {
-            case "Canceled":
+            case "New Order":
+            case "Confirm":
+            case "Pending":
+                viewHolder.txtType.setText(orderModel.getOrder_status());
+                viewHolder.txtTypeDate.setText("Ordered at (" + orderModel.getOrder_received_date() + ")");
+                break;
+            case "Cancelled":
             case "Deleted":
             case "Rejected":
                 viewHolder.txtType.setText(orderModel.getOrder_status());
@@ -189,10 +198,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             case "Return":
                 viewHolder.txtType.setText(orderModel.getOrder_status());
                 viewHolder.txtTypeDate.setText(orderModel.getOrder_status() + " at (" + orderModel.getOrder_return_date() + ")");
-                break;
-            case "Pending":
-                viewHolder.txtType.setText(orderModel.getOrder_status());
-                viewHolder.txtTypeDate.setText("Ordered at (" + orderModel.getOrder_received_date() + ")");
                 break;
             case "Ready For Dispatch":
             case "Dispatched":
@@ -208,8 +213,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         switch (orderModel.getOrder_status()) {
             case "Pending":
+            case "New Order":
             case "Ready For Dispatch":
             case "Dispatched":
+            case "Confirm":
                 viewHolder.txtReturn.setText(R.string.cancel_order);
                 viewHolder.cardView.setAlpha(1f);
                 break;
@@ -217,7 +224,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 viewHolder.txtReturn.setText(R.string.return_order);
                 viewHolder.cardView.setAlpha(1f);
                 break;
-            case "Canceled":
+            case "Cancelled":
             case "Rejected":
             case "Deleted":
             case "Return":

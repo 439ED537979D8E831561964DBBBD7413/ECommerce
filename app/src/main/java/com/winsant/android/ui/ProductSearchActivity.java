@@ -97,10 +97,13 @@ public class ProductSearchActivity extends AppCompatActivity implements View.OnC
         imgType.setOnClickListener(this);
         imgSearch.setOnClickListener(this);
 
-        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH)
+                {
                     CommonDataUtility.hideSoftKeyboard(activity);
                     getData();
                     return true;
@@ -132,9 +135,12 @@ public class ProductSearchActivity extends AppCompatActivity implements View.OnC
 
             case R.id.imgSearch:
 
-                if (edtSearch.getText().toString().equals("") && !(edtSearch.getText().toString().length() >= 3)) {
+                if (edtSearch.getText().toString().equals("") && !(edtSearch.getText().toString().length() >= 3))
+                {
                     Toast.makeText(activity, "Please enter keyword more than 3 character", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else
+                    {
                     CommonDataUtility.hideSoftKeyboard(activity);
                     getData();
                 }
@@ -151,12 +157,15 @@ public class ProductSearchActivity extends AppCompatActivity implements View.OnC
         viewAllList.setVisibility(View.GONE);
         findViewById(R.id.ll_top).setVisibility(View.VISIBLE);
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             imgError.setVisibility(View.GONE);
             getProductSearchData();
 
-        } else {
+        }
+        else
+            {
 
             imgError.setVisibility(View.VISIBLE);
             TYPE = getString(R.string.no_internet);
@@ -164,13 +173,15 @@ public class ProductSearchActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void getProductSearchData() {
+    private void getProductSearchData()
+    {
 
         progress_wheel.setVisibility(View.VISIBLE);
         productArrayList = new ArrayList<>();
 
         JSONObject obj = new JSONObject();
-        try {
+        try
+        {
 
             obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
             obj.put("keyword", edtSearch.getText().toString().trim());

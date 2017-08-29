@@ -181,7 +181,7 @@ public class ProductViewAllAdapter extends RecyclerView.Adapter<ProductViewAllAd
 //            }
 //        });
 
-        if (viewAllProductModel.getDiscount_per().equals("100")) {
+        if (viewAllProductModel.getDiscount_per().equals("0")) {
             viewHolder.txtDiscountPrice.setVisibility(View.GONE);
             viewHolder.txtDiscount.setVisibility(View.GONE);
 

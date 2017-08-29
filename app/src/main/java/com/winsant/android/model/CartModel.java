@@ -6,6 +6,7 @@ package com.winsant.android.model;
 
 public class CartModel {
 
+    private String cart_id;
     private String product_id;
     private String name;
     private String product_url;
@@ -20,11 +21,13 @@ public class CartModel {
     private String size_name;
     private String product_color;
     private String product_size;
+    private String shipping_amount;
 
     // TODO : Cart Page Product Details Display
-    public CartModel(String product_id, String name, String product_url, String price, String discount_price, String discount_per, String product_image,
-                     String remove_url, String qty, String availability, String color_name, String size_name, String product_color, String product_size) {
+    public CartModel(String cart_id, String product_id, String name, String product_url, String price, String discount_price, String discount_per, String product_image,
+                     String remove_url, String qty, String availability, String color_name, String size_name, String product_color, String product_size, String shipping_amount) {
 
+        this.cart_id = cart_id;
         this.product_id = product_id;
         this.name = name;
         this.product_url = product_url;
@@ -39,10 +42,15 @@ public class CartModel {
         this.size_name = size_name;
         this.product_color = product_color;
         this.product_size = product_size;
+        this.shipping_amount = shipping_amount;
     }
 
     public String getProduct_id() {
         return this.product_id;
+    }
+
+    public String getCart_id() {
+        return this.cart_id;
     }
 
     public String getName() {
@@ -95,5 +103,9 @@ public class CartModel {
 
     public String getProduct_size() {
         return this.product_size;
+    }
+
+    public String getShipping_amount() {
+        return this.shipping_amount;
     }
 }

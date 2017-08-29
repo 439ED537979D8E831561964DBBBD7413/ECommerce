@@ -14,48 +14,59 @@ public class SharedPreferenceUtility {
     private SharedPreferences appSharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
-    public SharedPreferenceUtility(MyApplication activity) {
+    public SharedPreferenceUtility(MyApplication activity)
+    {
         this.appSharedPrefs = activity.getSharedPreferences(USER_PREFS, Activity.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
     }
 
     public void clearData() {
         prefsEditor.clear().commit();
+
     }
 
-    public void setLogin(boolean value) {
+    public void setLogin(boolean value)
+    {
         prefsEditor.putBoolean("isLogin", value).commit();
     }
 
-    public boolean getLogin() {
+    public boolean getLogin()
+    {
         return appSharedPrefs.getBoolean("isLogin", false);
     }
 
-    public void setInt(String key, int value) {
+    public void setInt(String key, int value)
+    {
         prefsEditor.putInt(key, value).commit();
     }
 
-    public int getInt(String key) {
+    public int getInt(String key)
+    {
         return appSharedPrefs.getInt(key, 0);
     }
 
-    public void setToken(String value) {
+    public void setToken(String value)
+    {
         prefsEditor.putString("token", value).commit();
     }
 
-    public String getToken() {
+    public String getToken()
+    {
         return appSharedPrefs.getString("token", "");
     }
 
-    public void setString(String key, String value) {
+    public void setString(String key, String value)
+    {
         prefsEditor.putString(key, value).commit();
     }
 
-    public String getString(String key) {
+    public String getString(String key)
+    {
         return appSharedPrefs.getString(key, "");
     }
 
-    public void setUserId(String value) {
+    public void setUserId(String value)
+    {
         prefsEditor.putString("user_id", value).commit();
     }
 

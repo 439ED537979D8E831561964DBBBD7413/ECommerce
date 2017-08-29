@@ -51,7 +51,8 @@ import java.util.Map;
  * TODO : Specific SubCategory with SubCategory Product Display Activity
  */
 
-public class SpecificCategoryListActivity extends AppCompatActivity implements View.OnClickListener {
+public class SpecificCategoryListActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private Activity activity;
     private CapitalizedTextView mToolbar_title;
@@ -71,7 +72,8 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
     private VolleyNetWorkCall netWorkCall;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_category);
 
@@ -147,9 +149,11 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
                 if (CommonDataUtility.checkConnection(activity)) {
                     getData();
                 } else if (TYPE.equals(getResources().getString(R.string.no_data))
-                        || TYPE.equals(getResources().getString(R.string.no_connection))) {
+                        || TYPE.equals(getResources().getString(R.string.no_connection)))
+                {
                     getData();
-                } else if (TYPE.equals(getResources().getString(R.string.no_internet))) {
+                } else if (TYPE.equals(getResources().getString(R.string.no_internet)))
+                {
                     startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 }
 
@@ -160,16 +164,20 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
         }
     }
 
-    private void getData() {
+    private void getData()
+    {
 
         ns_main.setVisibility(View.GONE);
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             imgError.setVisibility(View.GONE);
             getProductViewAllData();
 
-        } else {
+        }
+        else
+            {
 
             imgError.setVisibility(View.VISIBLE);
             TYPE = getString(R.string.no_internet);
@@ -177,17 +185,21 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
         }
     }
 
-    private void getProductViewAllData() {
+    private void getProductViewAllData()
+    {
 
         progress_wheel.setVisibility(View.VISIBLE);
         SubCategoryList = new ArrayList<>();
         CategoryProductList = new ArrayList<>();
 
-        netWorkCall.makeServiceCall(activity, url, new VolleyNetWorkCall.OnResponse() {
+        netWorkCall.makeServiceCall(activity, url, new VolleyNetWorkCall.OnResponse()
+        {
             @Override
-            public void onSuccessCall(JSONObject response) {
+            public void onSuccessCall(JSONObject response)
+            {
 
-                try {
+                try
+                {
 
                     System.out.println(StaticDataUtility.APP_TAG + " home page response --> " + response.toString());
 
@@ -202,8 +214,10 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
                         // TODO : SubCategory Display
                         JSONArray category = jsonObject.optJSONArray("category");
 
-                        if (category.length() > 0) {
-                            for (int i = 0; i < category.length(); i++) {
+                        if (category.length() > 0)
+                        {
+                            for (int i = 0; i < category.length(); i++)
+                            {
 
                                 JSONObject dataObject = category.getJSONObject(i);
 
@@ -214,7 +228,8 @@ public class SpecificCategoryListActivity extends AppCompatActivity implements V
 
                         // TODO : SubCategory Product Display
                         JSONArray data = jsonObject.optJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
+                        for (int i = 0; i < data.length(); i++)
+                        {
 
                             subCategoryProductList = new ArrayList<>();
 

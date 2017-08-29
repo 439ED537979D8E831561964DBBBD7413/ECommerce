@@ -19,24 +19,29 @@ import java.util.Map;
  * TODO: Call {@link #initialize(Context)} from an entry point in your app
  * before using this!
  */
-public final class AnalyticsTrackers {
+public final class AnalyticsTrackers
+{
 
-    public enum Target {
+    public enum Target
+    {
         APP,
         // Add more trackers here if you need, and update the code in #get(Target) below
     }
 
     private static AnalyticsTrackers sInstance;
 
-    public static synchronized void initialize(Context context) {
-        if (sInstance != null) {
+    public static synchronized void initialize(Context context)
+    {
+        if (sInstance != null)
+        {
             throw new IllegalStateException("Extra call to initialize analytics trackers");
         }
 
         sInstance = new AnalyticsTrackers(context);
     }
 
-    public static synchronized AnalyticsTrackers getInstance() {
+    public static synchronized AnalyticsTrackers getInstance()
+    {
         if (sInstance == null) {
             throw new IllegalStateException("Call initialize() before getInstance()");
         }

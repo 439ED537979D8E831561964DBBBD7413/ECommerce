@@ -97,21 +97,26 @@ public class ActionItemBadgeAdder {
         return add(icon, style.getStyle(), badgeCount);
     }
 
-    public MenuItem add(IIcon icon, BadgeStyle style, int badgeCount) {
+    public MenuItem add(IIcon icon, BadgeStyle style, int badgeCount)
+    {
         return add(icon, Color.WHITE, style, badgeCount);
     }
 
-    public MenuItem add(IIcon icon, int iconColor, BadgeStyle style, int badgeCount) {
+    public MenuItem add(IIcon icon, int iconColor, BadgeStyle style, int badgeCount)
+    {
         return add(new IconicsDrawable(activity, icon).color(iconColor).actionBar(), style, badgeCount, null);
     }
 
-    public MenuItem add(Drawable icon, ActionItemBadge.BadgeStyles style, int badgeCount) {
+    public MenuItem add(Drawable icon, ActionItemBadge.BadgeStyles style, int badgeCount)
+    {
         return add(icon, style.getStyle(), badgeCount, null);
     }
 
-    public MenuItem add(Drawable icon, BadgeStyle style, int badgeCount, ActionItemBadge.ActionItemBadgeListener listener) {
+    public MenuItem add(Drawable icon, BadgeStyle style, int badgeCount, ActionItemBadge.ActionItemBadgeListener listener)
+    {
         MenuItem item;
-        if (groupId != null && itemId != null && order != null) {
+        if (groupId != null && itemId != null && order != null)
+        {
             item = menu.add(groupId, itemId, order, title);
         } else {
             item = menu.add(title);

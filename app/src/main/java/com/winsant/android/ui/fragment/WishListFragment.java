@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,8 @@ import java.util.Map;
 /**
  * Fragment class for each nav menu item
  */
-public class WishListFragment extends BaseFragment implements View.OnClickListener {
+public class WishListFragment extends BaseFragment implements View.OnClickListener
+{
 
     private RecyclerView viewAllList;
     private ProgressWheel progress_wheel;
@@ -65,13 +65,15 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wishlist, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
 //        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
@@ -91,7 +93,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         imgError.setOnClickListener(this);
         ll_before_login.setOnClickListener(this);
 
-        if (MyApplication.getInstance().getPreferenceUtility().getLogin()) {
+        if (MyApplication.getInstance().getPreferenceUtility().getLogin())
+        {
             ll_before_login.setVisibility(View.GONE);
             getData();
         } else {
@@ -101,18 +104,24 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
 
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.imgError:
 
                 if (!TYPE.equals(getResources().getString(R.string.no_wish_list_data)))
-                    if (CommonDataUtility.checkConnection(activity)) {
+                    if (CommonDataUtility.checkConnection(activity))
+                    {
                         getData();
                     } else if (TYPE.equals(getResources().getString(R.string.no_data))
-                            || TYPE.equals(getResources().getString(R.string.no_connection))) {
+                            || TYPE.equals(getResources().getString(R.string.no_connection)))
+                    {
                         getData();
-                    } else if (TYPE.equals(getResources().getString(R.string.no_internet))) {
+                    }
+                    else if (TYPE.equals(getResources().getString(R.string.no_internet)))
+                    {
                         startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                     }
 
@@ -130,11 +139,13 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         MyApplication.getInstance().trackScreenView("WishList Fragment");
     }
 
-    private void getData() {
+    private void getData()
+    {
 
         viewAllList.setVisibility(View.GONE);
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             imgError.setVisibility(View.GONE);
             getWishListData();
@@ -147,7 +158,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private void getWishListData() {
+    private void getWishListData()
+    {
 
         progress_wheel.setVisibility(View.VISIBLE);
         wishListProductList = new ArrayList<>();
@@ -182,7 +194,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                                 JSONArray data = jsonObject.optJSONArray("data");
 
                                 if (data.length() > 0) {
-                                    for (int i = 0; i < data.length(); i++) {
+                                    for (int i = 0; i < data.length(); i++)
+                                    {
 
                                         JSONObject dataObject = data.getJSONObject(i);
 
@@ -195,7 +208,8 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                                 progress_wheel.setVisibility(View.GONE);
 
-                                if (wishListProductList.size() > 0) {
+                                if (wishListProductList.size() > 0)
+                                {
                                     // TODO : Set Data
 //                                    toolbar_title.setText(getString(R.string.title_activity_wish_list) + " (Total " + wishListProductList.size() + " Products)");
                                     Toast.makeText(activity, "Total " + wishListProductList.size() + " Products", Toast.LENGTH_SHORT).show();
@@ -203,42 +217,55 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                                     viewAllList.setVisibility(View.VISIBLE);
                                     setData();
 
-                                } else {
+                                }
+                                else
+                                    {
                                     viewAllList.setVisibility(View.GONE);
                                     imgError.setVisibility(View.VISIBLE);
                                     TYPE = getString(R.string.no_wish_list_data);
                                     Glide.with(activity).load(R.drawable.no_wishlist).into(imgError);
                                 }
 
-                            } else {
+                            }
+                            else
+                                {
 
                                 progress_wheel.setVisibility(View.GONE);
 
                             }
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             e.printStackTrace();
                             noDataError();
                         }
                     }
-                }, new Response.ErrorListener() {
+                }, new Response.ErrorListener()
+        {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
 
                 progress_wheel.setVisibility(View.GONE);
                 viewAllList.setVisibility(View.GONE);
                 imgError.setVisibility(View.VISIBLE);
 
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError)
+                {
                     TYPE = getString(R.string.no_connection);
                     Glide.with(activity).load(R.drawable.no_server).into(imgError);
-                } else {
+                }
+                else
+
+                {
                     noDataError();
                 }
             }
         }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;

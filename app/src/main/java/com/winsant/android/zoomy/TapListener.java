@@ -7,6 +7,7 @@ import android.view.View;
  * Zoomy.
  */
 
-public interface TapListener {
+public interface TapListener
+{
     void onTap(View v);
 }

@@ -7,7 +7,8 @@ import android.view.View;
  * Zoomy.
  */
 
-public interface ZoomListener {
+public interface ZoomListener
+{
     void onViewStartedZooming(View view);
     void onViewEndedZooming(View view);
 }

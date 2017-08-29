@@ -33,7 +33,8 @@ class ViewUtils {
         return returnedBitmap;
     }
 
-    static Point getViewAbsoluteCords(View v) {
+    static Point getViewAbsoluteCords(View v)
+    {
         int[] location = new int[2];
         v.getLocationInWindow(location);
         int x = location[0];

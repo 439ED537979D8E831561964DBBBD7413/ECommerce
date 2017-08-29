@@ -5,7 +5,8 @@ package com.winsant.android.zoomy;
  * Zoomy.
  */
 
-public class ZoomyConfig {
+public class ZoomyConfig
+{
 
     private boolean zoomAnimationEnabled = true;
     private boolean immersiveModeEnabled = true;

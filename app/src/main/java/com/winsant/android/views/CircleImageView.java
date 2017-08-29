@@ -29,7 +29,8 @@ import android.widget.ImageView;
 import com.winsant.android.R;
 
 
-public class CircleImageView extends ImageView {
+public class CircleImageView extends ImageView
+{
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_INSIDE;
 

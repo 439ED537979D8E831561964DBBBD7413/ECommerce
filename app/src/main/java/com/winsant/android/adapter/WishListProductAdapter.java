@@ -64,7 +64,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
             txtPrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
 
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -79,7 +80,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
                 txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View v) {
                     if (clickListener != null)
@@ -91,13 +93,15 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_home_product_v_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position)
+    {
 
         HomeProductModel viewAllProductModel = viewAllProductList.get(position);
 
@@ -121,9 +125,11 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
         viewHolder.imgWishList.setVisibility(View.VISIBLE);
         viewHolder.imgWishList.setImageResource(R.drawable.ico_delete_svg);
         viewHolder.imgWishList.setTag(position);
-        viewHolder.imgWishList.setOnClickListener(new View.OnClickListener() {
+        viewHolder.imgWishList.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 int pos = (int) v.getTag();
 
@@ -135,7 +141,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
 
         viewHolder.outStockImage.setVisibility(viewAllProductModel.getAvailability().equals("0") ? View.VISIBLE : View.GONE);
 
-        if (viewAllProductModel.getDiscount_per().equals("100")) {
+        if (viewAllProductModel.getDiscount_per().equals("0"))
+        {
             viewHolder.txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + viewAllProductModel.getPrice().replaceAll("\\.0*$", ""));
             viewHolder.txtPrice.setVisibility(View.GONE);
             viewHolder.txtDiscount.setVisibility(View.GONE);
@@ -153,7 +160,8 @@ public class WishListProductAdapter extends RecyclerView.Adapter<WishListProduct
     }
 
     @Override
-    public void onViewRecycled(ViewHolder holder) {
+    public void onViewRecycled(ViewHolder holder)
+    {
         super.onViewRecycled(holder);
         Glide.clear(holder.productImage);
     }

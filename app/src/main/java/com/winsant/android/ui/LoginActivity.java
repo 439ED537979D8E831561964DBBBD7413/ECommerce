@@ -70,14 +70,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Activity activity;
-    private EditText edtUserId, edtMobile, edtPassword, edtCPassword;
-    private String strUserId, strMobile, strPassword, strCPassword;
+    private EditText edtUserId, edtMobile, edtPassword;
+    private String strUserId, strMobile, strPassword;
     private Button btnSign_UP_IN, btnLogin;
     private boolean isForLogin = false;
     private LinearLayout ll_login, llFacebookLogin, llGoogleLogin;
     //    ;
     private KProgressHUD progressHUD;
-    private CardView cardCPassword, cardMobile;
+    private CardView cardMobile;
     private TextView mToolbar_title;
     private ProgressDialog pDialog;
 
@@ -140,17 +140,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginbutton = (LoginButton) findViewById(R.id.login_button);
 
         cardMobile = (CardView) findViewById(R.id.cardMobile);
-        cardCPassword = (CardView) findViewById(R.id.cardCPassword);
 
         edtUserId = (EditText) findViewById(R.id.edtUserId);
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
-        edtCPassword = (EditText) findViewById(R.id.edtCPassword);
 
         edtUserId.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtMobile.setTypeface(CommonDataUtility.setTypeFace1(activity));
         edtPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
-        edtCPassword.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
         TextView txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
         txtForgotPass.setTypeface(CommonDataUtility.setTypeFace1(activity));
@@ -167,7 +164,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -177,7 +173,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -187,7 +182,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             edtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            edtCPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtForgotPass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             btnSign_UP_IN.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -226,11 +220,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginbutton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(LoginResult loginResult)
+            {
 
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
+                        new GraphRequest.GraphJSONObjectCallback()
+                        {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.i("LoginActivity", response.toString());
@@ -260,12 +256,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     fbEmail = "";
-                                    if (!fbId.equals("")) {
+                                    if (!fbId.equals(""))
+                                    {
                                         if (pDialog != null && pDialog.isShowing())
                                             pDialog.dismiss();
 
                                         LoginManager.getInstance().logOut();
-                                        Toast.makeText(activity, "something went wrong,try another option.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(activity, "something went wr" + "ong,try another option.", Toast.LENGTH_SHORT).show();
                                     } else {
                                         if (pDialog != null && pDialog.isShowing())
                                             pDialog.dismiss();
@@ -282,7 +279,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 request.setParameters(parameters);
                 request.executeAsync();
 
-                if (accessToken == null) {
+                if (accessToken == null)
+                {
                     pDialog = new ProgressDialog(activity);
                     pDialog.setMessage("Please wait...");
                     pDialog.setIndeterminate(false);
@@ -299,7 +297,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onError(FacebookException exception) {
+            public void onError(FacebookException exception)
+            {
                 System.out.println("onError");
                 if (pDialog != null && pDialog.isShowing())
                     pDialog.dismiss();
@@ -307,10 +306,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        llFacebookLogin.setOnClickListener(new View.OnClickListener() {
+        llFacebookLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if (!CommonDataUtility.checkConnection(activity)) {
+            public void onClick(View v)
+            {
+                if (!CommonDataUtility.checkConnection(activity))
+                {
                     Toast.makeText(activity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 } else {
                     // social_provider = "facebook";
@@ -320,7 +322,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void loginWithGplus() {
+    private void loginWithGplus()
+    {
         pDialog = new ProgressDialog(activity);
         pDialog.setMessage("Please wait...");
         pDialog.setIndeterminate(false);
@@ -339,17 +342,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int accountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
-        if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
+        if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED)
+        {
             listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
-        } else {
+        }
+        else
+            {
             isReadPhone = true;
         }
-        if (accountPermission != PackageManager.PERMISSION_GRANTED) {
+        if (accountPermission != PackageManager.PERMISSION_GRANTED)
+        {
             listPermissionsNeeded.add(Manifest.permission.GET_ACCOUNTS);
         } else {
             isReadAccount = true;
         }
-        if (!listPermissionsNeeded.isEmpty()) {
+        if (!listPermissionsNeeded.isEmpty())
+        {
             Toast.makeText(activity, "please grant all this permission to work all functionality properly", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_PERMISSION);
             return false;
@@ -361,9 +369,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults)
+    {
 
-        if (requestCode == REQUEST_PERMISSION) {
+        if (requestCode == REQUEST_PERMISSION)
+        {
             // START_INCLUDE(permission_result)
 
             Map<String, Integer> perms = new HashMap<String, Integer>();
@@ -376,16 +386,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 perms.put(permissions[i], grantResults[i]);
 
             // Check for READ_PHONE_STATE
-            if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
+            {
                 isReadPhone = true;
 
-            } else {
+            }
+            else
+            {
                 isReadPhone = false;
                 CommonDataUtility.showSnackBar(ll_login, "Phone read permission was NOT granted.");
             }
 
             // Check for GET_ACCOUNTS
-            if (perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
+            if (perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED)
+            {
                 isReadAccount = true;
 
             } else {
@@ -393,9 +407,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 CommonDataUtility.showSnackBar(ll_login, "Google Account read permission was NOT granted.");
             }
 
-            if (isReadPhone && isReadAccount) {
+            if (isReadPhone && isReadAccount)
+            {
                 loginWithGplus();
-            } else {
+            }
+            else
+            {
                 checkPermission();
             }
 
@@ -422,7 +439,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 strUserId = edtUserId.getText().toString();
                 strMobile = edtMobile.getText().toString();
                 strPassword = edtPassword.getText().toString();
-                strCPassword = edtCPassword.getText().toString();
 
                 if (CommonDataUtility.checkConnection(activity)) {
                     if (!isForLogin) {
@@ -460,7 +476,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     edtUserId.setHint(getString(R.string.email));
 
                     cardMobile.setVisibility(View.GONE);
-                    cardCPassword.setVisibility(View.GONE);
                     llFacebookLogin.setVisibility(View.VISIBLE);
                     llGoogleLogin.setVisibility(View.VISIBLE);
                     mToolbar_title.setText(getString(R.string.title_activity_login));
@@ -472,7 +487,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     edtUserId.setHint(getString(R.string.email_address));
 
                     cardMobile.setVisibility(View.VISIBLE);
-                    cardCPassword.setVisibility(View.VISIBLE);
                     llFacebookLogin.setVisibility(View.GONE);
                     llGoogleLogin.setVisibility(View.GONE);
                     mToolbar_title.setText(getString(R.string.title_activity_sign_up));
@@ -508,8 +522,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return "Please enter valid Mobile number";
         else if (strPassword.equals(""))
             return "Please enter password";
-        else if (!(strPassword.equals(strCPassword)))
-            return "Password and Confirm password doesn't match!";
         else
             return "true";
     }

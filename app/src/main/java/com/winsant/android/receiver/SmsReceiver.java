@@ -16,17 +16,21 @@ import android.util.Log;
 /**
  * Created by Ravi on 09/07/15.
  */
-public class SmsReceiver extends BroadcastReceiver {
+public class SmsReceiver extends BroadcastReceiver
+{
     private static final String TAG = SmsReceiver.class.getSimpleName();
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent)
+    {
 
         final Bundle bundle = intent.getExtras();
         try {
-            if (bundle != null) {
+            if (bundle != null)
+            {
                 Object[] pdusObj = (Object[]) bundle.get("pdus");
-                for (Object aPdusObj : pdusObj) {
+                for (Object aPdusObj : pdusObj)
+                {
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
                     String senderAddress = currentMessage.getDisplayOriginatingAddress();
                     String message = currentMessage.getDisplayMessageBody();
@@ -34,7 +38,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     Log.e(TAG, "Received SMS: " + message + ", Sender: " + senderAddress);
 
                     // if the SMS is not from our gateway, ignore the message
-                    if (!senderAddress.contains("MD-WINSNT")) {
+                    if (!senderAddress.contains("MD-WINSNT"))
+                    {
                         return;
                     }
 
@@ -55,7 +60,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     LocalBroadcastManager.getInstance(context).sendBroadcast(otpIntent);
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
     }

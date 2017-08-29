@@ -30,7 +30,8 @@ import com.winsant.android.utils.StaticDataUtility;
 /**
  * Fragment class for each nav menu item
  */
-public class ProfileFragment extends BaseFragment implements View.OnClickListener {
+public class ProfileFragment extends BaseFragment implements View.OnClickListener
+{
 
     private TextView txtUserName, txtMobile, txtEmail, txtChangePassword;
     private LinearLayout ll_before_login, ll_after_login;
@@ -41,19 +42,23 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private MenuItem cart;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+
+    {
         super.onViewCreated(view, savedInstanceState);
 
 //        if (MyApplication.getInstance().getPreferenceUtility().getLogin())
@@ -62,8 +67,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 //        Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
 //        activity.setSupportActionBar(toolbar);
 //        TextView toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-//        toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-//        toolbar_title.setText(R.string.my_account);
+       // toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
+     //  toolbar_title.setText(R.string.my_account);
 
         ll_before_login = (LinearLayout) view.findViewById(R.id.ll_before_login);
         ll_after_login = (LinearLayout) view.findViewById(R.id.ll_after_login);
@@ -110,7 +115,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
-        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+        } else if (activity.getResources().getBoolean(R.bool.isTablet))
+        {
 
             txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
             txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -125,7 +131,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             txtLogout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtChangePassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
-        } else {
+        }
+        else
+            {
 
             txtUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
             txtMobile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -155,7 +163,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         System.out.println(StaticDataUtility.APP_TAG + " Profile OnResume");
         MyApplication.getInstance().trackScreenView("Profile Fragment");
@@ -232,9 +241,11 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             ll_before_login.setVisibility(View.VISIBLE);
             ll_after_login.setVisibility(View.GONE);
 
-            ll_before_login.setOnClickListener(new View.OnClickListener() {
+            ll_before_login.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     startActivity(new Intent(activity, LoginActivity.class));
                     // activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
@@ -414,13 +425,17 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 //        Volley.newRequestQueue(activity).add(jsonObjReq);
 //    }
 
-    private void rateApp() {
+    private void rateApp()
+    {
 
         Uri uri = Uri.parse("market://details?id=" + activity.getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        try {
+        try
+        {
             startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException e)
+        {
+
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://play.google.com/store/apps/details?id=" + activity.getPackageName())));
         }

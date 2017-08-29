@@ -19,13 +19,15 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by Pc-Android-1 on 10/1/2016.
  */
-public class MyApplication extends Application {
+public class MyApplication extends Application
+{
 
     private static MyApplication mInstance;
     private SharedPreferenceUtility preferenceUtility;
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         mInstance = this;
 
@@ -37,28 +39,34 @@ public class MyApplication extends Application {
         facebookHash();
     }
 
-    public static synchronized MyApplication getInstance() {
+    public static synchronized MyApplication getInstance()
+    {
         return mInstance;
     }
 
-    public synchronized SharedPreferenceUtility getPreferenceUtility() {
+    public synchronized SharedPreferenceUtility getPreferenceUtility()
+    {
         return preferenceUtility;
     }
 
-    public synchronized Tracker getGoogleAnalyticsTracker() {
+    public synchronized Tracker getGoogleAnalyticsTracker()
+    {
         AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
         return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
     }
 
-    private void facebookHash() {
-        try {
+    private void facebookHash()
+    {
+        try
+        {
             PackageInfo info = getPackageManager().getPackageInfo(mInstance.getPackageName(), PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.e("MY KEY HASH:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e)
+        {
 
         }
     }

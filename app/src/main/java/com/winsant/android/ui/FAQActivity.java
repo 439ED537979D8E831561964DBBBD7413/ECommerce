@@ -34,7 +34,8 @@ import java.util.Map;
 /**
  * Created by Pc-Android-1 on 9/29/2016.
  */
-public class FAQActivity extends AppCompatActivity {
+public class FAQActivity extends AppCompatActivity
+{
 
     private Activity activity;
     FAQListAdapter faqListAdapter;
@@ -45,7 +46,8 @@ public class FAQActivity extends AppCompatActivity {
     private LinearLayout ll_faq;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helpfaq);
 
@@ -59,11 +61,13 @@ public class FAQActivity extends AppCompatActivity {
 
         getFAQ();
 
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener()
+        {
 
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
+                                        int groupPosition, long id)
+            {
                 // Toast.makeText(getApplicationContext(),
                 // "Group Clicked " + listDataHeader.get(groupPosition),
                 // Toast.LENGTH_SHORT).show();
@@ -72,25 +76,29 @@ public class FAQActivity extends AppCompatActivity {
         });
 
         // Listview Group expanded listener
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener()
+        {
 
             @Override
-            public void onGroupExpand(int groupPosition) {
+            public void onGroupExpand(int groupPosition)
+            {
                 expListView.setSelectedGroup(groupPosition);
             }
         });
 
         // Listview Group collasped listener
-        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener()
+        {
             @Override
-            public void onGroupCollapse(int groupPosition) {
+            public void onGroupCollapse(int groupPosition)
+            {
 
             }
         });
     }
 
-    private void getFAQ() {
+    private void getFAQ()
+    {
 
         progressHUD = KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -145,23 +153,29 @@ public class FAQActivity extends AppCompatActivity {
                             CommonDataUtility.showSnackBar(ll_faq, "Something went wrong,Try again later.");
                         }
                     }
-                }, new Response.ErrorListener() {
+                }, new Response.ErrorListener()
+        {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
 
-                if (error instanceof NoConnectionError) {
+                if (error instanceof NoConnectionError)
+                {
                     progressHUD.dismiss();
                     CommonDataUtility.showSnackBar(ll_faq, activity.getString(R.string.no_internet));
-                } else {
+                } else
+                    {
                     progressHUD.dismiss();
                     CommonDataUtility.showSnackBar(ll_faq, "Something went wrong,Try again later.");
                 }
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
+            public Map<String,String> getHeaders() throws AuthFailureError
+            {
                 HashMap<String,String> headers = new HashMap<String,String>();
+
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

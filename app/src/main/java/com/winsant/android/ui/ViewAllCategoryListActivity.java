@@ -36,7 +36,8 @@ import java.util.ArrayList;
  * TODO : Home Page View All Category Display Activity
  */
 
-public class ViewAllCategoryListActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewAllCategoryListActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private Activity activity;
     private TextView mToolbar_title;
@@ -54,7 +55,8 @@ public class ViewAllCategoryListActivity extends AppCompatActivity implements Vi
     private VolleyNetWorkCall netWorkCall;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view_all);
 
@@ -72,11 +74,14 @@ public class ViewAllCategoryListActivity extends AppCompatActivity implements Vi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });
@@ -162,14 +167,16 @@ public class ViewAllCategoryListActivity extends AppCompatActivity implements Vi
                         JSONArray category = jsonObject.optJSONArray("category");
 
                         if (category.length() > 0) {
-                            for (int i = 0; i < category.length(); i++) {
+                            for (int i = 0; i < category.length(); i++)
+                            {
 
                                 SubCategoryList = new ArrayList<>();
 
                                 JSONObject dataObject = category.getJSONObject(i);
 
                                 JSONArray sub_category = dataObject.optJSONArray("sub_category");
-                                for (int j = 0; j < sub_category.length(); j++) {
+                                for (int j = 0; j < sub_category.length(); j++)
+                                {
 
                                     JSONObject subCategoryObject = sub_category.optJSONObject(j);
 

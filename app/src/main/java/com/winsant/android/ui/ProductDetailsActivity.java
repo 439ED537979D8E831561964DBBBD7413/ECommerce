@@ -106,6 +106,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private TextView txtDiscount;
     private TextView txtPinCode;
     private TextView txtDetails;
+    private TextView txtShippingCharge;
     private TextView item_sold_out;
     private TextView txtSingleAttribute;
 
@@ -207,6 +208,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         ImageView imgShare = (ImageView) findViewById(R.id.imgShare);
         txtPinCode = (TextView) findViewById(R.id.txtPinCode);
         txtDetails = (TextView) findViewById(R.id.txtDetails);
+        txtShippingCharge = (TextView) findViewById(R.id.txtShippingCharge);
         txtColor = (TextView) findViewById(R.id.txtColor);
         txtSize = (TextView) findViewById(R.id.txtSize);
         txtSingleAttribute = (TextView) findViewById(R.id.txtSingleAttribute);
@@ -218,6 +220,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         txtDiscount.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtPinCode.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtDetails.setTypeface(CommonDataUtility.setTypeFace1(activity));
+        txtShippingCharge.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtColor.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity));
         txtSingleAttribute.setTypeface(CommonDataUtility.setTypeFace1(activity));
@@ -238,6 +241,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtShippingCharge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -254,6 +258,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
             txtDetails.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtShippingCharge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtSingleAttribute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -277,10 +282,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
         if (!MyApplication.getInstance().getPreferenceUtility().getString("pincode").equals("")) {
             strPinCode = MyApplication.getInstance().getPreferenceUtility().getString("pincode");
-            txtPinCode.setText((Html.fromHtml("Deliver to " + "<font color='#1B347E'> <b>" + strPinCode + "</b></font>")));
+            txtPinCode.setText((Html.fromHtml("Deliver to " + "<font color='#0787EA'> <b>" + strPinCode + "</b></font>")));
         } else {
             strPinCode = "";
-            txtPinCode.setText((Html.fromHtml("Deliver to : " + "<font color='#1B347E'>____________</font>")));
+            txtPinCode.setText((Html.fromHtml("Deliver to : " + "<font color='#0787EA'>____________</font>")));
         }
 
         heart_button.setOnLikeListener(new OnLikeListener() {
@@ -571,7 +576,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 //                                productId = data.optString("product_id");
                                 txtName.setText(data.optString("product_name"));
 
-                                if (data.optString("discount_per").equals("100")) {
+                                if (data.optString("discount_per").equals("0")) {
                                     txtPrice.setVisibility(View.GONE);
                                     txtDiscount.setVisibility(View.GONE);
                                     txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + data.optString("price"));
@@ -583,6 +588,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                 }
 
                                 txtDetails.setText(Html.fromHtml(data.optString("description")));
+
+                                if (data.optString("shipping_amount").equals("0"))
+                                    txtShippingCharge.setText("Free Shipping");
+                                else
+                                    txtShippingCharge.setText("Shipping Charge " + activity.getResources().getString(R.string.Rs)
+                                            + " " + data.optString("shipping_amount"));
 
                                 fav_link = data.optString("fav_link");
                                 remove_link = data.optString("remove_link");
@@ -703,7 +714,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                 ColorId = color_id;
                                 ColorName = color_name;
-                                txtColor.setText(Html.fromHtml("Color : <font color='#1B347E'><b>" + ColorName + "</b></font>"));
+                                txtColor.setText(Html.fromHtml("Color : <font color='#0787EA'><b>" + ColorName + "</b></font>"));
 
 //                                dismissProgress();
                             }
@@ -718,9 +729,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
                                     SizeId = size_id;
                                     SizeName = size_name;
-                                    txtSize.setText(Html.fromHtml("Size : <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+                                    txtSize.setText(Html.fromHtml("Size : <font color='#0787EA'><b>" + SizeName + "</b></font>"));
 
-                                    if (discount_per.equals("100")) {
+                                    if (discount_per.equals("0")) {
                                         txtPrice.setVisibility(View.GONE);
                                         txtDiscount.setVisibility(View.GONE);
                                         txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + price);
@@ -739,7 +750,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                             public void onSizeClick(String size_id, String size_name) {
                                 SizeId = size_id;
                                 SizeName = size_name;
-                                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + SizeName + "</b></font>"));
+                                txtSize.setText(Html.fromHtml("Size :- <font color='#0787EA'><b>" + SizeName + "</b></font>"));
                             }
                         });
 
@@ -756,7 +767,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new SizeAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
-                                txtSingleAttribute.setText(Html.fromHtml("Size : <font color='#1B347E'><b>" + size_name + "</b></font>"));
+                                txtSingleAttribute.setText(Html.fromHtml("Size : <font color='#0787EA'><b>" + size_name + "</b></font>"));
                                 SizeId = size_id;
                             }
                         });
@@ -775,7 +786,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         new ColorAttributeListAdapter.onClickListener() {
                             @Override
                             public void onClick(String color_id, String color_name) {
-                                txtSingleAttribute.setText(Html.fromHtml("Color : <font color='#1B347E'><b>" + color_name + "</b></font>"));
+                                txtSingleAttribute.setText(Html.fromHtml("Color : <font color='#0787EA'><b>" + color_name + "</b></font>"));
                                 ColorId = color_id;
                             }
                         });
@@ -1095,8 +1106,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 //            String getData = data.getStringExtra("type");
 //
 //            if (getData.equals("yes")) {
-//                txtColor.setText(Html.fromHtml("Color :- <font color='#1B347E'><b>" + data.getStringExtra("color") + "</b></font>"));
-//                txtSize.setText(Html.fromHtml("Size :- <font color='#1B347E'><b>" + data.getStringExtra("size") + "</b></font>"));
+//                txtColor.setText(Html.fromHtml("Color :- <font color='#0787EA'><b>" + data.getStringExtra("color") + "</b></font>"));
+//                txtSize.setText(Html.fromHtml("Size :- <font color='#0787EA'><b>" + data.getStringExtra("size") + "</b></font>"));
 //
 //
 //                ColorId = data.getStringExtra("ColorId");
@@ -1253,7 +1264,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                             }
                                         }
 
-                                        txtPinCode.setText((Html.fromHtml(message + " <font color='#1B347E'> <b>" + strPinCode + "</b></font>")));
+                                        txtPinCode.setText((Html.fromHtml(message + " <font color='#0787EA'> <b>" + strPinCode + "</b></font>")));
                                     }
                                 });
 

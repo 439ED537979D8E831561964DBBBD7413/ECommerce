@@ -6,13 +6,15 @@ import java.io.Serializable;
  * Created by Developer on 2/21/2017.
  */
 
-public class OfferModel implements Serializable {
+public class OfferModel implements Serializable
+{
 
     private String coupon_title;
     private String coupon_description;
     private String t_and_c;
 
-    public OfferModel(String coupon_title, String coupon_description, String t_and_c) {
+    public OfferModel(String coupon_title, String coupon_description, String t_and_c)
+    {
         this.coupon_title = coupon_title;
         this.coupon_description = coupon_description;
         this.t_and_c = t_and_c;

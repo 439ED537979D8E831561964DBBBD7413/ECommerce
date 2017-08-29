@@ -4,7 +4,8 @@ package com.winsant.android.model;
  * Created by Developer on 2/10/2017.
  */
 
-public class OrderModel {
+public class OrderModel
+{
 
     private String product_id;
     private String order_id;

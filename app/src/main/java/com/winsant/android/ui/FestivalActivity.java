@@ -63,14 +63,16 @@ public class FestivalActivity extends AppCompatActivity implements View.OnClickL
     private VolleyNetWorkCall netWorkCall;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_festival);
 
         activity = FestivalActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
@@ -79,11 +81,14 @@ public class FestivalActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });

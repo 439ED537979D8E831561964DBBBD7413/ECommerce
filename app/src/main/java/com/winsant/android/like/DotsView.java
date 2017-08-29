@@ -15,7 +15,8 @@ import com.winsant.android.utils.CommonDataUtility;
  * Created by Developer on 5/2/2017.
  */
 
-public class DotsView extends View {
+public class DotsView extends View
+{
     private static final int DOTS_COUNT = 7;
     private static final int OUTER_DOTS_POSITION_ANGLE = 51;
 
@@ -85,8 +86,10 @@ public class DotsView extends View {
         drawInnerDotsFrame(canvas);
     }
 
-    private void drawOuterDotsFrame(Canvas canvas) {
-        for (int i = 0; i < DOTS_COUNT; i++) {
+    private void drawOuterDotsFrame(Canvas canvas)
+    {
+        for (int i = 0; i < DOTS_COUNT; i++)
+        {
             int cX = (int) (centerX + currentRadius1 * Math.cos(i * OUTER_DOTS_POSITION_ANGLE * Math.PI / 180));
             int cY = (int) (centerY + currentRadius1 * Math.sin(i * OUTER_DOTS_POSITION_ANGLE * Math.PI / 180));
             canvas.drawCircle(cX, cY, currentDotSize1, circlePaints[i % circlePaints.length]);

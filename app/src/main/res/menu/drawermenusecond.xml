@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/main_home_selector"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/main_category_selector"
+            android:title="@string/nav_category" />
+       <!-- <item
+            android:id="@+id/nav_brand"
+            android:icon="@drawable/main_category_selector"
+            android:title="@string/nav_brand" />-->
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/main_order_selector"
+            android:title="@string/nav_order" />
+
+        <item
+            android:id="@+id/nav_payment"
+            android:icon="@drawable/main_payment_selector"
+            android:title="@string/nav_payment" />
+      <!--  <item
+            android:id="@+id/nav_return"
+            android:icon="@drawable/main_return_selector"
+            android:title="@string/nav_return" />-->
+    </group>
+
+    <item android:title="@string/other">
+        <menu>
+           <!-- <item
+                android:id="@+id/nav_support"
+                android:icon="@drawable/main_support_selector"
+                android:title="@string/nav_support" />-->
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/main_settings_selector"
+                android:title="@string/nav_setting" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/main_logout_selector"
+                android:title="@string/nav_logout" />
+        </menu>
+    </item>
+</menu>

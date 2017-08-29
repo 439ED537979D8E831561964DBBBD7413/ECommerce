@@ -25,7 +25,8 @@ import java.util.ArrayList;
  * TODO : Specific Product Details Display Activity
  */
 
-public class AttributeActivity extends AppCompatActivity {
+public class AttributeActivity extends AppCompatActivity
+{
 
     private Activity activity;
     private TextView mToolbar_title;
@@ -41,14 +42,16 @@ public class AttributeActivity extends AppCompatActivity {
     private ArrayList<AttributeModel> attributeModelArrayList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_attribute);
 
         activity = AttributeActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
@@ -63,9 +66,11 @@ public class AttributeActivity extends AppCompatActivity {
 
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });
@@ -76,9 +81,11 @@ public class AttributeActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnApply = (Button) findViewById(R.id.btnApply);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 Intent intent = new Intent();
                 intent.putExtra("type", "no");
@@ -88,13 +95,17 @@ public class AttributeActivity extends AppCompatActivity {
             }
         });
 
-        btnApply.setOnClickListener(new View.OnClickListener() {
+        btnApply.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
-                if (ColorName.equals("")) {
+                if (ColorName.equals(""))
+                {
                     CommonDataUtility.showSnackBar(rl_attribute, "Select color");
-                } else if (SizeName.equals("")) {
+                } else if (SizeName.equals(""))
+                {
                     CommonDataUtility.showSnackBar(rl_attribute, "Select size");
                 } else {
 
@@ -127,9 +138,11 @@ public class AttributeActivity extends AppCompatActivity {
         SizeList.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
 
         ColorList.setAdapter(new AttributeListAdapter(activity, attributeModelArrayList, SizeList,
-                new AttributeListAdapter.onClickListener() {
+                new AttributeListAdapter.onClickListener()
+                {
                     @Override
-                    public void onColorClick(ArrayList<String> images, String color_id, String color_name) {
+                    public void onColorClick(ArrayList<String> images, String color_id, String color_name)
+                    {
 
                         ColorId = color_id;
                         ColorName = color_name;
@@ -138,7 +151,8 @@ public class AttributeActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per) {
+                    public void onSizeClick(String size_id, String size_name, String price, String discount_price, String discount_per)
+                    {
 
                     }
 

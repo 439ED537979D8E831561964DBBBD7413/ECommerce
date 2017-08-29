@@ -148,13 +148,18 @@ public class ProgressWheel extends View {
         }
 
         //Measure Height
-        if (heightMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.EXACTLY) {
+        if (heightMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.EXACTLY)
+        {
             //Must be this size
             height = heightSize;
-        } else if (heightMode == MeasureSpec.AT_MOST) {
+        }
+        else if (heightMode == MeasureSpec.AT_MOST)
+        {
             //Can't be bigger than...
             height = Math.min(viewHeight, heightSize);
-        } else {
+        }
+        else
+            {
             //Be whatever you want
             height = viewHeight;
         }
@@ -168,7 +173,8 @@ public class ProgressWheel extends View {
      * Use this dimensions to setup the bounds and paints.
      */
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         super.onSizeChanged(w, h, oldw, oldh);
 
         setupBounds(w, h);
@@ -180,7 +186,8 @@ public class ProgressWheel extends View {
      * Set the properties of the paints we're using to
      * draw the progress wheel
      */
-    private void setupPaints() {
+    private void setupPaints()
+    {
         barPaint.setColor(barColor);
         barPaint.setAntiAlias(true);
         barPaint.setStyle(Style.STROKE);
@@ -195,7 +202,8 @@ public class ProgressWheel extends View {
     /**
      * Set the bounds of the component
      */
-    private void setupBounds(int layout_width, int layout_height) {
+    private void setupBounds(int layout_width, int layout_height)
+    {
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
         int paddingLeft = getPaddingLeft();

@@ -5,7 +5,8 @@ import android.content.Intent;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.winsant.android.ui.MyApplication;
 
-public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
+public class FirebaseInstanceIDService extends FirebaseInstanceIdService
+{
     private static final String TAG = "MyFirebaseIIDService";
 
     public void onTokenRefresh() {

@@ -39,7 +39,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public interface onClickListener {
-
         void onRemoveClick(int position, String remove_url, String product_id);
 
         void onQtyClick(int position, String quantity);
@@ -48,7 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView productImage;
-        TextView txtName, txtDiscount, txtPrice, txtDiscountPrice, txtQty, txtRemove, txtColor, txtSize;
+        TextView txtName, txtDiscount, txtPrice, txtDiscountPrice, txtQty, txtRemove, txtColor, txtSize, txtShippingCharge;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -62,6 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             txtRemove = (TextView) itemView.findViewById(R.id.txtRemove);
             txtColor = (TextView) itemView.findViewById(R.id.txtColor);
             txtSize = (TextView) itemView.findViewById(R.id.txtSize);
+            txtShippingCharge = (TextView) itemView.findViewById(R.id.txtShippingCharge);
 
             txtName.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
@@ -71,36 +71,40 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             txtRemove.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtColor.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtSize.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
+            txtShippingCharge.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
             if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
-                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-                txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtShippingCharge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-            } else {
+            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtShippingCharge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+            } else {
+                txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 txtQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                txtRemove.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 txtColor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtSize.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                txtShippingCharge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
         }
     }
@@ -147,6 +151,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         } else
             viewHolder.txtSize.setVisibility(View.GONE);
 
+        if (!cartModel.getShipping_amount().equals("0")) {
+            viewHolder.txtShippingCharge.setVisibility(View.VISIBLE);
+            viewHolder.txtShippingCharge.setText("Shipping Charge " + cartModel.getShipping_amount());
+        } else
+            viewHolder.txtShippingCharge.setVisibility(View.GONE);
+
+
         viewHolder.txtName.setText(cartModel.getName());
 
         viewHolder.txtQty.setText("Qty : " + cartModel.getQty());
@@ -172,14 +183,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             }
         });
 
-        int Price, DisPrice;
-        int qty = (int) Double.parseDouble(cartModel.getQty());
+//        int Price, DisPrice;
+//        int qty = (int) Double.parseDouble(cartModel.getQty());
 
-        if (cartModel.getDiscount_per().equals("100")) {
+        if (cartModel.getDiscount_per().equals("0")) {
 
-            Price = (int) Double.parseDouble(cartModel.getPrice()) * qty;
+//            Price = (int) Double.parseDouble(cartModel.getPrice()) * qty;
 
-            viewHolder.txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(Price).replaceAll("\\.0*$", ""));
+            viewHolder.txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(cartModel.getPrice()).replaceAll("\\.0*$", ""));
             viewHolder.txtDiscountPrice.setGravity(Gravity.CENTER);
             viewHolder.txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
@@ -189,14 +200,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         } else {
 
-            Price = (int) Double.parseDouble(cartModel.getPrice()) * qty;
-            DisPrice = (int) Double.parseDouble(cartModel.getDiscount_price()) * qty;
+//            Price = (int) Double.parseDouble(cartModel.getPrice()) * qty;
+//            DisPrice = (int) Double.parseDouble(cartModel.getDiscount_price()) * qty;
 
-            viewHolder.txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(DisPrice).replaceAll("\\.0*$", ""));
+            viewHolder.txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(cartModel.getDiscount_price()).replaceAll("\\.0*$", ""));
 
             viewHolder.txtPrice.setVisibility(View.VISIBLE);
             viewHolder.txtDiscount.setVisibility(View.VISIBLE);
-            viewHolder.txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(Price).replaceAll("\\.0*$", ""));
+            viewHolder.txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + String.valueOf(cartModel.getPrice()).replaceAll("\\.0*$", ""));
             viewHolder.txtPrice.setPaintFlags(viewHolder.txtPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             viewHolder.txtDiscount.setText(String.format("%s %% OFF", cartModel.getDiscount_per()));
         }

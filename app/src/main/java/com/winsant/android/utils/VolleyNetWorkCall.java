@@ -21,11 +21,13 @@ import java.util.Map;
  * Created by Developer on 2/20/2017.
  */
 
-public class VolleyNetWorkCall {
+public class VolleyNetWorkCall
+{
 
     private OnResponse onResponse;
 
-    public interface OnResponse {
+    public interface OnResponse
+    {
         void onSuccessCall(JSONObject response);
 
         void onPostSuccessCall(String response);
@@ -33,7 +35,8 @@ public class VolleyNetWorkCall {
         void onFailCall(VolleyError error);
     }
 
-    public void makeServiceCall(Activity activity, String url, final OnResponse onResponse) {
+    public void makeServiceCall(Activity activity, String url, final OnResponse onResponse)
+    {
 
         this.onResponse = onResponse;
 

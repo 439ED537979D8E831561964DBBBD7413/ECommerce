@@ -8,7 +8,8 @@ import android.view.MotionEvent;
  * Zoomy.
  */
 
-public class SimpleGestureListener implements GestureDetector.OnGestureListener {
+public class SimpleGestureListener implements GestureDetector.OnGestureListener
+{
     @Override
     public boolean onDown(MotionEvent e) {
         return true;

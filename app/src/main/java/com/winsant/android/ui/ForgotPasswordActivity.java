@@ -73,9 +73,11 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });
@@ -123,7 +125,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
-        } else {
+        }
+        else
+            {
 
             edtUserId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             edtPassword.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -135,7 +139,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         checkPermission();
     }
@@ -177,7 +182,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
                         if (message.equals("true")) {
                             ResetPassword();
-                        } else {
+                        }
+                        else
+                            {
                             CommonDataUtility.showSnackBar(ll_login, message);
                         }
                     }

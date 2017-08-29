@@ -106,6 +106,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.ll_top).setVisibility(View.GONE);
         findViewById(R.id.tableRow).setVisibility(View.GONE);
+        findViewById(R.id.tableRow1).setVisibility(View.GONE);
 
         progress_wheel = (ProgressWheel) findViewById(R.id.progress_wheel);
         rl_cart = (RelativeLayout) findViewById(R.id.rl_cart);
@@ -258,8 +259,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -437,8 +438,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
             }
         }) {
             @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> headers = new HashMap<String,String>();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

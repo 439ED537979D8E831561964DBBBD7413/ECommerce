@@ -10,19 +10,23 @@ import com.bumptech.glide.Glide;
 import com.winsant.android.R;
 
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         ImageView splashLogo = (ImageView) findViewById(R.id.splashLogo);
         Glide.with(SplashActivity.this).load(R.drawable.winsant_logo).into(splashLogo);
 
-        new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                 finish();
             }

@@ -7,7 +7,8 @@ import android.view.MotionEvent;
  * Created by Álvaro Blanco Cabrero on 11/02/2017.
  * Zoomy.
  */
-class MotionUtils {
+class MotionUtils
+{
 
     static void midPointOfEvent(PointF point, MotionEvent event){
         if (event.getPointerCount() == 2) {

@@ -49,7 +49,8 @@ public class LoginDataBaseAdapter {
         db.insert("LOGIN", null, newValues);
     }
 
-    public int deleteEntry(String password) {
+    public int deleteEntry(String password)
+    {
         String where = "PASSWORD=?";
         return db.delete("LOGIN", where, new String[]{password});
     }
@@ -86,14 +87,17 @@ public class LoginDataBaseAdapter {
         }
     }
 
-    public void getAllData() {
+    public void getAllData()
+    {
 
 
         Cursor c = db.rawQuery("SELECT * FROM " + "LOGIN", null);
         String str = null;
         int i = 0;
-        if (c.moveToFirst()) {
-            do {
+        if (c.moveToFirst())
+        {
+            do
+            {
                 str = c.getString(c.getColumnIndex("USERNAME"));
                 i++;
                 Log.e(i + "", str);

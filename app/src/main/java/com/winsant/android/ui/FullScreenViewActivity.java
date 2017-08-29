@@ -46,9 +46,11 @@ public class FullScreenViewActivity extends AppCompatActivity {
 
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });

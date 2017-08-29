@@ -110,30 +110,38 @@ public class CirclePageIndicator extends View implements PageIndicator {
         invalidate();
     }
 
-    public boolean isCentered() {
+    public boolean isCentered()
+    {
         return mCentered;
     }
 
-    public void setPageColor(int pageColor) {
+    public void setPageColor(int pageColor)
+    {
         mPaintPageFill.setColor(pageColor);
         invalidate();
     }
 
-    public int getPageColor() {
+    public int getPageColor()
+    {
         return mPaintPageFill.getColor();
+
     }
 
-    public void setFillColor(int fillColor) {
+    public void setFillColor(int fillColor)
+    {
         mPaintFill.setColor(fillColor);
         invalidate();
     }
 
-    public int getFillColor() {
+    public int getFillColor()
+    {
         return mPaintFill.getColor();
     }
 
-    public void setOrientation(int orientation) {
-        switch (orientation) {
+    public void setOrientation(int orientation)
+    {
+        switch (orientation)
+        {
             case HORIZONTAL:
             case VERTICAL:
                 mOrientation = orientation;
@@ -145,43 +153,52 @@ public class CirclePageIndicator extends View implements PageIndicator {
         }
     }
 
-    public int getOrientation() {
+    public int getOrientation()
+    {
         return mOrientation;
     }
 
-    public void setStrokeColor(int strokeColor) {
+    public void setStrokeColor(int strokeColor)
+    {
         mPaintStroke.setColor(strokeColor);
         invalidate();
     }
 
-    public int getStrokeColor() {
+    public int getStrokeColor()
+    {
         return mPaintStroke.getColor();
     }
 
-    public void setStrokeWidth(float strokeWidth) {
+    public void setStrokeWidth(float strokeWidth)
+    {
         mPaintStroke.setStrokeWidth(strokeWidth);
         invalidate();
     }
 
-    public float getStrokeWidth() {
+    public float getStrokeWidth()
+    {
         return mPaintStroke.getStrokeWidth();
     }
 
-    public void setRadius(float radius) {
+    public void setRadius(float radius)
+    {
         mRadius = radius;
         invalidate();
     }
 
-    public float getRadius() {
+    public float getRadius()
+    {
         return mRadius;
     }
 
-    public void setSnap(boolean snap) {
+    public void setSnap(boolean snap)
+    {
         mSnap = snap;
         invalidate();
     }
 
-    public boolean isSnap() {
+    public boolean isSnap()
+    {
         return mSnap;
     }
 

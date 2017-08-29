@@ -113,7 +113,8 @@ public class CircleView extends View {
         postInvalidate();
     }
 
-    private void updateCircleColor() {
+    private void updateCircleColor()
+    {
         float colorProgress = (float) CommonDataUtility.clamp(outerCircleRadiusProgress, 0.5, 1);
         colorProgress = (float) CommonDataUtility.mapValueFromRangeToRange(colorProgress, 0.5f, 1f, 0f, 1f);
         this.circlePaint.setColor((Integer) argbEvaluator.evaluate(colorProgress, START_COLOR, END_COLOR));

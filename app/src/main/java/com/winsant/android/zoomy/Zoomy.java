@@ -72,7 +72,8 @@ public class Zoomy {
             return this;
         }
 
-        public void register() {
+        public void register()
+        {
             checkNotDisposed();
             if (mConfig == null) mConfig = mDefaultConfig;
             if (mActivity == null) throw new IllegalArgumentException("Activity must not be null");

@@ -37,12 +37,14 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     private Activity activity;
     private ArrayList<HomeHeaderModel> homeHeaderModels;
 
-    public HomePageAdapter(Activity activity, ArrayList<HomeHeaderModel> homeHeaderModels) {
+    public HomePageAdapter(Activity activity, ArrayList<HomeHeaderModel> homeHeaderModels)
+    {
         this.activity = activity;
         this.homeHeaderModels = homeHeaderModels;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         ImageView festival_banner, main_banner, sub_banner_1, sub_banner_2;
         CapitalizedTextView main_title;
@@ -67,13 +69,16 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             main_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
             viewAll.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            } else if (activity.getResources().getBoolean(R.bool.isTablet))
+            {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            } else {
+            } else
+                {
                 main_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 viewAll.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
             }
@@ -81,7 +86,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position)
+    {
 
         int viewType = 0;
         if (position == 0) viewType = 0;
@@ -103,15 +109,20 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         final HomeHeaderModel homeHeaderModel = homeHeaderModels.get(position);
 
-        if (homeHeaderModel.getIs_festival().equals("1") && position == 0) {
+        if (homeHeaderModel.getIs_festival().equals("1") && position == 0)
+        {
             holder.festival_banner.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else
+            {
             holder.festival_banner.setVisibility(View.GONE);
         }
 
-        holder.festival_banner.setOnClickListener(new View.OnClickListener() {
+        holder.festival_banner.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 if (!homeHeaderModel.getFestival_banner_url().equals(""))
                     showWebView(homeHeaderModel.getFestival_banner_url());
             }
@@ -152,11 +163,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             }
         });
 
-        holder.sub_banner_1.setOnClickListener(new View.OnClickListener() {
+        holder.sub_banner_1.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 
-                if (!homeHeaderModels.get((int) v.getTag()).getBanner1_url().equals("")) {
+                if (!homeHeaderModels.get((int) v.getTag()).getBanner1_url().equals(""))
+                {
                     Intent intent = new Intent(activity, SpecificCategoryListActivity.class);
                     intent.putExtra("url", homeHeaderModels.get((int) v.getTag()).getBanner1_url());
                     intent.putExtra("name", "");
@@ -167,11 +180,14 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             }
         });
 
-        holder.sub_banner_2.setOnClickListener(new View.OnClickListener() {
+        holder.sub_banner_2.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
-                if (!homeHeaderModels.get((int) v.getTag()).getBanner2_url().equals("")) {
+                if (!homeHeaderModels.get((int) v.getTag()).getBanner2_url().equals(""))
+                {
                     Intent intent = new Intent(activity, SpecificCategoryListActivity.class);
                     intent.putExtra("url", homeHeaderModels.get((int) v.getTag()).getBanner2_url());
                     intent.putExtra("name", "");
@@ -184,9 +200,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         holder.main_title.setText(homeHeaderModel.getName().toLowerCase(Locale.getDefault()));
         holder.viewAll.setTag(position);
-        holder.viewAll.setOnClickListener(new View.OnClickListener() {
+        holder.viewAll.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 // TODO : Home Page View All Product Display Activity
                 Intent intent = new Intent(activity, ProductViewAllActivity.class);
@@ -198,7 +216,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
             }
         });
 
-        if (position % 3 == 0) {
+        if (position % 3 == 0)
+        {
 
             holder.home_page_data_list.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
 
@@ -224,11 +243,15 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
         } else {
 
-            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 4));
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            } else if (activity.getResources().getBoolean(R.bool.isTablet))
+            {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 3));
-            } else {
+            }
+            else
+                {
                 holder.home_page_data_list.setLayoutManager(new GridLayoutManager(activity, 2));
             }
 
@@ -285,8 +308,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         new FinestWebView.Builder(activity).theme(R.style.FinestWebViewTheme)
                 .titleDefault("Winsant")
                 .showUrl(false)
-                .statusBarColorRes(R.color.bluePrimaryDark)
-                .toolbarColorRes(R.color.bluePrimary)
+                .statusBarColorRes(R.color.colorPrimaryDark)
+                .toolbarColorRes(R.color.colorPrimary)
                 .titleColorRes(R.color.finestWhite)
                 .urlColorRes(R.color.bluePrimaryLight)
                 .iconDefaultColorRes(R.color.finestWhite)
@@ -295,7 +318,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
                 .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                 .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                 .showSwipeRefreshLayout(true)
-                .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                .swipeRefreshColorRes(R.color.colorPrimaryDark)
                 .menuSelector(R.drawable.selector_light_theme)
                 .menuTextGravity(Gravity.CENTER)
                 .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)

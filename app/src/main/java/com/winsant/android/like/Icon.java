@@ -7,7 +7,8 @@ package com.winsant.android.like;
 
 import android.support.annotation.DrawableRes;
 
-public class Icon {
+public class Icon
+{
     private int onIconResourceId;
     private int offIconResourceId;
     private IconType iconType;

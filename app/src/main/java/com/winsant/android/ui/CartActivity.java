@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -63,13 +63,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout rl_cart;
     // private RelativeLayout rl_no_data;
     // private TextView emptyData;
-    private TextView txtPinCode, txtTotalPrice;
+    private TextView txtTotalPrice, txtPayablePrice, txtShippingPrice;
+    // txtPinCode
     private ArrayList<CartModel> cartProductArrayList;
     private CartAdapter cartAdapter;
     private TableRow tableRow;
+    private LinearLayout tableRow1;
     private ImageView imgError;
 
-    private int TotalPrice;
+    private int TotalPrice, PriceAmount, ShippingPrice;
     private RecyclerView CartProductList;
     private KProgressHUD progressHUD;
     private String strPinCode;
@@ -117,32 +119,37 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.ll_top).setVisibility(View.GONE);
 
         tableRow = (TableRow) findViewById(R.id.tableRow);
+        tableRow1 = (LinearLayout) findViewById(R.id.tableRow1);
         imgError = (ImageView) findViewById(R.id.imgError);
 
         progress_wheel = (ProgressWheel) findViewById(R.id.progress_wheel);
         rl_cart = (RelativeLayout) findViewById(R.id.rl_cart);
-        txtPinCode = (TextView) findViewById(R.id.txtPinCode);
+//        txtPinCode = (TextView) findViewById(R.id.txtPinCode);
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
+        txtPayablePrice = (TextView) findViewById(R.id.txtPayablePrice);
+        txtShippingPrice = (TextView) findViewById(R.id.txtShippingPrice);
 
         txtTotalPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
+        txtPayablePrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
+        txtShippingPrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
 
         Button btnChange = (Button) findViewById(R.id.btnChange);
         Button btnContinue = (Button) findViewById(R.id.btnContinue);
         btnContinue.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
         if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
-            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+//            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
         } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
-            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-        } else {
-            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+//            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else {
+//            txtPinCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnContinue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         }
 
         CartProductList = (RecyclerView) findViewById(R.id.CartProductList);
@@ -151,7 +158,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         btnChange.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
 
-        txtPinCode.setText("Pincode 000000");
+//        txtPinCode.setText("Pincode 000000");
         imgError.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,7 +226,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 
                     } else if (cartProductArrayList.size() > 0) {
-                        createJson();
+//                        createJson();
+                        intent = new Intent(activity, AllAddressActivity.class);
+                        intent.putExtra("from", "cart");
+                        intent.putExtra("total", String.valueOf(TotalPrice));
+                        intent.putExtra("productPrice", String.valueOf(PriceAmount));
+                        intent.putExtra("shippingPrice", String.valueOf(ShippingPrice));
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
 
                 } else {
@@ -248,7 +262,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         if (!MyApplication.getInstance().getPreferenceUtility().getString("pincode").equals("")) {
             strPinCode = MyApplication.getInstance().getPreferenceUtility().getString("pincode");
-            txtPinCode.setText((Html.fromHtml("Deliver to " + "<font color='#1B347E'> <b>" + strPinCode + "</b></font>")));
+//            txtPinCode.setText((Html.fromHtml("Deliver to " + "<font color='#0787EA'> <b>" + strPinCode + "</b></font>")));
         }
 
         if (CommonDataUtility.checkConnection(activity)) {
@@ -282,8 +296,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        System.out.println(StaticDataUtility.APP_TAG + " getCartProductData response --> " + response);
-
                         try {
 
                             System.out.println(StaticDataUtility.APP_TAG + " getCartProductData response --> " + response.toString());
@@ -301,17 +313,19 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
                                         JSONObject dataObject = data.getJSONObject(i);
 
-                                        cartProductArrayList.add(new CartModel(dataObject.optString("product_id"), dataObject.optString("product_name"),
-                                                dataObject.optString("product_link"), dataObject.optString("price"), dataObject.optString("discount_price"),
-                                                dataObject.optString("discount_per"), dataObject.optString("product_image"), dataObject.optString("remove_link"),
-                                                dataObject.optString("qty"), dataObject.optString("availability"), dataObject.optString("color_name"),
-                                                dataObject.optString("size_name"), dataObject.optString("product_color"), dataObject.optString("product_size")));
+                                        cartProductArrayList.add(new CartModel(dataObject.optString("cart_id"), dataObject.optString("product_id"),
+                                                dataObject.optString("product_name"), dataObject.optString("product_link"), dataObject.optString("price"),
+                                                dataObject.optString("discount_price"), dataObject.optString("discount_per"), dataObject.optString("product_image"),
+                                                dataObject.optString("remove_link"), dataObject.optString("qty"), dataObject.optString("availability"),
+                                                dataObject.optString("color_name"), dataObject.optString("size_name"), dataObject.optString("product_color"),
+                                                dataObject.optString("product_size"), dataObject.optString("shipping_amount")));
 
-                                        if (dataObject.optString("discount_per").equals("100")) {
-                                            TotalPrice += (int) Double.parseDouble(dataObject.optString("price"));
+                                        if (dataObject.optString("discount_per").equals("0")) {
+                                            PriceAmount += (int) Double.parseDouble(dataObject.optString("price"));
                                         } else {
-                                            TotalPrice += (int) Double.parseDouble(dataObject.optString("discount_price"));
+                                            PriceAmount += (int) Double.parseDouble(dataObject.optString("discount_price"));
                                         }
+                                        ShippingPrice += (int) Double.parseDouble(dataObject.optString("shipping_amount"));
                                     }
                                 }
 
@@ -323,7 +337,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                 mToolbar_title.setText("My Cart (" + cartProductArrayList.size() + ")");
 
                                 Toast.makeText(activity, "Total " + cartProductArrayList.size() + " Products", Toast.LENGTH_SHORT).show();
-                                txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
+
+                                TotalPrice = PriceAmount + ShippingPrice;
+
+                                txtPayablePrice.setText("Price         : " + activity.getResources().getString(R.string.Rs) + " " + PriceAmount);
+                                txtShippingPrice.setText("Shipping      : " + activity.getResources().getString(R.string.Rs) + " " + ShippingPrice);
+                                txtTotalPrice.setText("Payable Amount : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
 
                                 progress_wheel.setVisibility(View.GONE);
                                 CartProductList.setVisibility(View.VISIBLE);
@@ -376,6 +395,91 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    private void getUpdatedCartProductData(String cartId, final int qty, final int position) {
+
+        progressHUD = KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false).show();
+
+        JSONObject obj = new JSONObject();
+        try {
+
+            obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
+            obj.put("cart_id", cartId);
+            obj.put("qty", String.valueOf(qty));
+            System.out.println(StaticDataUtility.APP_TAG + " getUpdatedCartProductData param --> " + obj.toString());
+
+        } catch (Exception e) {
+            System.out.println(StaticDataUtility.APP_TAG + " getUpdatedCartProductData error --> " + e.toString());
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, StaticDataUtility.SERVER_URL + StaticDataUtility.CART_UPDATE, obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            System.out.println(StaticDataUtility.APP_TAG + " getUpdatedCartProductData response --> " + response.toString());
+
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            final String message = jsonObject.optString("message");
+                            final String success = jsonObject.optString("success");
+
+                            if (success.equals("1")) {
+
+                                JSONArray data = jsonObject.optJSONArray("data");
+
+                                if (data.length() > 0) {
+
+                                    JSONObject dataObject = data.getJSONObject(0);
+
+                                    cartProductArrayList.set(position, new CartModel(dataObject.optString("cart_id"), dataObject.optString("product_id"),
+                                            dataObject.optString("product_name"), dataObject.optString("product_link"), dataObject.optString("price"),
+                                            dataObject.optString("discount_price"), dataObject.optString("discount_per"), dataObject.optString("product_image"),
+                                            dataObject.optString("remove_link"), dataObject.optString("qty"), dataObject.optString("availability"),
+                                            dataObject.optString("color_name"), dataObject.optString("size_name"), dataObject.optString("product_color"),
+                                            dataObject.optString("product_size"), dataObject.optString("shipping_amount")));
+                                }
+
+                                progressHUD.dismiss();
+
+                                // TODO : Set Data
+                                cartAdapter.notifyItemChanged(position);
+                                setTotal(position);
+
+                            } else {
+                                progressHUD.dismiss();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            progressHUD.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressHUD.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Adding request to request queue
+        Volley.newRequestQueue(activity).add(jsonObjReq);
+    }
+
     private void setData() {
 
         if (cartProductArrayList.size() > 0) {
@@ -393,6 +497,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
             CartProductList.setAdapter(cartAdapter);
             tableRow.setVisibility(View.VISIBLE);
+            tableRow1.setVisibility(View.VISIBLE);
         }
     }
 
@@ -580,6 +685,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void EmptyCart() {
 
         tableRow.setVisibility(View.GONE);
+        tableRow1.setVisibility(View.GONE);
         imgError.setVisibility(View.VISIBLE);
         Glide.with(activity).load(R.drawable.no_empty_cart).into(imgError);
     }
@@ -638,7 +744,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     MyApplication.getInstance().getPreferenceUtility().setString("pincode", edtPinCode.getText().toString());
                     strPinCode = MyApplication.getInstance().getPreferenceUtility().getString("pincode");
-                    txtPinCode.setText("Deliver to " + strPinCode);
+//                    txtPinCode.setText("Deliver to " + strPinCode);
                 }
 
                 dialog.dismiss();
@@ -711,18 +817,16 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     TotalPrice = 0;
                     int qty = (int) Double.parseDouble(edtPinCode.getText().toString());
 
-                    setTotal(qty, position);
+//                    CartModel cartModel = cartProductArrayList.get(position);
 
-                    CartModel cartModel = cartProductArrayList.get(position);
+//                    cartProductArrayList.set(position, new CartModel(cartModel.getCart_id(), cartModel.getProduct_id(), cartModel.getName(), cartModel.getProduct_url(),
+//                            cartModel.getPrice(), cartModel.getDiscount_price(), cartModel.getDiscount_per(), cartModel.getProduct_image(), cartModel.getRemove_url(),
+//                            String.valueOf(qty), cartModel.getAvailability(), cartModel.getColor_name(), cartModel.getSize_name(), cartModel.getProduct_color(),
+//                            cartModel.getProduct_size(), cartModel.getShipping_amount()));
+//
+//                    cartAdapter.notifyItemChanged(position);
 
-                    cartProductArrayList.set(position, new CartModel(cartModel.getProduct_id(), cartModel.getName(), cartModel.getProduct_url(),
-                            cartModel.getPrice(), cartModel.getDiscount_price(), cartModel.getDiscount_per(), cartModel.getProduct_image(), cartModel.getRemove_url(),
-                            String.valueOf(qty), cartModel.getAvailability(), cartModel.getColor_name(), cartModel.getSize_name(), cartModel.getProduct_color(),
-                            cartModel.getProduct_size()));
-
-                    cartAdapter.notifyItemChanged(position);
-
-
+                    getUpdatedCartProductData(cartProductArrayList.get(position).getCart_id(), qty, position);
                 }
             }
         });
@@ -739,51 +843,60 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private void TotalAfterRemove() {
 
+        PriceAmount = 0;
         TotalPrice = 0;
-        int Price, DisPrice;
+        ShippingPrice = 0;
 
         for (int i = 0; i < cartProductArrayList.size(); i++) {
             CartModel cartModel = cartProductArrayList.get(i);
 
             if (Double.parseDouble(cartModel.getDiscount_per()) == 100) {
-                Price = (int) Double.parseDouble(cartModel.getPrice()) * Integer.parseInt(cartModel.getQty());
-                TotalPrice += Price;
+                PriceAmount += (int) Double.parseDouble(cartModel.getPrice());
             } else {
-                DisPrice = (int) Double.parseDouble(cartModel.getDiscount_price()) * Integer.parseInt(cartModel.getQty());
-                TotalPrice += DisPrice;
+                PriceAmount += (int) Double.parseDouble(cartModel.getDiscount_price());
             }
+
+            ShippingPrice += (int) Double.parseDouble(cartModel.getShipping_amount());
         }
 
-        txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
+        TotalPrice = PriceAmount + ShippingPrice;
+
+        txtPayablePrice.setText("Price         : " + activity.getResources().getString(R.string.Rs) + " " + PriceAmount);
+        txtShippingPrice.setText("Shipping      : " + activity.getResources().getString(R.string.Rs) + " " + ShippingPrice);
+        txtTotalPrice.setText("Payable Amount : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
     }
 
-    private void setTotal(int qty, int position) {
+    private void setTotal(int position) {
 
-        int Price, DisPrice;
+        PriceAmount = 0;
+        TotalPrice = 0;
+        ShippingPrice = 0;
 
         for (int i = 0; i < cartProductArrayList.size(); i++) {
             CartModel cartModel = cartProductArrayList.get(i);
 
             if (i == position) {
                 if (Double.parseDouble(cartModel.getDiscount_per()) == 100) {
-                    Price = (int) Double.parseDouble(cartModel.getPrice()) * qty;
-                    TotalPrice += Price;
+                    PriceAmount += (int) Double.parseDouble(cartModel.getPrice());
                 } else {
-                    DisPrice = (int) Double.parseDouble(cartModel.getDiscount_price()) * qty;
-                    TotalPrice += DisPrice;
+                    PriceAmount += (int) Double.parseDouble(cartModel.getDiscount_price());
                 }
             } else {
                 if (Double.parseDouble(cartModel.getDiscount_per()) == 100) {
-                    Price = (int) Double.parseDouble(cartModel.getPrice()) * Integer.parseInt(cartModel.getQty());
-                    TotalPrice += Price;
+                    PriceAmount += (int) Double.parseDouble(cartModel.getPrice());
                 } else {
-                    DisPrice = (int) Double.parseDouble(cartModel.getDiscount_price()) * Integer.parseInt(cartModel.getQty());
-                    TotalPrice += DisPrice;
+                    PriceAmount += (int) Double.parseDouble(cartModel.getDiscount_price());
                 }
             }
+
+            ShippingPrice += (int) Double.parseDouble(cartModel.getShipping_amount());
         }
 
-        txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
+        TotalPrice = PriceAmount + ShippingPrice;
+
+        txtPayablePrice.setText("Price         : " + activity.getResources().getString(R.string.Rs) + " " + PriceAmount);
+        txtShippingPrice.setText("Shipping      : " + activity.getResources().getString(R.string.Rs) + " " + ShippingPrice);
+        txtTotalPrice.setText("Payable Amount : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
     }
 
     JSONArray jsonArray = new JSONArray();

@@ -21,18 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imgLogo"
-                android:layout_width="match_parent"
-                android:layout_height="135dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/winsant_logo" />
-
             <TableRow
                 android:id="@+id/tblCoupon"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/imgLogo"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:padding="2dp">
 
@@ -66,7 +59,7 @@
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnApply"
                     android:layout_width="120dp"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
@@ -87,32 +80,139 @@
                 android:background="@drawable/cardview"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtSubTotalPrice"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|start"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:visibility="gone" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtDiscountPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|start"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/lableSubTotalPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="Price : "
+                        android:textColor="@color/colorBlack" />
 
-                <TextView
-                    android:id="@+id/txtTotalPrice"
+                    <TextView
+                        android:id="@+id/txtSubTotalPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|end"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark" />
+                </TableRow>
+
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|start"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark" />
-                <!-- Sub Total : 73000 \nDiscount Amount : 3000\nTotal : 70000 -->
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lableShippingPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="Shipping Amount : "
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/txtShippingPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|end"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lableCod"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="COD Charge : "
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/txtCodPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|end"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lableDiscountPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="Discount Amount : "
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/txtDiscountPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|end"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/rose" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lableTotalPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="Total :"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTotalPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|end"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark" />
+                </TableRow>
+
             </LinearLayout>
 
             <android.support.v7.widget.CardView
@@ -173,7 +273,7 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="36dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorAccent"
         android:text="@string/confirm"

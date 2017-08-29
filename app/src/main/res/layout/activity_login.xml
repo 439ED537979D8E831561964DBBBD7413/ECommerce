@@ -115,32 +115,32 @@
                     android:textSize="14sp" />
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardCPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="gone"
-                app:cardElevation="2dp">
+            <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/cardCPassword"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:visibility="gone"-->
+            <!--app:cardElevation="2dp">-->
 
-                <EditText
-                    android:id="@+id/edtCPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:layout_margin="5dp"
-                    android:background="@null"
-                    android:hint="@string/c_password"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
-                    android:lines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/oil"
-                    android:textColorHint="@color/aluminum"
-                    android:textSize="14sp" />
-            </android.support.v7.widget.CardView>
+            <!--<EditText-->
+            <!--android:id="@+id/edtCPassword"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@null"-->
+            <!--android:hint="@string/c_password"-->
+            <!--android:imeOptions="actionDone"-->
+            <!--android:inputType="textPassword"-->
+            <!--android:lines="1"-->
+            <!--android:padding="8dp"-->
+            <!--android:textColor="@color/oil"-->
+            <!--android:textColorHint="@color/aluminum"-->
+            <!--android:textSize="14sp" />-->
+            <!--</android.support.v7.widget.CardView>-->
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnLogin"
@@ -218,7 +218,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_google"
                     android:gravity="center"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

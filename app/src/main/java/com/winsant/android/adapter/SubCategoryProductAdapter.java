@@ -33,7 +33,8 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
     private onClickListener clickListener;
     private Intent intent;
 
-    public SubCategoryProductAdapter(Activity activity, ArrayList<CategoryModel> categoryModelList, onClickListener clickListener) {
+    public SubCategoryProductAdapter(Activity activity, ArrayList<CategoryModel> categoryModelList, onClickListener clickListener)
+    {
         this.activity = activity;
         this.categoryModelList = categoryModelList;
         this.clickListener = clickListener;
@@ -43,13 +44,15 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
         void onFavClick(int position, String product_id, String fav_link, String isFavorite);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         ImageView main_banner;
         TextView main_title, viewAll;
         RecyclerView home_page_data_list;
 
-        ViewHolder(final View itemView) {
+        ViewHolder(final View itemView)
+        {
             super(itemView);
 
             main_banner = (ImageView) itemView.findViewById(R.id.main_banner);

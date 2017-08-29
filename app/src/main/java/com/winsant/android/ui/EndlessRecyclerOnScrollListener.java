@@ -9,7 +9,8 @@ import android.support.v7.widget.RecyclerView;
  * Created by Developer on 3/7/2017.
  */
 
-public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
+public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener
+{
     public static String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
 
     private int previousTotal = 0; // The total number of items in the dataset after the last load
@@ -22,7 +23,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     private GridLayoutManager gridLayoutManager;
     private LinearLayoutManager linearLayoutManager;
 
-    public EndlessRecyclerOnScrollListener(Activity activity, String type, String totalProduct) {
+    public EndlessRecyclerOnScrollListener(Activity activity, String type, String totalProduct)
+    {
         this.type = type;
         this.totalProduct = totalProduct;
         gridLayoutManager = new GridLayoutManager(activity, 2);
@@ -35,7 +37,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
         visibleItemCount = recyclerView.getChildCount();
 
-        if (type.equals("g")) {
+        if (type.equals("g"))
+        {
             totalItemCount = gridLayoutManager.getItemCount();
             firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition();
         } else {

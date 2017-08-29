@@ -47,7 +47,7 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
     private RelativeLayout ll_address;
     private RecyclerView AddressList;
     private TextView emptyAddress;
-    private String TotalPrice, from;
+    private String TotalPrice, PriceAmount, ShippingPrice, from;
     private Button btnSetDefault;
     private TableRow tableRow;
     private ArrayList<AddressModel> addressModels;
@@ -96,6 +96,17 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
         } else {
             TotalPrice = "0.0";
             txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + TotalPrice);
+        }
+
+        if (getIntent().hasExtra("productPrice")) {
+            PriceAmount = getIntent().getStringExtra("productPrice");
+        } else {
+            PriceAmount = "0.0";
+        }
+        if (getIntent().hasExtra("shippingPrice")) {
+            ShippingPrice = getIntent().getStringExtra("shippingPrice");
+        } else {
+            ShippingPrice = "0.0";
         }
 
         from = getIntent().getStringExtra("from");
@@ -192,6 +203,8 @@ public class AllAddressActivity extends AppCompatActivity implements View.OnClic
 
                                 Intent intent = new Intent(activity, SelectPaymentActivity.class);
                                 intent.putExtra("total", String.valueOf(TotalPrice));
+                                intent.putExtra("productPrice", String.valueOf(PriceAmount));
+                                intent.putExtra("shippingPrice", String.valueOf(ShippingPrice));
                                 intent.putExtra("address_id", addressModels.get(i).getAddress_id());
                                 intent.putExtra("is_cod", addressModels.get(i).getIs_cod());
                                 startActivity(intent);

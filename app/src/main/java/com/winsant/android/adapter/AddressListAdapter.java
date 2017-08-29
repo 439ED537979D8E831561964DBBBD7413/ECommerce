@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.winsant.android.R;
 import com.winsant.android.model.AddressModel;
-import com.winsant.android.utils.CommonDataUtility;
 import com.winsant.android.utils.StaticDataUtility;
 
 import java.util.ArrayList;

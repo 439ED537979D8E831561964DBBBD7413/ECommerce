@@ -32,12 +32,14 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
         this.viewAllList = viewAllList;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         RecyclerView subCategoryList;
         TextView categoryName;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView)
+        {
             super(itemView);
 
             subCategoryList = (RecyclerView) itemView.findViewById(R.id.subCategoryList);
@@ -46,13 +48,18 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
             categoryName.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
                 categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 subCategoryList.setLayoutManager(new GridLayoutManager(activity, 4));
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            }
+            else if (activity.getResources().getBoolean(R.bool.isTablet))
+            {
                 categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 subCategoryList.setLayoutManager(new GridLayoutManager(activity, 4));
-            } else {
+            }
+            else
+                {
                 categoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 subCategoryList.setLayoutManager(new GridLayoutManager(activity, 3));
             }
@@ -60,27 +67,34 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
 
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position)
+    {
 
         CategoryModel allCategoryModel = AllCategoryList.get(position);
 
         viewHolder.categoryName.setText(allCategoryModel.getCategory_name());
         viewHolder.subCategoryList.setAdapter(new AllSubCategoryListAdapter(activity, allCategoryModel.getSubCategoryArrayList(),
-                viewAllList, new AllSubCategoryListAdapter.onClickListener() {
+                viewAllList, new AllSubCategoryListAdapter.onClickListener()
+        {
             @Override
-            public void onClick(String category_name, String category_url, String is_last) {
+            public void onClick(String category_name, String category_url, String is_last)
+            {
 
                 // TODO : Specific SubCategory with SubCategory Product Display Activity
-                if (is_last.equals("0")) {
+                if (is_last.equals("0"))
+                {
                     intent = new Intent(activity, SpecificCategoryListActivity.class);
-                } else {
+                }
+                else
+                    {
                     intent = new Intent(activity, ProductViewAllActivity.class);
                 }
 

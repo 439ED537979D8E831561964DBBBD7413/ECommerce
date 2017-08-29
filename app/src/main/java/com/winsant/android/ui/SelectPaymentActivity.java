@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -33,17 +34,21 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SelectPaymentActivity extends AppCompatActivity implements View.OnClickListener {
-
     private Activity activity;
     private KProgressHUD progressHUD;
     private TextView mToolbar_title, txtCouponCode;
-    private TextView txtSubTotalPrice, txtDiscountPrice, txtTotalPrice;
+    private TextView txtCodPrice;
+    private TextView txtDiscountPrice;
+    private TextView txtTotalPrice;
+    private final AtomicReference<TextView> lableTotalPrice = new AtomicReference<TextView>();
     private EditText edtCouponCode;
     private RelativeLayout rl_payment;
     private RadioButton rbCOD, rbPAYU;
-    private String TotalPrice, DiscountPrice = "0", is_cod, address_id, paymentId, coupon_id = "0";
+    private String SubTotalPrice = "0", ShippingPrice = "0", CodPrice = "0", TotalPrice, DiscountPrice = "0", is_cod, address_id, paymentId, coupon_id = "0",
+            couponCode = "", discountOptionType = "", couponCategoryId = "0";
     // private String SubTotalPrice, ShippingPrice;
     private Button btnApply;
     private int total = 0;
@@ -83,20 +88,37 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         txtCouponCode = (TextView) findViewById(R.id.txtCouponCode);
         txtCouponCode.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.BOLD);
 
-        txtSubTotalPrice = (TextView) findViewById(R.id.txtSubTotalPrice);
+        TextView txtSubTotalPrice = (TextView) findViewById(R.id.txtSubTotalPrice);
         txtSubTotalPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
+
+        TextView txtShippingPrice = (TextView) findViewById(R.id.txtShippingPrice);
+        txtShippingPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
+
+        txtCodPrice = (TextView) findViewById(R.id.txtCodPrice);
+        txtCodPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
 
         txtDiscountPrice = (TextView) findViewById(R.id.txtDiscountPrice);
         txtDiscountPrice.setTypeface(CommonDataUtility.setTypeFace(activity), Typeface.NORMAL);
 
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
         txtTotalPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
+        lableTotalPrice.set((TextView) findViewById(R.id.lableTotalPrice));
+        lableTotalPrice.get().setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
         is_cod = getIntent().getStringExtra("is_cod");
         address_id = getIntent().getStringExtra("address_id");
 
+        SubTotalPrice = getIntent().getStringExtra("productPrice");
+        txtSubTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + SubTotalPrice);
+
+        txtCodPrice.setText(activity.getResources().getString(R.string.Rs) + " " + CodPrice);
+        txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + DiscountPrice);
+
+        ShippingPrice = getIntent().getStringExtra("shippingPrice");
+        txtShippingPrice.setText(activity.getResources().getString(R.string.Rs) + " " + ShippingPrice);
+
         TotalPrice = getIntent().getStringExtra("total");
-        txtTotalPrice.setText("Total Price : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
+        txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
 
         rbCOD = (RadioButton) findViewById(R.id.rbCOD);
         rbPAYU = (RadioButton) findViewById(R.id.rbPAYU);
@@ -118,7 +140,7 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
@@ -131,7 +153,7 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
@@ -139,18 +161,42 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
         } else {
-            edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            edtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtCouponCode.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtSubTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            txtTotalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            rbCOD.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            rbPAYU.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
-            btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            btnApply.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            btnConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         }
+
+        rbCOD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    // Call service
+                    COD_Charges();
+                }
+            }
+        });
+
+        rbPAYU.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    // Call service
+                    CodPrice = "0";
+                    txtCodPrice.setText(activity.getResources().getString(R.string.Rs) + " " + CodPrice);
+                    setTotalPrice();
+                }
+            }
+        });
 
         if (is_cod.equals("1"))
             rbCOD.setVisibility(View.VISIBLE);
@@ -227,18 +273,6 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         String userEmail = MyApplication.getInstance().getPreferenceUtility().getEmail();
         String userMobile = MyApplication.getInstance().getPreferenceUtility().getMobileNumber();
 
-//        if (!MyApplication.getInstance().getPreferenceUtility().getEmail().equals("")) {
-//            userEmail = MyApplication.getInstance().getPreferenceUtility().getEmail();
-//        } else {
-//            userEmail = "test@gmail.com";
-//        }
-//
-//        if (!MyApplication.getInstance().getPreferenceUtility().getMobileNumber().equals("")) {
-//            userMobile = MyApplication.getInstance().getPreferenceUtility().getMobileNumber();
-//        } else {
-//            userMobile = "9876543210";
-//        }
-
         Intent intent = new Intent(activity, PayMentGateWay.class);
         intent.putExtra("name", MyApplication.getInstance().getPreferenceUtility().getFirstName());
         intent.putExtra("amount", DiscountPrice.equals("0") ? TotalPrice : String.valueOf(total));
@@ -281,6 +315,8 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
 
     private void RedirectToOrder() {
 
+        MyApplication.getInstance().getPreferenceUtility().setInt("total_cart", 0);
+
         Intent intent = new Intent(activity, OrderActivity.class);
         intent.putExtra("from", "order");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -303,8 +339,13 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
             obj.put("address_id", address_id);
             obj.put("discount_amount", DiscountPrice);
             obj.put("coupon_id", coupon_id);
+            obj.put("coupon_code", couponCode);
+            obj.put("discount_option_type", discountOptionType);
+            obj.put("coupon_category_id", couponCategoryId);
             obj.put("total_amount", TotalPrice);
             obj.put("payment_id", paymentId);
+            obj.put("shipping_total", ShippingPrice);
+            obj.put("cod_total", CodPrice);
 
             if (is_cod.equals("1"))
                 obj.put("payment_method", rbCOD.isChecked() ? "cod" : "payu");
@@ -382,6 +423,81 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    private void COD_Charges() {
+
+        progressHUD = KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false).show();
+
+        JSONObject obj = new JSONObject();
+        try {
+
+            obj.put("userid", MyApplication.getInstance().getPreferenceUtility().getUserId());
+
+            System.out.println(StaticDataUtility.APP_TAG + " COD_Charges param --> " + obj.toString());
+
+        } catch (Exception e) {
+            System.out.println(StaticDataUtility.APP_TAG + " COD_Charges error --> " + e.toString());
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                StaticDataUtility.SERVER_URL + StaticDataUtility.COD_CHARGE, obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        System.out.println(StaticDataUtility.APP_TAG + " COD_Charges response --> " + response);
+
+                        try {
+
+                            final JSONObject jsonObject = new JSONObject(response.toString());
+                            final String message = jsonObject.optString("message");
+                            final String success = jsonObject.optString("success");
+
+                            if (success.equals("1")) {
+
+                                progressHUD.dismiss();
+
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CodPrice = jsonObject.optString("cod_amount");
+                                        txtCodPrice.setText(activity.getResources().getString(R.string.Rs) + " " + CodPrice);
+                                        setTotalPrice();
+                                    }
+                                });
+
+                            } else {
+                                showError("Problem while placing your order. Try again later");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            showError("Problem while placing your order. Try again later");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showError("Problem while placing your order. Try again later");
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Adding request to request queue
+        Volley.newRequestQueue(activity).add(jsonObjReq);
+    }
+
     private void apply_coupon(String coupon_code) {
 
         progressHUD = KProgressHUD.create(activity)
@@ -421,16 +537,15 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
                                 progressHUD.dismiss();
                                 btnApply.setText(getString(R.string.remove));
 
+                                couponCategoryId = jsonObject.optJSONObject("data").optString("coupon_category_id");
+                                couponCode = jsonObject.optJSONObject("data").optString("coupon_code");
+                                discountOptionType = jsonObject.optJSONObject("data").optString("discount_option_type");
+
                                 DiscountPrice = jsonObject.optJSONObject("data").optString("coupon_discount_amount").replaceAll("\\.0*$", "");
                                 coupon_id = jsonObject.optJSONObject("data").optString("coupon_id");
 
-                                total = Integer.parseInt(TotalPrice) - Integer.parseInt(DiscountPrice);
-
-                                txtSubTotalPrice.setVisibility(View.VISIBLE);
-                                txtDiscountPrice.setVisibility(View.VISIBLE);
-                                txtSubTotalPrice.setText("Sub Total : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
-                                txtDiscountPrice.setText("Discount amount : " + activity.getResources().getString(R.string.Rs) + " " + DiscountPrice);
-                                txtTotalPrice.setText("Total : " + activity.getResources().getString(R.string.Rs) + " " + total);
+                                txtDiscountPrice.setText(activity.getResources().getString(R.string.Rs) + " " + DiscountPrice);
+                                setTotalPrice();
 
                                 edtCouponCode.setVisibility(View.GONE);
                                 txtCouponCode.setVisibility(View.VISIBLE);
@@ -477,19 +592,23 @@ public class SelectPaymentActivity extends AppCompatActivity implements View.OnC
         Volley.newRequestQueue(activity).add(jsonObjReq);
     }
 
+    private void setTotalPrice() {
+
+        total = Integer.parseInt(SubTotalPrice) + Integer.parseInt(DiscountPrice) + Integer.parseInt(CodPrice) + Integer.parseInt(ShippingPrice);
+        txtTotalPrice.setText(activity.getResources().getString(R.string.Rs) + " " + total);
+    }
+
     private void remove_coupon() {
 
         btnApply.setText(getString(R.string.apply));
-
-        txtSubTotalPrice.setVisibility(View.GONE);
-        txtDiscountPrice.setVisibility(View.GONE);
-        txtTotalPrice.setText("Total : " + activity.getResources().getString(R.string.Rs) + " " + TotalPrice);
 
         DiscountPrice = "0";
         coupon_id = "0";
         edtCouponCode.setVisibility(View.VISIBLE);
         txtCouponCode.setVisibility(View.GONE);
         edtCouponCode.setText("");
+
+        setTotalPrice();
     }
 }
 

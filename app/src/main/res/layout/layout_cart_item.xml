@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp"
+    android:layout_marginBottom="10dp"
     android:gravity="center"
     app:cardElevation="4dp">
 
@@ -44,7 +44,7 @@
                         android:layout_weight="1"
                         android:gravity="center|start|top"
                         android:padding="5dp"
-                        android:text="Color : SILVER WHITE RED"
+                        android:text=""
                         android:textColor="@color/black" />
 
                     <TextView
@@ -57,12 +57,21 @@
                         android:text=""
                         android:textColor="@color/black" />
                 </TableRow>
+
+                <TextView
+                    android:id="@+id/txtShippingCharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start|top"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/productImage"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name" />
 
@@ -70,7 +79,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -130,13 +139,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/rose" />
 
         <TextView
             android:id="@+id/txtRemove"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="36dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/remove"

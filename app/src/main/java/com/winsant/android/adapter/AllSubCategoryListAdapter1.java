@@ -18,7 +18,8 @@ import com.winsant.android.views.CircleImageView;
 
 import java.util.ArrayList;
 
-public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCategoryListAdapter1.ViewHolder> {
+public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCategoryListAdapter1.ViewHolder>
+{
 
     private Activity activity;
     private ArrayList<SubCategoryModel> subCategoryArrayList;
@@ -28,7 +29,8 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
     private AllSubCategoryListAdapter adapter;
 
     public AllSubCategoryListAdapter1(Activity activity, ArrayList<SubCategoryModel> subCategoryArrayList,
-                                      RecyclerView subCategoryList2, AllSubCategoryListAdapter adapter, onClickListener clickListener, String type) {
+                                      RecyclerView subCategoryList2, AllSubCategoryListAdapter adapter, onClickListener clickListener, String type)
+    {
         this.activity = activity;
         this.subCategoryArrayList = subCategoryArrayList;
         this.clickListener = clickListener;
@@ -41,16 +43,19 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
         void onClick(String category_name, String category_url, String is_last);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         CircleImageView subCategoryImage;
         ImageView SpecificSubCategoryImage, ViewMore, ViewLess;
         TextView subCategoryName;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView)
+        {
             super(itemView);
 
-            if (type.equals("circle")) {
+            if (type.equals("circle"))
+            {
                 subCategoryImage = (CircleImageView) itemView.findViewById(R.id.subCategoryImage);
             } else {
                 SpecificSubCategoryImage = (ImageView) itemView.findViewById(R.id.SpecificSubCategoryImage);
@@ -60,17 +65,23 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
             subCategoryName = (TextView) itemView.findViewById(R.id.subCategoryName);
             subCategoryName.setTypeface(CommonDataUtility.setTypeFace1(activity));
 
-            if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
                 subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+            } else if (activity.getResources().getBoolean(R.bool.isTablet))
+            {
                 subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            } else {
+            }
+            else
+                {
                 subCategoryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     if (clickListener != null)
                         clickListener.onClick(subCategoryArrayList.get(getAdapterPosition()).getCategory_name(),
                                 subCategoryArrayList.get(getAdapterPosition()).getCategory_url(), subCategoryArrayList.get(getAdapterPosition()).getIs_last());
@@ -80,10 +91,12 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
 
         View v;
-        if (type.equals("circle")) {
+        if (type.equals("circle"))
+        {
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sub_category_item, viewGroup, false);
         } else {
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.specific_sub_category_item, viewGroup, false);
@@ -92,15 +105,19 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position)
+    {
 
-        if (type.equals("square")) {
+        if (type.equals("square"))
+        {
 
-            if (position == subCategoryArrayList.size()) {
+            if (position == subCategoryArrayList.size())
+            {
                 viewHolder.ViewLess.setVisibility(View.VISIBLE);
                 viewHolder.subCategoryName.setText("View Less");
                 viewHolder.SpecificSubCategoryImage.setVisibility(View.GONE);
-            } else {
+            } else
+                {
 
                 SubCategoryModel subCategoryModel = subCategoryArrayList.get(position);
 
@@ -114,13 +131,16 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
             viewHolder.ViewMore.setVisibility(View.GONE);
 
             viewHolder.subCategoryName.setTag(position);
-            viewHolder.subCategoryName.setOnClickListener(new View.OnClickListener() {
+            viewHolder.subCategoryName.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
 
                     int pos = (int) v.getTag();
 
-                    if (pos == getItemCount() - 1) {
+                    if (pos == getItemCount() - 1)
+                    {
                         subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_out));
                         subCategoryList2.setVisibility(View.GONE);
                         adapter.notifyDataSetChanged();
@@ -129,15 +149,19 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
             });
 
             viewHolder.ViewLess.setTag(position);
-            viewHolder.ViewLess.setOnClickListener(new View.OnClickListener() {
+            viewHolder.ViewLess.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     subCategoryList2.setAnimation(AnimationUtils.loadAnimation(activity, R.anim.fade_out));
                     subCategoryList2.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
             });
-        } else {
+        }
+        else
+            {
 
             SubCategoryModel subCategoryModel = subCategoryArrayList.get(position);
 
@@ -147,7 +171,8 @@ public class AllSubCategoryListAdapter1 extends RecyclerView.Adapter<AllSubCateg
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return subCategoryArrayList.size() + 1;
     }
 }

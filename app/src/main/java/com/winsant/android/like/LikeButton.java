@@ -67,7 +67,8 @@ public class LikeButton extends FrameLayout implements View.OnClickListener {
         this(context, attrs, 0);
     }
 
-    public LikeButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LikeButton(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
@@ -80,7 +81,8 @@ public class LikeButton extends FrameLayout implements View.OnClickListener {
      * @param attrs
      * @param defStyle
      */
-    private void init(Context context, AttributeSet attrs, int defStyle) {
+    private void init(Context context, AttributeSet attrs, int defStyle)
+    {
         LayoutInflater.from(getContext()).inflate(R.layout.likeview, this, true);
         icon = (ImageView) findViewById(R.id.icon);
         dotsView = (DotsView) findViewById(R.id.dots);

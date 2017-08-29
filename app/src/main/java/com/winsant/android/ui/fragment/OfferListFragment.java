@@ -35,7 +35,8 @@ import java.util.ArrayList;
 /**
  * Fragment class for each nav menu item
  */
-public class OfferListFragment extends BaseFragment implements View.OnClickListener {
+public class OfferListFragment extends BaseFragment implements View.OnClickListener
+{
 
     private RecyclerView viewAllList;
     private ProgressWheel progress_wheel;
@@ -49,13 +50,15 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wishlist, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         netWorkCall = new VolleyNetWorkCall();
@@ -78,18 +81,23 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
 
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.emptyData:
 
                 if (!TYPE.equals(getResources().getString(R.string.no_wish_list_data)))
-                    if (CommonDataUtility.checkConnection(activity)) {
+                    if (CommonDataUtility.checkConnection(activity))
+                    {
                         getData();
                     } else if (TYPE.equals(getResources().getString(R.string.no_data))
-                            || TYPE.equals(getResources().getString(R.string.no_connection))) {
+                            || TYPE.equals(getResources().getString(R.string.no_connection)))
+                    {
                         getData();
-                    } else if (TYPE.equals(getResources().getString(R.string.no_internet))) {
+                    } else if (TYPE.equals(getResources().getString(R.string.no_internet)))
+                    {
                         startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                     }
 
@@ -98,21 +106,26 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MyApplication.getInstance().trackScreenView("Offer Fragment");
     }
 
-    private void getData() {
+    private void getData()
+    {
 
         viewAllList.setVisibility(View.GONE);
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             imgError.setVisibility(View.GONE);
             getOfferData();
 
-        } else {
+        }
+        else
+            {
 
             imgError.setVisibility(View.VISIBLE);
             TYPE = getString(R.string.no_internet);
@@ -120,18 +133,22 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
-    private void getOfferData() {
+    private void getOfferData()
+    {
 
         progress_wheel.setVisibility(View.VISIBLE);
         OfferList = new ArrayList<>();
 
-        netWorkCall.makeServiceCall(activity, StaticDataUtility.SERVER_URL + StaticDataUtility.OFFER, new VolleyNetWorkCall.OnResponse() {
+        netWorkCall.makeServiceCall(activity, StaticDataUtility.SERVER_URL + StaticDataUtility.OFFER, new VolleyNetWorkCall.OnResponse()
+        {
             @Override
-            public void onSuccessCall(JSONObject response) {
+            public void onSuccessCall(JSONObject response)
+            {
 
                 System.out.println(StaticDataUtility.APP_TAG + " getOfferData response --> " + response);
 
-                try {
+                try
+                {
 
                     JSONObject jsonObject = new JSONObject(response.toString());
                     final String message = jsonObject.optString("message");
@@ -193,24 +210,28 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
         });
     }
 
-    private void setData() {
+    private void setData()
+    {
 
-        OffersAdapter adapter = new OffersAdapter(activity, OfferList, new OffersAdapter.onClickListener() {
+        OffersAdapter adapter = new OffersAdapter(activity, OfferList, new OffersAdapter.onClickListener()
+        {
             @Override
-            public void onClick(int position, String offer_url) {
+            public void onClick(int position, String offer_url)
+            {
 //                showWebView(offer_url);
             }
         });
         viewAllList.setAdapter(adapter);
     }
 
-    private void showWebView(String url) {
+    private void showWebView(String url)
+    {
 
         new FinestWebView.Builder(activity).theme(R.style.FinestWebViewTheme)
                 .titleDefault("Winsant")
                 .showUrl(false)
-                .statusBarColorRes(R.color.bluePrimaryDark)
-                .toolbarColorRes(R.color.bluePrimary)
+                .statusBarColorRes(R.color.colorPrimaryDark)
+                .toolbarColorRes(R.color.colorPrimary)
                 .titleColorRes(R.color.finestWhite)
                 .urlColorRes(R.color.bluePrimaryLight)
                 .iconDefaultColorRes(R.color.finestWhite)
@@ -219,7 +240,7 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
                 .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                 .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                 .showSwipeRefreshLayout(true)
-                .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                .swipeRefreshColorRes(R.color.colorPrimaryDark)
                 .menuSelector(R.drawable.selector_light_theme)
                 .menuTextGravity(Gravity.CENTER)
                 .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
@@ -230,7 +251,8 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
     }
 
 
-    private void noDataError() {
+    private void noDataError()
+    {
 
         imgError.setVisibility(View.VISIBLE);
         progress_wheel.setVisibility(View.GONE);
@@ -239,17 +261,20 @@ public class OfferListFragment extends BaseFragment implements View.OnClickListe
         Glide.with(activity).load(R.drawable.ico_no_data_svg).into(imgError);
     }
 
-    private void noOfferError() {
+    private void noOfferError()
+    {
         progress_wheel.setVisibility(View.GONE);
         viewAllList.setVisibility(View.GONE);
         imgError.setVisibility(View.VISIBLE);
 //        imgError.setImageResource(R.drawable.ico_offer_svg);
         Glide.with(activity).load(R.drawable.no_offer).into(imgError);
         TYPE = getString(R.string.no_offer_hint);
+
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         Glide.clear(imgError);
     }

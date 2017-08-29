@@ -18,7 +18,8 @@ import android.widget.ImageView;
  * Zoomy.
  */
 
-class ZoomableTouchListener implements View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
+class ZoomableTouchListener implements View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener
+{
 
     private static final int STATE_IDLE = 0;
     private static final int STATE_POINTER_DOWN = 1;

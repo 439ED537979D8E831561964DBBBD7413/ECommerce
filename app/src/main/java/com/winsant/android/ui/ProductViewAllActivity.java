@@ -45,7 +45,8 @@ import java.util.Map;
  * TODO : Home Page/SubCategory View All Product Display Activity
  */
 
-public class ProductViewAllActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductViewAllActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private Activity activity;
     private TextView mToolbar_title;

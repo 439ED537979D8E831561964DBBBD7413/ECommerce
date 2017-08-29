@@ -77,6 +77,43 @@
         android:layout_below="@+id/main_toolbar"
         android:layout_marginTop="10dp" />
 
+    <LinearLayout
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableRow"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/txtPayablePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center|start"
+            android:text=""
+            android:textColor="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/txtShippingPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center|start"
+            android:text=""
+            android:textColor="@color/black" />
+    </LinearLayout>
+
     <TableRow
         android:id="@+id/tableRow"
         android:layout_width="match_parent"

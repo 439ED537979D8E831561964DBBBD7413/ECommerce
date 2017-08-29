@@ -45,7 +45,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener, BaseSliderView.OnSliderClickListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, BaseSliderView.OnSliderClickListener
+{
     //implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener
 
     private RecyclerView home_page_list;
@@ -70,13 +71,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView txtCategory3;
     private MenuItem cart;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 //        setHasOptionsMenu(true);
 //        activity.invalidateOptionsMenu();
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         netWorkCall = new VolleyNetWorkCall();
@@ -86,12 +89,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         return rootView;
     }
 
-    private void BindView() {
+    private void BindView()
+    {
 
         EditText edtSearch = (EditText) rootView.findViewById(R.id.edtSearch);
-        edtSearch.setOnClickListener(new View.OnClickListener() {
+        edtSearch.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 startActivity(new Intent(activity, ProductSearchActivity.class));
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
@@ -110,16 +116,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         getData();
 
-        imgError.setOnClickListener(new View.OnClickListener() {
+        imgError.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
-                if (CommonDataUtility.checkConnection(activity)) {
+                if (CommonDataUtility.checkConnection(activity))
+                {
                     getData();
                 } else if (TYPE.equals(getResources().getString(R.string.no_data))
-                        || TYPE.equals(getResources().getString(R.string.no_connection))) {
+                        || TYPE.equals(getResources().getString(R.string.no_connection)))
+                {
                     getData();
-                } else if (TYPE.equals(getResources().getString(R.string.no_internet))) {
+                } else if (TYPE.equals(getResources().getString(R.string.no_internet)))
+                {
                     startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 }
             }
@@ -158,21 +169,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         txtCategory3.setTypeface(CommonDataUtility.setTypeFace(activity));
         txtCategory4.setTypeface(CommonDataUtility.setTypeFace(activity));
 
-        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+        {
 
             txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
-        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+        }
+        else if (activity.getResources().getBoolean(R.bool.isTablet))
+        {
 
             txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtCategory3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtCategory4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-        } else {
+        }
+        else
+            {
 
             txtCategory1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             txtCategory2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -183,16 +199,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    private void getData() {
+    private void getData()
+    {
 
         ll_home.setVisibility(View.GONE);
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             imgError.setVisibility(View.GONE);
             getHomePageData();
 
-        } else {
+        }
+        else
+            {
 
             imgError.setVisibility(View.VISIBLE);
             TYPE = getString(R.string.no_internet);
@@ -200,24 +220,29 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private void setHomePageData() {
+    private void setHomePageData()
+    {
 
         HomePageAdapter adapter = new HomePageAdapter(activity, homeHeaderModels);
         home_page_list.setAdapter(adapter);
     }
 
-    private void getHomePageData() {
+    private void getHomePageData()
+    {
 
         progress_wheel.setVisibility(View.VISIBLE);
         categoryModels = new ArrayList<>();
         homeHeaderModels = new ArrayList<>();
         bannerList = new ArrayList<>();
 
-        netWorkCall.makeServiceCall(activity, StaticDataUtility.SERVER_URL, new VolleyNetWorkCall.OnResponse() {
+        netWorkCall.makeServiceCall(activity, StaticDataUtility.SERVER_URL, new VolleyNetWorkCall.OnResponse()
+        {
             @Override
-            public void onSuccessCall(JSONObject response) {
+            public void onSuccessCall(JSONObject response)
+            {
 
-                try {
+                try
+                {
 
                     System.out.println(StaticDataUtility.APP_TAG + " home page response --> " + response.toString());
 
@@ -229,13 +254,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                         // TODO : Banner
                         JSONArray banners = jsonObject.optJSONArray("banner");
-                        for (int i = 0; i < banners.length(); i++) {
+                        for (int i = 0; i < banners.length(); i++)
+                        {
                             bannerList.add(new BannerModel(banners.optJSONObject(i).optString("banner_image"), banners.optJSONObject(i).optString("banner_url")));
                         }
 
                         // TODO : Category
                         JSONArray category = jsonObject.optJSONArray("category");
-                        for (int i = 0; i < category.length(); i++) {
+                        for (int i = 0; i < category.length(); i++)
+                        {
 
                             JSONObject categoryObject = category.optJSONObject(i);
                             System.out.println(StaticDataUtility.APP_TAG + " category --> " + categoryObject.toString());
@@ -246,7 +273,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                         // TODO : Product
                         JSONArray name = jsonObject.optJSONArray("name");
-                        for (int i = 0; i < name.length(); i++) {
+                        for (int i = 0; i < name.length(); i++)
+                        {
 
                             homeProductModels = new ArrayList<>();
                             JSONArray nameObject = name.optJSONArray(i);
@@ -255,14 +283,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                                 JSONObject finalObject = nameObject.optJSONObject(j);
 
-                                if (j == 0) {
+                                if (j == 0)
+                                {
                                     homeHeaderModels.add(new HomeHeaderModel(finalObject.optString("name"), finalObject.optString("banner"),
                                             finalObject.optString("banner_url"), finalObject.optString("catt_view_all"), finalObject.optString("banner1"),
                                             finalObject.optString("banner1_url"), finalObject.optString("banner2"), finalObject.optString("banner2_url"),
                                             jsonObject.optString("is_festival"), jsonObject.optString("festival_banner"), jsonObject.optString("festival_banner_url")
                                             , homeProductModels, categoryModels, bannerList));
-                                } else {
-                                    homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
+                                }
+                                else
+                                    {
+                                        homeProductModels.add(new HomeProductModel(finalObject.optString("product_name"), finalObject.optString("product_full_name"),
                                             finalObject.optString("product_url"), finalObject.optString("price"), finalObject.optString("discount_price"),
                                             finalObject.optString("discount_per"), finalObject.optString("product_image"), finalObject.optString("cart_url"),
                                             finalObject.optString("fav_url")));
@@ -291,20 +322,24 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             }
 
             @Override
-            public void onPostSuccessCall(String response) {
+            public void onPostSuccessCall(String response)
+            {
 
             }
 
             @Override
-            public void onFailCall(VolleyError error) {
+            public void onFailCall(VolleyError error)
+            {
                 progress_wheel.setVisibility(View.GONE);
                 ll_home.setVisibility(View.GONE);
                 imgError.setVisibility(View.VISIBLE);
 
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError)
+                {
                     TYPE = getString(R.string.no_connection);
                     Glide.with(activity).load(R.drawable.no_wifi).into(imgError);
-                } else {
+                } else
+                    {
                     noDataError();
                 }
             }
@@ -411,9 +446,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MyApplication.getInstance().trackScreenView("Home Fragment");
+
 //        System.out.println(StaticDataUtility.APP_TAG + " Home OnResume");
 //        setBadge();
 //        activity.invalidateOptionsMenu();

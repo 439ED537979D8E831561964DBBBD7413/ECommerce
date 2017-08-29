@@ -2,6 +2,20 @@
     <string name="app_name">Winsant</string>
     <string name="action_settings">Settings</string>
 
+    <string name="nav_home">Home</string>
+    <string name="nav_category">Category</string>
+    <string name="nav_brand">Brand</string>
+    <string name="nav_order">Order</string>
+    <string name="nav_listing">Listings</string>
+    <string name="nav_payment">Payments</string>
+    <string name="nav_return">Returns</string>
+    <string name="nav_support">Support</string>
+    <string name="nav_setting">Settings</string>
+    <string name="nav_logout">Logout</string>
+    <string name="other">Other</string>
+
+    <!--******************** -->
+
     <string name="title_activity_login">Winsant Login</string>
     <string name="title_activity_sign_up">Winsant Sing Up</string>
     <string name="title_activity_forgot_pass">Forgot Password</string>
@@ -19,6 +33,7 @@
 
     <string name="activity_action_cart">Cart</string>
     <string name="title_activity_wish_list">WishList</string>
+    <string name="main">Main</string>
 
     <string name="Rs">\u20B9</string>
     <string name="app_id">1388761107841516</string> <!--1555840384655574-->
@@ -147,5 +162,13 @@
     <string name="copy_link">Copy Link</string>
     <string name="open_with">Open with</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main1">MainActivity1</string>
 
 </resources>

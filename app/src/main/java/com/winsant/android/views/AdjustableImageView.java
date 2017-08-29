@@ -12,7 +12,8 @@ import android.widget.ImageView;
  * Created by Developer on 2/23/2017.
  */
 
-public class AdjustableImageView extends ImageView {
+public class AdjustableImageView extends ImageView
+{
 
     boolean mAdjustViewBounds;
 

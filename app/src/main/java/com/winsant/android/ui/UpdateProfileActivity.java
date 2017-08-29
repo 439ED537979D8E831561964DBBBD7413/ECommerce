@@ -51,14 +51,16 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     private String missing = "none", isSetPassword, isVerify = "";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
         activity = UpdateProfileActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
@@ -69,9 +71,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });

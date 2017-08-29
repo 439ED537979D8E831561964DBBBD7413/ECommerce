@@ -64,7 +64,8 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
             txtPrice.setTypeface(CommonDataUtility.setTypeFace1(activity), Typeface.NORMAL);
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
-            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
 
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -157,7 +158,7 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
 //            }
 //        });
 
-        if (categoryProductModel.getDiscount_per().equals("100")) {
+        if (categoryProductModel.getDiscount_per().equals("0")) {
             viewHolder.txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + categoryProductModel.getPrice().replaceAll("\\.0*$", ""));
             viewHolder.txtPrice.setGravity(Gravity.CENTER);
             viewHolder.txtPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
@@ -172,11 +173,14 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
 
-        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+        {
             return itemsCategory.size();
-        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+        } else if (activity.getResources().getBoolean(R.bool.isTablet))
+        {
             if (tag.equals("v"))
                 return 4;
             else
@@ -187,7 +191,8 @@ public class SubCategoryProductListAdapter extends RecyclerView.Adapter<SubCateg
     }
 
     @Override
-    public void onViewRecycled(ViewHolder holder) {
+    public void onViewRecycled(ViewHolder holder)
+    {
         super.onViewRecycled(holder);
         Glide.clear(holder.productImage);
     }

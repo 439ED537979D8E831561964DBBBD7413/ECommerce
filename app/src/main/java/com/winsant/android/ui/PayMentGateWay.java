@@ -30,7 +30,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PayMentGateWay extends Activity {
+public class PayMentGateWay extends Activity
+{
 
     private ArrayList<String> post_val = new ArrayList<String>();
     private String post_Data = "";
@@ -228,7 +229,8 @@ public class PayMentGateWay extends Activity {
 
     }
 
-    private final class PayUJavaScriptInterface {
+    private final class PayUJavaScriptInterface
+    {
 
         PayUJavaScriptInterface() {
         }
@@ -351,10 +353,12 @@ public class PayMentGateWay extends Activity {
     //String SUCCESS_URL = "https://pay.in/sccussful" ; // failed
     //String FAILED_URL = "https://pay.in/failed" ;
     //override the override loading method for the webview client
-    private class MyWebViewClient extends WebViewClient {
+    private class MyWebViewClient extends WebViewClient
+    {
 
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        public boolean shouldOverrideUrlLoading(WebView view, String url)
+        {
 
          /*if(url.contains("response.php") || url.equalsIgnoreCase(SUCCESS_URL)){
 
@@ -364,7 +368,8 @@ public class PayMentGateWay extends Activity {
 
                 return false;
          }else  */
-            if (url.startsWith("http")) {
+            if (url.startsWith("http"))
+            {
                 //Toast.makeText(getApplicationContext(),url ,Toast.LENGTH_LONG).show();
                 progressHUD.show();
                 view.loadUrl(url);

@@ -224,24 +224,29 @@ public class MaterialEditText extends EditText {
         super.setPadding((int) paddingLeft + left, (int) paddingTop + top, (int) paddingRight + right, (int) paddingBottom + bottom);
     }
 
-    public float getBasePaddingLeft() {
+    public float getBasePaddingLeft()
+    {
         return basePaddingLeft;
     }
 
-    public float getBasePaddingTop() {
+    public float getBasePaddingTop()
+    {
         return basePaddingTop;
     }
 
-    public float getBasePaddingRight() {
+    public float getBasePaddingRight()
+    {
         return basePaddingRight;
     }
 
-    public float getBasePaddingBottom() {
+    public float getBasePaddingBottom()
+    {
         return basePaddingBottom;
     }
 
     @Override
-    public void setPadding(int left, int top, int right, int bottom) {
+    public void setPadding(int left, int top, int right, int bottom)
+    {
         paddingLeft = left;
         paddingTop = top;
         paddingRight = right;
@@ -250,7 +255,8 @@ public class MaterialEditText extends EditText {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         lineHeight = getHeight() - DIMEN_8_DP;

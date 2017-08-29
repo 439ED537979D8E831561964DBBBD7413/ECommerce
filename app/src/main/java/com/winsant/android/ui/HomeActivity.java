@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -27,6 +29,8 @@ import com.winsant.android.ui.fragment.WishListFragment;
 import com.winsant.android.utils.CommonDataUtility;
 import com.winsant.android.utils.StaticDataUtility;
 
+import static com.winsant.android.R.id.container;
+
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Activity activity;
@@ -36,19 +40,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private String tag = "";
     private MenuItem cart;
     private TextView toolbar_title;
-
+     DrawerLayout mDrawerLayout;
+     NavigationView mNavigationView;
+    private SessionManager sessionManager;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        sessionManager = new SessionManager(getApplicationContext());
+
+         //android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+     //  toolbar.setTitleTextColor(Color.parseColor("#000000"));
 
         activity = HomeActivity.this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
-        toolbar_title.setText(getString(R.string.app_name));
+       // toolbar_title.setText(getString(R.string.app_name));
 
         LinearLayout llHome = (LinearLayout) findViewById(R.id.llHome);
         LinearLayout llOffers = (LinearLayout) findViewById(R.id.llOffers);
@@ -65,12 +76,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         txtWishList = (TextView) findViewById(R.id.txtWishList);
         txtProfile = (TextView) findViewById(R.id.txtProfile);
 
-        if (getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (getResources().getBoolean(R.bool.isLargeTablet))
+        {
             txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtProfile.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        } else if (getResources().getBoolean(R.bool.isTablet)) {
+        } else if (getResources().getBoolean(R.bool.isTablet))
+        {
             txtHome.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtOffers.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtWishList.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -266,7 +279,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (fragmentManager != null) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             if (ft != null) {
-                ft.add(R.id.container, fragment).addToBackStack(null);
+                ft.add(container, fragment).addToBackStack(null);
                 ft.commit();
             }
         }

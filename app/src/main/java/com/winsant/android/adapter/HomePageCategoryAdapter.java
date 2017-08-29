@@ -22,7 +22,8 @@ import com.winsant.android.utils.CommonDataUtility;
 
 import java.util.ArrayList;
 
-public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCategoryAdapter.ViewHolder> {
+public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCategoryAdapter.ViewHolder>
+{
 
     private Activity activity;
     private ArrayList<HomeProductModel> itemsCategory;
@@ -30,23 +31,27 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
     private String tag;
 
     public HomePageCategoryAdapter(Activity activity, ArrayList<HomeProductModel> itemsCategory, onClickListener clickListener
-            , String tag) {
+            , String tag)
+    {
         this.activity = activity;
         this.itemsCategory = itemsCategory;
         this.clickListener = clickListener;
         this.tag = tag;
     }
 
-    public interface onClickListener {
+    public interface onClickListener
+    {
         void onClick(int position, String name, String product_url);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         ImageView productImage, outStockImage;
         TextView txtName, txtDiscount, txtPrice, txtDiscountPrice;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView)
+        {
             super(itemView);
 
             productImage = (ImageView) itemView.findViewById(R.id.productImage);
@@ -62,8 +67,8 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
             txtDiscountPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);
 
 
-            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet)) {
-
+            if (activity.getResources().getBoolean(R.bool.isTablet) || activity.getResources().getBoolean(R.bool.isLargeTablet))
+            {
                 txtDiscount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 txtName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 txtPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -89,12 +94,16 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    {
 
         View v;
-        if (tag.equals("v")) {
+        if (tag.equals("v"))
+        {
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_home_product_v_item, viewGroup, false);
-        } else {
+        }
+        else
+        {
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_home_product_g_item, viewGroup, false);
         }
 
@@ -102,7 +111,8 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position)
+    {
 
         HomeProductModel categoryProductModel = itemsCategory.get(position);
 
@@ -113,9 +123,11 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
 
                 .fitCenter()
                 .placeholder(R.drawable.no_image_available)
-                .into(new SimpleTarget<Bitmap>(200, 200) {
+                .into(new SimpleTarget<Bitmap>(200, 200)
+                {
                     @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+                    {
                         viewHolder.productImage.setImageBitmap(null);
                         viewHolder.productImage.setImageBitmap(resource);
                     }
@@ -123,7 +135,8 @@ public class HomePageCategoryAdapter extends RecyclerView.Adapter<HomePageCatego
 
         viewHolder.txtName.setText(categoryProductModel.getName());
 
-        if (categoryProductModel.getDiscount_per().equals("100")) {
+        if (categoryProductModel.getDiscount_per().equals("0"))
+        {
             viewHolder.txtPrice.setText(activity.getResources().getString(R.string.Rs) + " " + categoryProductModel.getPrice().replaceAll("\\.0*$", ""));
             viewHolder.txtPrice.setGravity(Gravity.CENTER);
             viewHolder.txtPrice.setTypeface(CommonDataUtility.setTitleTypeFace(activity), Typeface.BOLD);

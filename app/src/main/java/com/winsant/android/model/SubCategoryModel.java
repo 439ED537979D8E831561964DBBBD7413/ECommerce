@@ -4,7 +4,8 @@ package com.winsant.android.model;
  * Created by Developer on 2/10/2017.
  */
 
-public class SubCategoryModel {
+public class SubCategoryModel
+{
 
     private String category_name;
     private String category_image;
@@ -31,23 +32,28 @@ public class SubCategoryModel {
         this.is_last = is_last;
     }
 
-    public String getCategory_name() {
+    public String getCategory_name()
+    {
         return this.category_name;
     }
 
-    public String getCategory_image() {
+    public String getCategory_image()
+    {
         return this.category_image;
     }
 
-    public String getCategory_url() {
+    public String getCategory_url()
+    {
         return this.category_url;
     }
 
-    public String getIs_last() {
+    public String getIs_last()
+    {
         return this.is_last;
     }
 
-    public String getIs_expand() {
+    public String getIs_expand()
+    {
         return this.is_expand;
     }
 }

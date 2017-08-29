@@ -30,7 +30,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddAddressActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddAddressActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private Activity activity;
     private EditText edtFirstName, edtLastName, edtMobile, edtPincode, edtCity, edtState, edtCountry, edtAddress, edtLandmark;
@@ -41,14 +42,16 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
     private AddressModel addressModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
 
         activity = AddAddressActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
@@ -56,7 +59,9 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
         String type = getIntent().getStringExtra("type");
         if (type.equals("add"))
             mToolbar_title.setText(getString(R.string.title_activity_add_new_address));
-        else {
+        else
+
+            {
             mToolbar_title.setText(getString(R.string.title_activity_update_address));
             addressModel = (AddressModel) getIntent().getSerializableExtra("data");
         }
@@ -64,11 +69,14 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });
@@ -289,13 +297,15 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
                 }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
                 progressHUD.dismiss();
                 CommonDataUtility.showSnackBar(ll_address, "Something problem while login,Try again later!!!");
             }
         }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;

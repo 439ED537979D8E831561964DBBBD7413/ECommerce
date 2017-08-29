@@ -46,7 +46,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class OtpVerifyActivity extends AppCompatActivity implements View.OnClickListener {
+public class OtpVerifyActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private Activity activity;
     private EditText edtOtp;
@@ -62,14 +63,16 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
     final Handler handler = new Handler();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otp);
 
         activity = OtpVerifyActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             mToolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }
         mToolbar_title.setTypeface(CommonDataUtility.setTitleTypeFace(activity));
@@ -78,11 +81,14 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             toolbar.setNavigationIcon(R.drawable.ico_arrow_back_svg);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     onBackPressed();
                 }
             });
@@ -108,21 +114,26 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         btnOK.setOnClickListener(this);
         txtResend.setOnClickListener(this);
 
-        if (activity.getResources().getBoolean(R.bool.isLargeTablet)) {
+        if (activity.getResources().getBoolean(R.bool.isLargeTablet))
+        {
 
             edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtOtpNumber.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
-        } else if (activity.getResources().getBoolean(R.bool.isTablet)) {
+        } else if (activity.getResources().getBoolean(R.bool.isTablet))
+        {
 
             edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtOtpNumber.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             btnOK.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
-        } else {
+        }
+        else
+
+            {
 
             edtOtp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             txtResend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -135,10 +146,12 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
 
         //8866708550
-        switch (v.getId()) {
+        switch (v.getId())
+        {
 
             case R.id.btnOK:
 
@@ -148,9 +161,11 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.txtResend:
 
-                if (CommonDataUtility.checkConnection(activity)) {
+                if (CommonDataUtility.checkConnection(activity))
+                {
                     send_otp();
-                } else {
+                } else
+                    {
                     CommonDataUtility.showSnackBar(ll_login, getString(R.string.no_internet));
                 }
 
@@ -158,9 +173,11 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void initializeTimerTask() {
+    public void initializeTimerTask()
+    {
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(30000, 1000)
+        {
 
             public void onTick(long millisUntilFinished) {
                 txtResend.setEnabled(false);
@@ -168,7 +185,8 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
                 //here you can have your logic to set text to edittext
             }
 
-            public void onFinish() {
+            public void onFinish()
+            {
                 txtResend.setEnabled(true);
                 txtResend.setText("Resend OTP");
             }
@@ -176,17 +194,20 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         }.start();
     }
 
-    private void Verify() {
+    private void Verify()
+    {
 
         String message;
 
-        if (CommonDataUtility.checkConnection(activity)) {
+        if (CommonDataUtility.checkConnection(activity))
+        {
 
             strCode = edtOtp.getText().toString();
 
             message = MobileVerifyValidation();
 
-            if (message.equals("true")) {
+            if (message.equals("true"))
+            {
                 verifiy_otp();
             } else
                 CommonDataUtility.showSnackBar(ll_login, message);
@@ -196,11 +217,13 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private String MobileVerifyValidation() {
+    private String MobileVerifyValidation()
+    {
 
         if (strCode.equals(""))
             return "Please enter OTP code";
-        else if (!strCode.equals(MyApplication.getInstance().getPreferenceUtility().getString("otp"))) {
+        else if (!strCode.equals(MyApplication.getInstance().getPreferenceUtility().getString("otp")))
+        {
             is_otp_verified = "0";
             return "Please enter valid OTP";
         } else {
@@ -209,7 +232,8 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void send_otp() {
+    private void send_otp()
+    {
 
         JSONObject obj = new JSONObject();
         try {
@@ -387,6 +411,7 @@ public class OtpVerifyActivity extends AppCompatActivity implements View.OnClick
 
             if (intent.getStringExtra("isForOtp").equals("true")) {
                 strCode = intent.getStringExtra("otp");
+                edtOtp.setText(strCode);
                 Verify();
             }
         }
